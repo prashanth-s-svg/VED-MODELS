@@ -205,8 +205,6 @@ a:hover { text-decoration: underline; color: var(--turmeric); }
   background-size: 200% 100%;
   animation: tricolorSlide 4s linear infinite;
 }
-.tricolor-bar::before  { content: none; }
-.tricolor-bar::after   { content: none; }
 
 /* ─── NAVBAR ─── */
 .navbar {
@@ -779,6 +777,9 @@ a:hover { text-decoration: underline; color: var(--turmeric); }
   animation: fadeIn 0.4s ease-out;
 }
 .tab-pane.hidden { display: none; }
+.tab-pane.tab-enter {
+  animation: fadeIn 0.4s ease-out;
+}
 
 .section-header {
   display: flex;

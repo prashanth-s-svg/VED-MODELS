@@ -275,7 +275,7 @@ function showTab(tabId, triggerEl) {
   // hide all panes
   document.querySelectorAll('.tab-pane').forEach(p => {
     p.classList.add('hidden');
-    p.style.animation = 'none';
+    p.classList.remove('tab-enter');
   });
   // deactivate all tabs
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -285,10 +285,10 @@ function showTab(tabId, triggerEl) {
   const tabBtn = document.getElementById('tab-' + tabId);
   if (pane) {
     pane.classList.remove('hidden');
-    // Trigger re-animation
-    pane.style.animation = 'none';
-    pane.offsetHeight; // force reflow
-    pane.style.animation = 'fadeIn 0.4s ease-out';
+    // Use class toggle to re-trigger animation without forced reflow
+    requestAnimationFrame(() => {
+      pane.classList.add('tab-enter');
+    });
   }
   if (tabBtn) tabBtn.classList.add('active');
   if (triggerEl && triggerEl.classList.contains('nav-link')) triggerEl.classList.add('active');
