@@ -1,5 +1,5 @@
-/* BharatHub — Made in India GitHub-like Platform
-   app.js — All interactive behaviour
+/* Sangam — Made in India GitHub-like Platform
+   app.js — All interactive behaviour with premium transitions
 */
 
 'use strict';
@@ -273,14 +273,23 @@ function renderContribGraph() {
 
 function showTab(tabId, triggerEl) {
   // hide all panes
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+  document.querySelectorAll('.tab-pane').forEach(p => {
+    p.classList.add('hidden');
+    p.classList.remove('tab-enter');
+  });
   // deactivate all tabs
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
 
   const pane = document.getElementById('pane-' + tabId);
   const tabBtn = document.getElementById('tab-' + tabId);
-  if (pane) pane.classList.remove('hidden');
+  if (pane) {
+    pane.classList.remove('hidden');
+    // Use class toggle to re-trigger animation without forced reflow
+    requestAnimationFrame(() => {
+      pane.classList.add('tab-enter');
+    });
+  }
   if (tabBtn) tabBtn.classList.add('active');
   if (triggerEl && triggerEl.classList.contains('nav-link')) triggerEl.classList.add('active');
 
@@ -403,20 +412,75 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ═══════════════════════════════════════════════
-// ANIMATED STATS COUNTER IN HERO
+// ANIMATED STATS COUNTER IN HERO (with easing)
 // ═══════════════════════════════════════════════
+
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
 
 function animateCounter(id, target, suffix) {
   const el = document.getElementById(id);
   if (!el) return;
   const parsed = parseInt(target.replace(/,/g, ''), 10);
-  let current  = Math.floor(parsed * 0.85);
-  const step   = Math.ceil((parsed - current) / 30);
-  const timer  = setInterval(() => {
-    current += step;
-    if (current >= parsed) { current = parsed; clearInterval(timer); }
+  const duration = 1500; // ms
+  const startTime = performance.now();
+  const startVal = 0;
+
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutCubic(progress);
+    const current = Math.floor(startVal + (parsed - startVal) * eased);
     el.textContent = current.toLocaleString('en-IN') + (suffix || '');
-  }, 40);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ═══════════════════════════════════════════════
+// SPLASH SCREEN
+// ═══════════════════════════════════════════════
+
+function initSplashScreen() {
+  const splash = document.getElementById('splashScreen');
+  const bar = document.getElementById('splashBar');
+  if (!splash || !bar) return;
+
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 25 + 10;
+    if (progress > 100) progress = 100;
+    bar.style.width = progress + '%';
+
+    if (progress >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        splash.classList.add('hidden');
+      }, 300);
+    }
+  }, 200);
+}
+
+// ═══════════════════════════════════════════════
+// SCROLL ANIMATIONS (IntersectionObserver)
+// ═══════════════════════════════════════════════
+
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
 }
 
 // ═══════════════════════════════════════════════
@@ -424,11 +488,18 @@ function animateCounter(id, target, suffix) {
 // ═══════════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Splash screen
+  initSplashScreen();
+
+  // Render components
   renderRepoCards();
   renderStateChips();
 
-  // animate hero counters
+  // Animate hero counters
   animateCounter('statRepos', '124856');
   animateCounter('statDevs',  '482193');
   animateCounter('statPRs',   '3209441');
+
+  // Scroll animations
+  initScrollAnimations();
 });
