@@ -172,6 +172,8 @@ const starCounts  = {};
 const forkCounts  = {};
 const starredByMe = {};
 
+let isPrivate = false;
+
 REPOS.forEach(r => {
   starCounts[r.id]  = r.stars;
   forkCounts[r.id]  = r.forks;
@@ -362,6 +364,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ═══════════════════════════════════════════════
+// ACCOUNT PRIVACY
+// ═══════════════════════════════════════════════
+
+function togglePrivacy() {
+  isPrivate = !isPrivate;
+
+  const badge    = document.getElementById('privateBadge');
+  const overlay  = document.getElementById('privateOverlay');
+  const btn      = document.getElementById('btnTogglePrivacy');
+
+  if (badge)   badge.classList.toggle('hidden', !isPrivate);
+  if (overlay) overlay.classList.toggle('hidden', !isPrivate);
+  if (btn) {
+    btn.textContent = isPrivate ? '🔓 Make Public' : '🔒 Make Private';
+    btn.classList.toggle('btn-private-active', isPrivate);
+  }
+}
 
 // ═══════════════════════════════════════════════
 // SEARCH
