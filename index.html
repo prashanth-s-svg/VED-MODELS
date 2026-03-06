@@ -138,7 +138,10 @@
         <div class="profile-header">
           <div class="profile-avatar-lg">PD</div>
           <div class="profile-meta">
-            <h2>Prashanth Dev</h2>
+            <div class="profile-name-row">
+              <h2>Prashanth Dev</h2>
+              <span id="privateBadge" class="badge badge-private hidden">🔒 Private</span>
+            </div>
             <p class="handle">@prashanth_dev &nbsp;·&nbsp; Bangalore, Karnataka 🇮🇳</p>
             <p class="bio">Building open-source AI tools with Python &amp; PyTorch. Believer in Digital India. 🚀</p>
             <div class="profile-badges">
@@ -146,7 +149,14 @@
               <span class="badge badge-green">🇮🇳 Made in India</span>
               <span class="badge badge-blue">🤖 AI/ML</span>
             </div>
+            <div class="privacy-actions">
+              <button id="btnTogglePrivacy" class="btn-secondary btn-privacy" onclick="togglePrivacy()">🔒 Make Private</button>
+            </div>
           </div>
+        </div>
+        <div id="privateOverlay" class="private-overlay hidden">
+          <span class="private-overlay-icon">🔒</span>
+          <p>This account is <strong>private</strong>. Only you can see your activity, repositories, and stats.</p>
         </div>
         <div class="contribution-graph-label">Contribution activity</div>
         <div class="contribution-graph" id="contribGraph"></div>

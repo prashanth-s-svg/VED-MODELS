@@ -568,9 +568,47 @@ a:hover { text-decoration: underline; }
   border: 3px solid var(--border);
 }
 .profile-meta h2 { font-size: 22px; font-weight: 700; }
+.profile-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
 .handle { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
 .bio { font-size: 14px; margin-bottom: 10px; color: var(--text-muted); }
 .profile-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ─── PRIVACY ─── */
+.badge-private {
+  background: rgba(139,92,246,0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(139,92,246,0.35);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.privacy-actions { margin-top: 12px; }
+.btn-privacy {
+  font-size: 13px;
+  padding: 6px 16px;
+}
+.btn-privacy.btn-private-active {
+  border-color: #a78bfa;
+  color: #a78bfa;
+}
+.btn-privacy.btn-private-active:hover { border-color: #c4b5fd; }
+.private-overlay {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(139,92,246,0.08);
+  border: 1px solid rgba(139,92,246,0.3);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.private-overlay.hidden { display: none; }
+.private-overlay-icon { font-size: 24px; flex-shrink: 0; }
 
 /* ─── CONTRIBUTION GRAPH ─── */
 .contribution-graph-label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
