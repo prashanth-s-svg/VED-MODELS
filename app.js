@@ -427,8 +427,24 @@ document.addEventListener('DOMContentLoaded', () => {
   renderRepoCards();
   renderStateChips();
 
-  // animate hero counters
-  animateCounter('statRepos', '124856');
-  animateCounter('statDevs',  '482193');
-  animateCounter('statPRs',   '3209441');
+  // Fetch live hero metrics from the backend; fall back to static values
+  fetch('/api/hero-metrics')
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (data) {
+        animateCounter('statRepos', String(data.repos));
+        animateCounter('statDevs',  String(data.developers));
+        animateCounter('statPRs',   String(data.contributions));
+      } else {
+        animateCounter('statRepos', '124856');
+        animateCounter('statDevs',  '482193');
+        animateCounter('statPRs',   '3209441');
+      }
+    })
+    .catch(() => {
+      // Backend not running — use static fallback values
+      animateCounter('statRepos', '124856');
+      animateCounter('statDevs',  '482193');
+      animateCounter('statPRs',   '3209441');
+    });
 });
