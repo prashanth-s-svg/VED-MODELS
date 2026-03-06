@@ -165,6 +165,124 @@ const STATES = [
 ];
 
 // ═══════════════════════════════════════════════
+// ROADMAP DATA
+// ═══════════════════════════════════════════════
+
+const ROADMAP = [
+  {
+    phase: 'Phase 1',
+    name: 'Sangam',
+    subtitle: 'MVP — The Confluence',
+    period: 'Q1 – Q2 2026',
+    status: 'current',
+    statusLabel: '🚀 In Progress',
+    color: '#FF9933',
+    description: 'Sangam (संगम) means confluence — where rivers meet. This MVP lays the foundation by bringing Indian developers together on a single, India-first platform.',
+    milestones: [
+      { done: true,  text: 'User registration & profiles with Indian state tagging' },
+      { done: true,  text: 'Repository hosting — create, clone, browse code' },
+      { done: true,  text: 'Issues tracker & pull request workflow' },
+      { done: true,  text: 'Stars, forks, and activity feed' },
+      { done: false, text: 'Indic script support (Devanagari, Tamil, Telugu) in READMEs' },
+      { done: false, text: 'UPI-based developer sponsorship (one-click ₹ support)' },
+      { done: false, text: 'IndiaStack SDK integration (Aadhaar-verified contributor badges)' },
+      { done: false, text: 'Basic search across repositories, users, and topics' },
+    ],
+    newFeatures: [
+      { icon: '🆔', title: 'DigiLocker-Linked Dev Passport', desc: 'Verify degrees & certifications directly from DigiLocker — the world\'s first government-verified developer profile.' },
+      { icon: '💬', title: 'Voice PR Reviews in Hindi & Tamil', desc: 'Submit pull request comments as voice notes in any Indian language; auto-transcribed with AI.' },
+    ],
+  },
+  {
+    phase: 'Phase 2',
+    name: 'Bharati',
+    subtitle: 'The Voice of India',
+    period: 'Q3 2026',
+    status: 'planned',
+    statusLabel: '📅 Planned',
+    color: '#138808',
+    description: 'Bharati (भारती) symbolises the power of language and knowledge. This phase focuses on making BharatHub truly multilingual and adding developer productivity tools.',
+    milestones: [
+      { done: false, text: 'CI/CD pipeline — BharatHub Actions (YAML-based workflows)' },
+      { done: false, text: 'Multi-language UI in 10 Indian languages' },
+      { done: false, text: 'AI-powered code review suggestions (trained on Indian codebases)' },
+      { done: false, text: 'Organisation accounts for companies, colleges & government PSUs' },
+      { done: false, text: 'Project boards (Kanban) for team-based planning' },
+      { done: false, text: 'Mobile app — Android & iOS' },
+    ],
+    newFeatures: [
+      { icon: '🤖', title: 'Swadeshi Copilot', desc: 'An AI coding assistant fine-tuned on IIT research papers, Indian open-source codebases, and NPTEL course material — trained specifically on Indian educational and research content.' },
+      { icon: '📖', title: 'Code-to-Hindi Docgen', desc: 'Auto-generate function documentation in the developer\'s preferred Indian language directly from source code.' },
+    ],
+  },
+  {
+    phase: 'Phase 3',
+    name: 'Shakti',
+    subtitle: 'Power & Scale',
+    period: 'Q4 2026',
+    status: 'planned',
+    statusLabel: '📅 Planned',
+    color: '#7b9ef0',
+    description: 'Shakti (शक्ति) means power. This phase supercharges BharatHub with enterprise-grade capabilities and an open ecosystem for Indian developers to monetise their work.',
+    milestones: [
+      { done: false, text: 'BharatHub Packages — host npm, PyPI, Go, Maven packages' },
+      { done: false, text: 'Marketplace for GitHub Actions-compatible extensions' },
+      { done: false, text: 'Advanced security scanning & CERT-In compliance reports' },
+      { done: false, text: 'Government & education tier — free hosting for open-source institutions' },
+      { done: false, text: 'API marketplace built on IndiaStack & ONDC' },
+      { done: false, text: 'Paid tiers & developer subscription model in ₹' },
+    ],
+    newFeatures: [
+      { icon: '⚖️', title: 'IT Act & DPDP Compliance Scanner', desc: 'First-in-world automated scanner that checks your codebase against India\'s Digital Personal Data Protection Act (DPDP 2023) and IT Act rules.' },
+      { icon: '🌾', title: 'Jugaad Mode — Rapid Rural Templates', desc: 'One-click project scaffolds for offline-first, low-bandwidth apps targeting Bharat\'s 600,000 villages — a category no platform has addressed.' },
+    ],
+  },
+  {
+    phase: 'Phase 4',
+    name: 'Vishwa',
+    subtitle: 'India to the World',
+    period: 'Q1 – Q2 2027',
+    status: 'future',
+    statusLabel: '🔭 Future',
+    color: '#e07800',
+    description: 'Vishwa (विश्व) means the universe. In this phase, BharatHub goes global — carrying Indian open-source values, languages, and innovation to developers worldwide.',
+    milestones: [
+      { done: false, text: 'Global CDN with data residency in India (MeitY compliant)' },
+      { done: false, text: 'Open-Source India Program — fund 1,000 Indian OSS projects' },
+      { done: false, text: 'BharatHub for Education — integration with SWAYAM / NPTEL' },
+      { done: false, text: 'Diaspora developer network — NRI & global Indian dev community' },
+      { done: false, text: 'Federation with international forges (Gitea, Forgejo)' },
+      { done: false, text: 'Annual BharatHub Summit — flagship open-source conference' },
+    ],
+    newFeatures: [
+      { icon: '🔗', title: 'Blockchain Code Provenance on Bharat Chain', desc: 'Timestamp every commit on the government-backed NIC blockchain — immutable proof of Indian IP authorship with government-backed blockchain integration for code provenance.' },
+      { icon: '🏆', title: 'Bharat OSS Score', desc: 'A nationally-recognised open-source contribution index, recognised by MeitY, that can appear on resumes, college transcripts, and government job applications.' },
+    ],
+  },
+  {
+    phase: 'Phase 5',
+    name: 'Naveen',
+    subtitle: 'Innovation Lab — Features Never Built Before',
+    period: 'Q3 2027 & Beyond',
+    status: 'innovation',
+    statusLabel: '💡 Innovation Lab',
+    color: '#c084fc',
+    description: 'Naveen (नवीन) means new & novel. This phase is a dedicated sandbox for features the world has never seen in any code platform — born entirely from the needs, culture, and scale of India.',
+    milestones: [
+      { done: false, text: '🗣️ Swar IDE — voice-driven coding in Indian languages; write functions by speaking in Hindi, Tamil or Bengali' },
+      { done: false, text: '📱 SMS-based Git — push, pull and review code over plain SMS for 2G feature-phone developers in rural Bharat' },
+      { done: false, text: '🎓 Guru-Shishya Mode — structured 1-on-1 mentorship graph linking senior Indian engineers to college students via BharatHub repos' },
+      { done: false, text: '🏛️ Gram Sabha Board — township-level open-source governance boards for Panchayat digital projects, integrated with MyGov' },
+      { done: false, text: '🌐 Project Bhasha Bridge — real-time AI co-translation so a dev writing docs in Tamil can instantly share with a Hindi-speaking reviewer' },
+      { done: false, text: '🧩 Micro-Bounty UPI Rail — split a ₹500 bug bounty across 10 contributors in 10 seconds via UPI autopay, the world\'s smallest dev bounty unit' },
+      { done: false, text: '📡 Offline Mesh Sync — BharatHub repos sync peer-to-peer over Bluetooth/Wi-Fi Direct, enabling code collaboration without internet' },
+      { done: false, text: '🤝 Cooperative Licensing (Sahakari) — a new OSS license model where downstream commercial users automatically pay upstream Indian contributors via smart contracts' },
+    ],
+    newFeatures: [],
+  },
+];
+
+// ═══════════════════════════════════════════════
 // STAR / FORK COUNTS (local state)
 // ═══════════════════════════════════════════════
 
@@ -267,6 +385,58 @@ function renderContribGraph() {
   el.innerHTML = html.join('');
 }
 
+function renderRoadmap() {
+  const container = document.getElementById('roadmapPhases');
+  if (!container) return;
+  container.innerHTML = ROADMAP.map(p => {
+    const doneCnt = p.milestones.filter(m => m.done).length;
+    const pct     = Math.round(doneCnt / p.milestones.length * 100);
+    const newFeatHTML = p.newFeatures && p.newFeatures.length ? `
+      <div class="roadmap-new-features">
+        <div class="roadmap-new-label">✨ New Features — Never Built Before</div>
+        <div class="roadmap-new-grid">
+          ${p.newFeatures.map(f => `
+            <div class="roadmap-new-card">
+              <span class="roadmap-new-icon">${f.icon}</span>
+              <div>
+                <div class="roadmap-new-title">${f.title}</div>
+                <div class="roadmap-new-desc">${f.desc}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>` : '';
+
+    return `
+    <div class="roadmap-phase roadmap-${p.status}">
+      <div class="roadmap-phase-header">
+        <div class="roadmap-phase-left">
+          <div class="roadmap-phase-badge" style="background:${p.color}22;border-color:${p.color}55;color:${p.color}">${p.phase}</div>
+          <div>
+            <div class="roadmap-phase-name">${p.name} <span class="roadmap-phase-sub">— ${p.subtitle}</span></div>
+            <div class="roadmap-phase-period">⏱ ${p.period}</div>
+          </div>
+        </div>
+        <span class="roadmap-status-label roadmap-status-${p.status}">${p.statusLabel}</span>
+      </div>
+      <p class="roadmap-desc">${p.description}</p>
+      <ul class="roadmap-milestones">
+        ${p.milestones.map(m => `
+          <li class="roadmap-milestone${m.done ? ' done' : ''}">
+            <span class="roadmap-check">${m.done ? '✅' : '⬜'}</span>
+            <span>${m.text}</span>
+          </li>
+        `).join('')}
+      </ul>
+      <div class="roadmap-progress-bar">
+        <div class="roadmap-progress-fill" style="width:${pct}%;background:${p.color}"></div>
+      </div>
+      <div class="roadmap-progress-label">${doneCnt} / ${p.milestones.length} milestones complete</div>
+      ${newFeatHTML}
+    </div>`;
+  }).join('');
+}
+
 // ═══════════════════════════════════════════════
 // TAB SWITCHING
 // ═══════════════════════════════════════════════
@@ -287,6 +457,7 @@ function showTab(tabId, triggerEl) {
   // lazy render
   if (tabId === 'trending') renderTrending();
   if (tabId === 'profile')  renderContribGraph();
+  if (tabId === 'roadmap')  renderRoadmap();
 }
 
 // ═══════════════════════════════════════════════
