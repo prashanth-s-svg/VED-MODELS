@@ -24,6 +24,7 @@
         <a href="#" class="nav-link active" onclick="showTab('explore', this)">Explore</a>
         <a href="#" class="nav-link" onclick="showTab('trending', this)">Trending</a>
         <a href="#" class="nav-link" onclick="showTab('profile', this)">Profile</a>
+        <a href="#" class="nav-link" onclick="showTab('roadmap', this)">Roadmap</a>
         <a href="#" class="btn-primary">Sign Up Free</a>
       </div>
     </div>
@@ -99,6 +100,7 @@
         <button class="tab active" id="tab-explore" onclick="showTab('explore', this)">🏠 Feed</button>
         <button class="tab" id="tab-trending" onclick="showTab('trending', this)">🔥 Trending</button>
         <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
+        <button class="tab" id="tab-roadmap" onclick="showTab('roadmap', this)">🗺️ Roadmap</button>
       </div>
 
       <!-- ── EXPLORE FEED ── -->
@@ -131,6 +133,19 @@
           </div>
         </div>
         <div id="trendingCards"></div>
+      </div>
+
+      <!-- ── ROADMAP ── -->
+      <div id="pane-roadmap" class="tab-pane hidden">
+        <div class="section-header">
+          <h2>🗺️ BharatHub Roadmap</h2>
+          <span class="badge">2026 – 2027</span>
+        </div>
+        <p class="roadmap-intro">
+          Our phased plan to build the world-class open-source platform <strong>Made in India 🇮🇳</strong>.
+          Each phase is named after a Sanskrit word that reflects our vision for India's developer ecosystem.
+        </p>
+        <div id="roadmapPhases"></div>
       </div>
 
       <!-- ── PROFILE ── -->
