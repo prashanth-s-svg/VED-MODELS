@@ -3,28 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BharatHub — Made in India 🇮🇳</title>
+  <title>SangamHub — Where Developers Confluence 🌊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <!-- ═══════════════════════════════════════════════ SANGAM RIPPLE DECORATION ═══ -->
+  <div class="sangam-river-bg" aria-hidden="true">
+    <div class="river-wave wave-1"></div>
+    <div class="river-wave wave-2"></div>
+    <div class="river-wave wave-3"></div>
+  </div>
 
   <!-- ═══════════════════════════════════════════════ NAVBAR ═══ -->
   <nav class="navbar">
     <div class="nav-inner">
       <a href="#" class="brand">
-        <span class="chakra">&#10006;</span>
-        <span class="brand-name">BharatHub</span>
-        <span class="brand-tag">Made in India 🇮🇳</span>
+        <span class="lotus-icon">🪷</span>
+        <span class="brand-name">SangamHub</span>
+        <span class="brand-tag">संगम · Confluence</span>
       </a>
       <div class="nav-search">
-        <input type="text" id="globalSearch" placeholder="Search repositories, users, topics…" />
+        <input type="text" id="globalSearch" placeholder="Search repositories, developers, topics…" />
         <button class="btn-search" onclick="handleSearch()">&#128269;</button>
       </div>
       <div class="nav-links">
         <a href="#" class="nav-link active" onclick="showTab('explore', this)">Explore</a>
         <a href="#" class="nav-link" onclick="showTab('trending', this)">Trending</a>
         <a href="#" class="nav-link" onclick="showTab('profile', this)">Profile</a>
-        <a href="#" class="btn-primary">Sign Up Free</a>
+        <a href="#" class="btn-primary">Join Sangam</a>
       </div>
     </div>
   </nav>
@@ -32,23 +42,28 @@
   <!-- ═══════════════════════════════════════════════ HERO ═══ -->
   <section class="hero">
     <div class="hero-content">
-      <div class="tricolor-bar"></div>
+      <div class="sangam-ornament" aria-hidden="true">
+        <span class="om-symbol">ॐ</span>
+        <div class="ornament-line"></div>
+        <span class="om-symbol">ॐ</span>
+      </div>
       <h1>
-        Where India<br/>
-        <span class="accent-saffron">Builds</span>
-        <span class="accent-white">&nbsp;•&nbsp;</span>
-        <span class="accent-green">Collaborates</span>
-        <span class="accent-white">&nbsp;•&nbsp;</span>
-        <span class="accent-saffron">Innovates</span>
+        Where Three Streams<br/>
+        <span class="accent-terracotta">Converge</span>
+        <span class="accent-muted">&nbsp;·&nbsp;</span>
+        <span class="accent-gold">Collaborate</span>
+        <span class="accent-muted">&nbsp;·&nbsp;</span>
+        <span class="accent-river">Create</span>
       </h1>
       <p class="hero-sub">
-        BharatHub is the home for Indian open-source developers.<br/>
-        Host code, review PRs, track issues — all under one roof,<br/>
-        proudly <strong>Made in India 🇮🇳</strong>.
+        SangamHub is the sacred confluence of Indian developers —<br/>
+        like the <em>Triveni Sangam</em> where rivers of <strong>knowledge</strong>,
+        <strong>code</strong> and <strong>creativity</strong> meet.<br/>
+        <span class="hero-sub-hindi">यहाँ विचार मिलते हैं, नवाचार जन्म लेता है।</span>
       </p>
       <div class="hero-cta">
-        <button class="btn-primary btn-lg" onclick="showTab('explore', document.querySelector('.nav-link'))">Start Exploring</button>
-        <button class="btn-secondary btn-lg">Create Free Account</button>
+        <button class="btn-primary btn-lg" onclick="showTab('explore', document.querySelector('.nav-link'))">🌊 Explore Confluence</button>
+        <button class="btn-secondary btn-lg">🪷 Join the Sangam</button>
       </div>
       <div class="hero-stats">
         <div class="stat"><span class="stat-num" id="statRepos">1,24,856</span><span class="stat-lbl">Repositories</span></div>
@@ -61,7 +76,20 @@
       </div>
     </div>
     <div class="hero-illustration">
-      <div class="chakra-big">&#9784;</div>
+      <div class="mandala-container" aria-hidden="true">
+        <div class="mandala-ring ring-outer">
+          <span class="petal">🪷</span><span class="petal">🪷</span>
+          <span class="petal">🪷</span><span class="petal">🪷</span>
+          <span class="petal">🪷</span><span class="petal">🪷</span>
+          <span class="petal">🪷</span><span class="petal">🪷</span>
+        </div>
+        <div class="mandala-ring ring-mid">
+          <span class="petal">✦</span><span class="petal">✦</span>
+          <span class="petal">✦</span><span class="petal">✦</span>
+          <span class="petal">✦</span><span class="petal">✦</span>
+        </div>
+        <div class="mandala-core">🌊</div>
+      </div>
     </div>
   </section>
 
@@ -74,21 +102,22 @@
         <div class="avatar">PD</div>
         <div class="profile-info">
           <strong>prashanth_dev</strong>
-          <span>Full Stack · Bangalore</span>
+          <span>Full Stack · Bengaluru</span>
         </div>
       </div>
       <div class="card">
-        <h3 class="card-title">Your Repositories</h3>
+        <h3 class="card-title">🌊 Your Streams</h3>
         <ul class="repo-list-mini" id="myRepoList">
           <li onclick="openRepo('VED-MODELS')"><span class="repo-icon">📦</span> VED-MODELS <span class="lang-dot python"></span></li>
-          <li onclick="openRepo('bharat-api')"><span class="repo-icon">🔗</span> bharat-api <span class="lang-dot js"></span></li>
+          <li onclick="openRepo('sangam-api')"><span class="repo-icon">🔗</span> sangam-api <span class="lang-dot js"></span></li>
           <li onclick="openRepo('namaste-ui')"><span class="repo-icon">🎨</span> namaste-ui <span class="lang-dot ts"></span></li>
-          <li onclick="openRepo('desi-deploy')"><span class="repo-icon">🚀</span> desi-deploy <span class="lang-dot go"></span></li>
+          <li onclick="openRepo('triveni-deploy')"><span class="repo-icon">🚀</span> triveni-deploy <span class="lang-dot go"></span></li>
         </ul>
-        <a href="#" class="card-link">View all repositories →</a>
+        <a href="#" class="card-link">View all streams →</a>
       </div>
       <div class="card">
-        <h3 class="card-title">🌐 Indian States on Hub</h3>
+        <h3 class="card-title">🏛️ Sangam Ghats</h3>
+        <p class="card-subtitle">Developers by Indian State</p>
         <div class="state-chips" id="stateChips"></div>
       </div>
     </aside>
@@ -96,15 +125,15 @@
     <!-- ─── FEED / TABS ─── -->
     <section class="feed">
       <div class="tab-bar">
-        <button class="tab active" id="tab-explore" onclick="showTab('explore', this)">🏠 Feed</button>
-        <button class="tab" id="tab-trending" onclick="showTab('trending', this)">🔥 Trending</button>
-        <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
+        <button class="tab active" id="tab-explore" onclick="showTab('explore', this)">🌊 Confluence</button>
+        <button class="tab" id="tab-trending" onclick="showTab('trending', this)">🔥 Rising Tides</button>
+        <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 My Ghat</button>
       </div>
 
       <!-- ── EXPLORE FEED ── -->
       <div id="pane-explore" class="tab-pane active">
         <div class="section-header">
-          <h2>What's happening in BharatHub</h2>
+          <h2>What flows through SangamHub</h2>
           <span class="badge">Live</span>
         </div>
         <div id="repoCards" class="repo-grid"></div>
@@ -113,7 +142,7 @@
       <!-- ── TRENDING ── -->
       <div id="pane-trending" class="tab-pane hidden">
         <div class="section-header">
-          <h2>🔥 Trending Indian Projects</h2>
+          <h2>🔥 Rising Tides — Trending Projects</h2>
           <div class="filter-row">
             <select id="trendFilter" onchange="renderTrending()">
               <option value="today">Today</option>
@@ -139,16 +168,16 @@
           <div class="profile-avatar-lg">PD</div>
           <div class="profile-meta">
             <h2>Prashanth Dev</h2>
-            <p class="handle">@prashanth_dev &nbsp;·&nbsp; Bangalore, Karnataka 🇮🇳</p>
-            <p class="bio">Building open-source AI tools with Python &amp; PyTorch. Believer in Digital India. 🚀</p>
+            <p class="handle">@prashanth_dev &nbsp;·&nbsp; Bengaluru, Karnataka 🇮🇳</p>
+            <p class="bio">Building open-source AI tools with Python &amp; PyTorch. Like a river, I keep flowing. 🌊</p>
             <div class="profile-badges">
-              <span class="badge badge-saffron">⚡ Top Contributor</span>
-              <span class="badge badge-green">🇮🇳 Made in India</span>
-              <span class="badge badge-blue">🤖 AI/ML</span>
+              <span class="badge badge-gold">⚡ Top Contributor</span>
+              <span class="badge badge-river">🌊 Sangam Elder</span>
+              <span class="badge badge-lotus">🪷 AI/ML</span>
             </div>
           </div>
         </div>
-        <div class="contribution-graph-label">Contribution activity</div>
+        <div class="contribution-graph-label">Contribution flow — your river's journey</div>
         <div class="contribution-graph" id="contribGraph"></div>
         <div class="profile-stats-row">
           <div class="pstat"><strong>42</strong><span>Repositories</span></div>
@@ -162,22 +191,22 @@
     <!-- ─── RIGHT RAIL ─── -->
     <aside class="right-rail">
       <div class="card">
-        <h3 class="card-title">🇮🇳 Digital India Spotlight</h3>
+        <h3 class="card-title">🏛️ Sangam Spotlight</h3>
         <div class="spotlight-item">
-          <span class="spotlight-icon">🏛️</span>
-          <div><strong>IndiaStack</strong><p>Open APIs for India's digital infra</p></div>
+          <span class="spotlight-icon">🌊</span>
+          <div><strong>IndiaStack</strong><p>Open APIs — where data rivers meet</p></div>
         </div>
         <div class="spotlight-item">
           <span class="spotlight-icon">🌾</span>
-          <div><strong>AgroAI</strong><p>Farmer-first ML models in Hindi</p></div>
+          <div><strong>KisanAI</strong><p>Farmer-first ML in Bharat's languages</p></div>
         </div>
         <div class="spotlight-item">
-          <span class="spotlight-icon">💊</span>
-          <div><strong>HealthBharat</strong><p>Open health records protocol</p></div>
+          <span class="spotlight-icon">🪷</span>
+          <div><strong>AyurCode</strong><p>Ancient wisdom, modern open-source</p></div>
         </div>
       </div>
       <div class="card">
-        <h3 class="card-title">📅 Upcoming Hackathons</h3>
+        <h3 class="card-title">📅 Upcoming Sangams</h3>
         <div class="event-item">
           <div class="event-date">MAR<span>22</span></div>
           <div><strong>Smart India Hackathon</strong><p>National · 72-hour sprint</p></div>
@@ -191,25 +220,26 @@
           <div><strong>Hack The Mountains 4.0</strong><p>Online · ₹5L prize pool</p></div>
         </div>
       </div>
-      <div class="card card-tricolor">
-        <p class="made-india-text">🇮🇳 &nbsp;Proudly Made in India</p>
-        <p class="made-india-sub">Jai Hind · जय हिन्द</p>
+      <div class="card card-sangam-glow">
+        <p class="sangam-quote">"सा विद्या या विमुक्तये"</p>
+        <p class="sangam-quote-trans">Knowledge is that which liberates.</p>
+        <p class="sangam-quote-sub">— Ancient Sangam Wisdom 🪷</p>
       </div>
     </aside>
   </main>
 
   <!-- ═══════════════════════════════════════════════ FOOTER ═══ -->
   <footer class="footer">
-    <div class="footer-tricolor">
-      <div class="ft-saffron"></div>
-      <div class="ft-white"></div>
-      <div class="ft-green"></div>
+    <div class="footer-sangam-strip">
+      <div class="fstrip-terracotta"></div>
+      <div class="fstrip-gold"></div>
+      <div class="fstrip-river"></div>
     </div>
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="chakra-sm">&#10006;</span>
-        <strong>BharatHub</strong>
-        <span>— Made in India 🇮🇳</span>
+        <span class="lotus-sm">🪷</span>
+        <strong>SangamHub</strong>
+        <span>— Where Ideas Confluence 🌊</span>
       </div>
       <div class="footer-links">
         <a href="#">About</a>
@@ -220,7 +250,8 @@
         <a href="#">Terms</a>
         <a href="#">Contact</a>
       </div>
-      <p class="footer-copy">© 2026 BharatHub Technologies Pvt. Ltd., Bengaluru, India · Built with ❤️ in Bharat</p>
+      <p class="footer-copy">© 2026 SangamHub Technologies Pvt. Ltd., Bengaluru, India · Built with ❤️ at the Confluence</p>
+      <p class="footer-copy footer-devanagari">संगमे बहु विद्यते — At the confluence, much is found.</p>
     </div>
   </footer>
 
