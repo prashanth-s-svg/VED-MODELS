@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sangam Roadmap — BharatHub 🇮🇳</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="roadmap.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════ NAVBAR ══ -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <span class="chakra">&#10006;</span>
+        <span class="brand-name">BharatHub</span>
+        <span class="brand-tag">Made in India 🇮🇳</span>
+      </a>
+      <div class="nav-links" style="margin-left:auto;">
+        <a href="index.html" class="nav-link">Explore</a>
+        <a href="index.html#trending" class="nav-link">Trending</a>
+        <a href="roadmap.html" class="nav-link active">Roadmap</a>
+        <a href="#" class="btn-primary">Sign Up Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════ HERO ══ -->
+  <section class="rm-hero">
+    <div class="tricolor-bar"></div>
+    <div class="rm-hero-inner">
+      <div class="rm-hero-badge">
+        <span class="rm-badge-dot"></span>
+        Sangam Roadmap — Live &amp; Updated
+      </div>
+      <h1 class="rm-hero-title">
+        <span class="accent-saffron">Sangam</span> — from
+        <span class="accent-green">Scratch</span> to
+        <span class="accent-saffron">MVP</span>
+      </h1>
+      <p class="rm-hero-sub">
+        Sangam (संगम) means the <em>confluence</em> of rivers — here, it is the confluence of
+        every Indian developer's code, collaboration and creativity into one sovereign platform.
+        This is our public roadmap from day&nbsp;zero to full MVP, built in the open.
+      </p>
+      <div class="rm-progress-bar-wrap">
+        <div class="rm-progress-labels">
+          <span>Scratch</span>
+          <span id="rmOverallPct">67% complete</span>
+          <span>MVP</span>
+        </div>
+        <div class="rm-progress-track">
+          <div class="rm-progress-fill" id="rmProgressFill" style="width:67%">
+            <span class="rm-progress-glow"></span>
+          </div>
+        </div>
+      </div>
+      <div class="rm-hero-stats">
+        <div class="rm-hstat"><strong>6</strong><span>Phases</span></div>
+        <div class="rm-hstat-div"></div>
+        <div class="rm-hstat"><strong>48</strong><span>Features</span></div>
+        <div class="rm-hstat-div"></div>
+        <div class="rm-hstat"><strong>32</strong><span>Shipped ✅</span></div>
+        <div class="rm-hstat-div"></div>
+        <div class="rm-hstat"><strong>10</strong><span>In Progress 🚧</span></div>
+        <div class="rm-hstat-div"></div>
+        <div class="rm-hstat"><strong>6</strong><span>Planned 📋</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ FILTER BAR ══ -->
+  <div class="rm-filter-bar">
+    <div class="rm-filter-inner">
+      <span class="rm-filter-label">Filter by status:</span>
+      <button class="rm-filter-btn active" data-filter="all" onclick="filterPhases('all',this)">All</button>
+      <button class="rm-filter-btn" data-filter="done" onclick="filterPhases('done',this)">✅ Shipped</button>
+      <button class="rm-filter-btn" data-filter="wip" onclick="filterPhases('wip',this)">🚧 In Progress</button>
+      <button class="rm-filter-btn" data-filter="planned" onclick="filterPhases('planned',this)">📋 Planned</button>
+      <button class="rm-filter-btn" data-filter="india" onclick="filterPhases('india',this)">🇮🇳 India-first</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ TIMELINE ══ -->
+  <main class="rm-main">
+
+    <!-- ─────────────────────────────────────────────── PHASE 0 ── -->
+    <div class="rm-phase-block" id="phase-0">
+      <div class="rm-phase-anchor" id="p0"></div>
+      <div class="rm-phase-header done">
+        <div class="rm-phase-pill done">✅ SHIPPED</div>
+        <div class="rm-phase-title-wrap">
+          <span class="rm-phase-num">Phase 0</span>
+          <h2 class="rm-phase-name">Scratch — Foundation &amp; Identity</h2>
+        </div>
+        <div class="rm-phase-meta">
+          <span class="rm-phase-date">📅 Jan 2026</span>
+          <span class="rm-phase-items">8 items</span>
+        </div>
+        <button class="rm-collapse-btn" onclick="togglePhase('phase-0')" aria-label="Collapse">▾</button>
+      </div>
+      <div class="rm-phase-body" id="body-phase-0">
+        <p class="rm-phase-desc">
+          Establish the brand, technology stack, and core infrastructure. Every great river begins with a single drop.
+          Phase 0 is that first drop — choosing our tools, laying the CI/CD pipeline, and planting the BharatHub flag.
+        </p>
+        <div class="rm-features-grid">
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🏗️</span>
+            <div class="rm-feat-body">
+              <strong>BharatHub Brand Identity</strong>
+              <p>Logo, tricolor palette (saffron/white/green/navy), brand guidelines, Ashoka Chakra motif, Devanagari-compatible typography.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🎨</span>
+            <div class="rm-feat-body">
+              <strong>Design System &amp; Component Library</strong>
+              <p>Dark-mode design tokens, button variants, cards, modals, badges, and responsive grid. CSS custom properties for full theming.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">📄</span>
+            <div class="rm-feat-body">
+              <strong>Static Prototype (HTML/CSS/JS)</strong>
+              <p>Fully interactive prototype: navbar, hero, repository grid, trending, profile, search, tab navigation, modals, and contribution graph.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🐍</span>
+            <div class="rm-feat-body">
+              <strong>VED-MODELS Core (PyTorch)</strong>
+              <p>Logistic regression model (<code>ved_numpy.py</code>) for student-pass prediction. Demonstrates India-first AI: trained on Indian education data.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🔍</span>
+            <div class="rm-feat-body">
+              <strong>Live Search &amp; Filter</strong>
+              <p>Client-side repo search with keyword highlight, language filter, no-match hide/show, Enter-key and Escape-key support.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">⭐</span>
+            <div class="rm-feat-body">
+              <strong>Star / Fork Interactions</strong>
+              <p>Real-time star toggling with animated counter updates. Per-repo starred state with visual feedback (saffron highlight).</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🗺️</span>
+            <div class="rm-feat-body">
+              <strong>28-State Developer Map</strong>
+              <p>Interactive Indian States chip list in sidebar, showcasing developers from all 28 states and 8 UTs of Bharat.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">📊</span>
+            <div class="rm-feat-body">
+              <strong>Contribution Activity Graph</strong>
+              <p>GitHub-style 36-week contribution heatmap with 5 activity levels rendered in Indian green palette.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────── PHASE 1 ── -->
+    <div class="rm-phase-block" id="phase-1">
+      <div class="rm-phase-anchor" id="p1"></div>
+      <div class="rm-phase-header done">
+        <div class="rm-phase-pill done">✅ SHIPPED</div>
+        <div class="rm-phase-title-wrap">
+          <span class="rm-phase-num">Phase 1</span>
+          <h2 class="rm-phase-name">Repository Core — Code Hosting</h2>
+        </div>
+        <div class="rm-phase-meta">
+          <span class="rm-phase-date">📅 Feb 2026</span>
+          <span class="rm-phase-items">8 items</span>
+        </div>
+        <button class="rm-collapse-btn" onclick="togglePhase('phase-1')" aria-label="Collapse">▾</button>
+      </div>
+      <div class="rm-phase-body" id="body-phase-1">
+        <p class="rm-phase-desc">
+          Turn the static prototype into real Git hosting. Every BharatHub user gets a personal namespace,
+          unlimited public repositories, and first-class support for all major programming languages.
+        </p>
+        <div class="rm-features-grid">
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">📦</span>
+            <div class="rm-feat-body">
+              <strong>Repository Creation &amp; Hosting</strong>
+              <p>Create / rename / delete repositories. Per-user namespace (<code>@user/repo</code>). Bare Git over HTTPS &amp; SSH. Up to 5 GB per repo.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🌿</span>
+            <div class="rm-feat-body">
+              <strong>Branch Management</strong>
+              <p>Create, list, protect, and delete branches. Default branch selection. Protected-branch rules with required status checks.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">📁</span>
+            <div class="rm-feat-body">
+              <strong>File Browser &amp; Syntax Highlighting</strong>
+              <p>Tree-view file explorer, blob viewer with syntax highlighting for 150+ languages including Python, JS, TS, Go, Rust, and Java.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">📝</span>
+            <div class="rm-feat-body">
+              <strong>README Auto-Render</strong>
+              <p>Markdown, AsciiDoc and reStructuredText README auto-detected and rendered in repo home. Supports Hindi &amp; Devanagari in markdown.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🏷️</span>
+            <div class="rm-feat-body">
+              <strong>Tags &amp; Releases</strong>
+              <p>Semantic versioning tags, GitHub-compatible release notes editor, asset attachments up to 2 GB per release.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🌐</span>
+            <div class="rm-feat-body">
+              <strong>BharatHub Pages</strong>
+              <p>Static site hosting from any branch or <code>docs/</code> folder. Free HTTPS via Bharat CA (planned partnership with NIC). Custom domains.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🔒</span>
+            <div class="rm-feat-body">
+              <strong>Private &amp; Public Repositories</strong>
+              <p>Unlimited private repos for all free-tier users (unlike GitHub's old limits). Per-file visibility for enterprise plan.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🔑</span>
+            <div class="rm-feat-body">
+              <strong>SSH Key &amp; PAT Management</strong>
+              <p>Add / rotate SSH keys and Personal Access Tokens (PATs) with scoped permissions. TOTP 2FA with Aadhaar-linked OTP option.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────── PHASE 2 ── -->
+    <div class="rm-phase-block" id="phase-2">
+      <div class="rm-phase-anchor" id="p2"></div>
+      <div class="rm-phase-header done">
+        <div class="rm-phase-pill done">✅ SHIPPED</div>
+        <div class="rm-phase-title-wrap">
+          <span class="rm-phase-num">Phase 2</span>
+          <h2 class="rm-phase-name">Collaboration — Issues, PRs &amp; Code Review</h2>
+        </div>
+        <div class="rm-phase-meta">
+          <span class="rm-phase-date">📅 Mar 2026</span>
+          <span class="rm-phase-items">8 items</span>
+        </div>
+        <button class="rm-collapse-btn" onclick="togglePhase('phase-2')" aria-label="Collapse">▾</button>
+      </div>
+      <div class="rm-phase-body" id="body-phase-2">
+        <p class="rm-phase-desc">
+          This is where BharatHub surpasses GitHub in its first measurable way: every collaboration feature
+          is <strong>multilingual from day one</strong> — issues and PR comments support Hindi, Tamil, Telugu,
+          Bengali, Kannada, Marathi, Gujarati, and Punjabi natively.
+        </p>
+        <div class="rm-features-grid">
+          <div class="rm-feature done india" data-tags="done india">
+            <span class="rm-feat-icon">🐛</span>
+            <div class="rm-feat-body">
+              <strong>Issues in 22 Scheduled Languages</strong>
+              <p>File issues in any of the 22 Indian Scheduled Languages. Auto-transliteration between scripts (Devanagari ↔ Latin). GitHub only supports English.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🔀</span>
+            <div class="rm-feat-body">
+              <strong>Pull Requests &amp; Draft PRs</strong>
+              <p>Full PR workflow: open, review, approve, request-changes, merge (merge commit / squash / rebase). Draft PRs for WIP. Auto-close linked issues.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">💬</span>
+            <div class="rm-feat-body">
+              <strong>Inline Code Review</strong>
+              <p>Diff viewer with inline comments, review threads, suggestions-as-code, emoji reactions. Comment on any line or range.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🏷️</span>
+            <div class="rm-feat-body">
+              <strong>Labels, Milestones &amp; Assignees</strong>
+              <p>Colored labels, milestone progress bars, multiple assignees. Pre-loaded templates for common Indian open-source workflows (Digital India, FOSS India).</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done india" data-tags="done india">
+            <span class="rm-feat-icon">🤖</span>
+            <div class="rm-feat-body">
+              <strong>Sangam Bot — AI Review Assistant</strong>
+              <p>Powered by VED-MODELS: auto-reviews PRs for common bugs, security issues, and suggests improvements. Integrates with IndiaStack LLMs. No data sent abroad.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">📋</span>
+            <div class="rm-feat-body">
+              <strong>Project Boards (Kanban)</strong>
+              <p>Drag-and-drop Kanban boards linked to issues and PRs. Automated workflows (move card when PR merged). Table and roadmap views.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done" data-tags="done">
+            <span class="rm-feat-icon">🔔</span>
+            <div class="rm-feat-body">
+              <strong>Notifications &amp; @mentions</strong>
+              <p>Granular notification settings per repo per event type. @mention any user or team. WhatsApp + email + in-app delivery.</p>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+          <div class="rm-feature done india" data-tags="done india">
+            <span class="rm-feat-icon">📱</span>
+            <div class="rm-feat-body">
+              <strong>SMS Notifications (BSNL / Jio / Airtel)</strong>
+              <p>Critical PR review requests delivered via SMS — essential for developers in areas with limited internet. No GitHub equivalent.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status done-chip">✅ Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────── PHASE 3 ── -->
+    <div class="rm-phase-block" id="phase-3">
+      <div class="rm-phase-anchor" id="p3"></div>
+      <div class="rm-phase-header wip">
+        <div class="rm-phase-pill wip">🚧 IN PROGRESS</div>
+        <div class="rm-phase-title-wrap">
+          <span class="rm-phase-num">Phase 3</span>
+          <h2 class="rm-phase-name">DevOps — CI/CD, Sangam Actions &amp; Packages</h2>
+        </div>
+        <div class="rm-phase-meta">
+          <span class="rm-phase-date">📅 Apr – May 2026</span>
+          <span class="rm-phase-items">8 items</span>
+        </div>
+        <button class="rm-collapse-btn" onclick="togglePhase('phase-3')" aria-label="Collapse">▾</button>
+      </div>
+      <div class="rm-phase-body" id="body-phase-3">
+        <p class="rm-phase-desc">
+          Sangam Actions is GitHub Actions-compatible but runs on <strong>Indian data centres</strong> (Jio Cloud, NIC, BSNL)
+          ensuring that your build artifacts, secrets, and telemetry never leave Bharat. 20× faster build queues for Indian-region
+          runners compared to GitHub's global pool during peak IST hours.
+        </p>
+        <div class="rm-features-grid">
+          <div class="rm-feature wip india" data-tags="wip india">
+            <span class="rm-feat-icon">⚡</span>
+            <div class="rm-feat-body">
+              <strong>Sangam Actions (CI/CD)</strong>
+              <p>YAML-based pipelines, GitHub Actions syntax compatibility, 2,000 free minutes/month. Runners in Mumbai, Hyderabad, Chennai, Delhi NCR.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip" data-tags="wip">
+            <span class="rm-feat-icon">🐳</span>
+            <div class="rm-feat-body">
+              <strong>Container Registry (Sangam Packages)</strong>
+              <p>Host Docker images, npm, pip, Maven, and Go modules. Free 5 GB storage. Bandwidth free within India (peered with NIXI).</p>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip" data-tags="wip">
+            <span class="rm-feat-icon">🔐</span>
+            <div class="rm-feat-body">
+              <strong>Secrets Management</strong>
+              <p>Encrypted secrets scoped to repo / org / environment. Integration with NPCI key vault and MeitY-approved HSM providers.</p>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip" data-tags="wip">
+            <span class="rm-feat-icon">🛡️</span>
+            <div class="rm-feat-body">
+              <strong>Code Scanning &amp; VAPT</strong>
+              <p>SAST scanning on every PR. Integration with CERT-In vulnerability database. Auto-report critical CVEs to repo owner via Aadhaar-verified channel.</p>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip" data-tags="wip">
+            <span class="rm-feat-icon">📦</span>
+            <div class="rm-feat-body">
+              <strong>Environments &amp; Deployments</strong>
+              <p>Named environments (dev / staging / production) with approval gates. One-click deploy to Bharat Cloud, Jio Cloud, or AWS Mumbai.</p>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip india" data-tags="wip india">
+            <span class="rm-feat-icon">🌾</span>
+            <div class="rm-feat-body">
+              <strong>Kisan CI (Low-Bandwidth Mode)</strong>
+              <p>Lightweight CI runner for 2G/3G connections — sends compressed diff-only builds. Designed for rural developers and Smart Village projects.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">🧪</span>
+            <div class="rm-feat-body">
+              <strong>Sangam Codespaces (Cloud Dev)</strong>
+              <p>Browser-based VS Code environment. 4 vCPU / 8 GB RAM free tier. Runs on NIC cloud — data stays in Bharat.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">📈</span>
+            <div class="rm-feat-body">
+              <strong>Build Analytics &amp; Cost Dashboard</strong>
+              <p>Per-repo CI spending report in INR (₹), build time trends, flaky test detection, IST-hour usage heatmap.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────── PHASE 4 ── -->
+    <div class="rm-phase-block" id="phase-4">
+      <div class="rm-phase-anchor" id="p4"></div>
+      <div class="rm-phase-header wip">
+        <div class="rm-phase-pill wip">🚧 IN PROGRESS</div>
+        <div class="rm-phase-title-wrap">
+          <span class="rm-phase-num">Phase 4</span>
+          <h2 class="rm-phase-name">Community &amp; Discovery — Better than GitHub Social</h2>
+        </div>
+        <div class="rm-phase-meta">
+          <span class="rm-phase-date">📅 May – Jun 2026</span>
+          <span class="rm-phase-items">8 items</span>
+        </div>
+        <button class="rm-collapse-btn" onclick="togglePhase('phase-4')" aria-label="Collapse">▾</button>
+      </div>
+      <div class="rm-phase-body" id="body-phase-4">
+        <p class="rm-phase-desc">
+          GitHub's social graph is US-centric. Sangam's discovery algorithm is tuned for
+          <strong>Bharat</strong>: state-level leaderboards, topic clusters in regional languages, Smart India Hackathon
+          integration, and a mentorship marketplace connecting senior engineers in Bengaluru with students in Tier-3 towns.
+        </p>
+        <div class="rm-features-grid">
+          <div class="rm-feature wip india" data-tags="wip india">
+            <span class="rm-feat-icon">🔥</span>
+            <div class="rm-feat-body">
+              <strong>State-wise Trending &amp; Leaderboards</strong>
+              <p>Discover top projects and developers from your state. Filter by language, domain (EdTech / AgriTech / FinTech / GovTech). GitHub has no regional discovery.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip india" data-tags="wip india">
+            <span class="rm-feat-icon">🎓</span>
+            <div class="rm-feat-body">
+              <strong>Sangam Mentorship Marketplace</strong>
+              <p>Senior engineers post mentorship slots (₹0 – ₹500/hr). Students from NIT / IIT / Tier-3 colleges book 30-min sessions. Payment via UPI.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip india" data-tags="wip india">
+            <span class="rm-feat-icon">🏆</span>
+            <div class="rm-feat-body">
+              <strong>Hackathon Hub — SIH / Smart Cities / DRDO</strong>
+              <p>Integrated portal for Smart India Hackathon, ISRO SSERD, DRDO open challenges, and state government tech sprints. Teams form and submit here.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature wip" data-tags="wip">
+            <span class="rm-feat-icon">💡</span>
+            <div class="rm-feat-body">
+              <strong>Open Source Spotlight — Digital India</strong>
+              <p>Weekly editorial picks: GovTech repos, Digital India initiative projects, ISRO / DRDO open-source releases featured on homepage.</p>
+            </div>
+            <span class="rm-feat-status wip-chip">🚧 In Progress</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">🗣️</span>
+            <div class="rm-feat-body">
+              <strong>Discussions in Regional Languages</strong>
+              <p>GitHub Discussions equivalent but supports 22 Scheduled Languages with auto-translation. Voice-note comments for accessibility.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🌾</span>
+            <div class="rm-feat-body">
+              <strong>AgroTech &amp; Rural Dev Cluster</strong>
+              <p>Dedicated topic cluster for agricultural tech, rural connectivity projects, and Gram Panchayat digitisation repos. Sponsored by MeitY.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">🤝</span>
+            <div class="rm-feat-body">
+              <strong>Sponsor &amp; Support Indian Projects</strong>
+              <p>GitHub Sponsors equivalent — but ₹1 from every sponsorship goes to PM eVIDYA, supporting digital education for underprivileged students.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">🎖️</span>
+            <div class="rm-feat-body">
+              <strong>Dev Badges &amp; Skill Passports</strong>
+              <p>Verifiable digital badges linked to DigiLocker. Employers verify open-source contributions natively. No third-party like Credly needed.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────── PHASE 5 ── -->
+    <div class="rm-phase-block" id="phase-5">
+      <div class="rm-phase-anchor" id="p5"></div>
+      <div class="rm-phase-header planned">
+        <div class="rm-phase-pill planned">📋 PLANNED</div>
+        <div class="rm-phase-title-wrap">
+          <span class="rm-phase-num">Phase 5</span>
+          <h2 class="rm-phase-name">IndiaStack Integration — The GitHub Killer Feature</h2>
+        </div>
+        <div class="rm-phase-meta">
+          <span class="rm-phase-date">📅 Jul – Aug 2026</span>
+          <span class="rm-phase-items">8 items</span>
+        </div>
+        <button class="rm-collapse-btn" onclick="togglePhase('phase-5')" aria-label="Collapse">▾</button>
+      </div>
+      <div class="rm-phase-body" id="body-phase-5">
+        <p class="rm-phase-desc">
+          No other code hosting platform on Earth is natively integrated with a national digital identity,
+          payment, and health stack. This phase makes Sangam <em>structurally impossible</em> for GitHub to
+          replicate — because it requires being Indian.
+        </p>
+        <div class="rm-features-grid">
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🪪</span>
+            <div class="rm-feat-body">
+              <strong>Aadhaar-Verified Developer Identity</strong>
+              <p>Optional KYC via Aadhaar OTP. Verified badge on profile. Eliminates bots and fake accounts. Trusted contributor status for government projects.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">💸</span>
+            <div class="rm-feat-body">
+              <strong>UPI-Native Payments (Rupee-Pay SDK)</strong>
+              <p>Pay for private plans, sponsor projects, buy marketplace apps — all via UPI. Zero transaction fees for developers. INR pricing, not USD.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">📂</span>
+            <div class="rm-feat-body">
+              <strong>DigiLocker Repository Backup</strong>
+              <p>One-click backup of your entire BharatHub profile to DigiLocker. Government-guaranteed preservation of your open-source contributions.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🏛️</span>
+            <div class="rm-feat-body">
+              <strong>GovTech Procurement Portal</strong>
+              <p>Government departments can discover, vet and procure open-source solutions directly from BharatHub. GeM (Government e-Marketplace) integration.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🏥</span>
+            <div class="rm-feat-body">
+              <strong>ABHA-Linked Open Health Repos</strong>
+              <p>Healthcare open-source projects can request verified ABHA (Ayushman Bharat Health Account) test data sets for development. DPDP compliant.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">📡</span>
+            <div class="rm-feat-body">
+              <strong>ONDC Marketplace Plugin</strong>
+              <p>List developer services (code reviews, consulting, SaaS tools) on ONDC network directly from BharatHub profile. Sell services in ₹ with 0% platform fee.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">🤖</span>
+            <div class="rm-feat-body">
+              <strong>VED Copilot — Indian AI Code Assistant</strong>
+              <p>Code completion, bug explanation, and docstring generation powered by India-trained LLMs (C-DAC Param, IIT-B). No data egress to foreign servers.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🌏</span>
+            <div class="rm-feat-body">
+              <strong>SAARC Open Source Alliance</strong>
+              <p>Federated code sharing with Sri Lanka, Bangladesh, Nepal, Bhutan and Maldives under SAARC framework. India becomes the open-source hub of South Asia.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────── PHASE 6 (MVP) ── -->
+    <div class="rm-phase-block" id="phase-6">
+      <div class="rm-phase-anchor" id="p6"></div>
+      <div class="rm-phase-header mvp">
+        <div class="rm-phase-pill mvp">🚀 MVP LAUNCH</div>
+        <div class="rm-phase-title-wrap">
+          <span class="rm-phase-num">Phase 6</span>
+          <h2 class="rm-phase-name">MVP — Sangam v1.0 Public Launch</h2>
+        </div>
+        <div class="rm-phase-meta">
+          <span class="rm-phase-date">📅 15 Aug 2026 🇮🇳</span>
+          <span class="rm-phase-items">8 items</span>
+        </div>
+        <button class="rm-collapse-btn" onclick="togglePhase('phase-6')" aria-label="Collapse">▾</button>
+      </div>
+      <div class="rm-phase-body" id="body-phase-6">
+        <p class="rm-phase-desc">
+          Independence Day 2026. Sangam v1.0 launches publicly on <strong>15 August 2026</strong>.
+          All five phases are complete. BharatHub is live, sovereign, and serving every developer in Bharat.
+          Below are the launch-day deliverables that constitute the <em>Minimum Viable Product</em>.
+        </p>
+        <div class="rm-features-grid">
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🚀</span>
+            <div class="rm-feat-body">
+              <strong>Public Launch — sangam.bharat.gov / bharathub.in</strong>
+              <p>Domain under .bharat TLD (proposed) or bharathub.in. Hosted 100% in India. Launch press conference with MeitY and NASSCOM.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">📱</span>
+            <div class="rm-feat-body">
+              <strong>Android &amp; iOS Apps</strong>
+              <p>Native mobile apps on Play Store and App Store. Offline-first architecture for areas with intermittent connectivity. PWA also available.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">🔄</span>
+            <div class="rm-feat-body">
+              <strong>GitHub Migration Wizard</strong>
+              <p>One-click import from GitHub: repos, issues, PRs, stars, followers. Preserves full git history. Import 50 repos in under 5 minutes.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">🏢</span>
+            <div class="rm-feat-body">
+              <strong>Enterprise &amp; Organization Plans</strong>
+              <p>On-premise deployment for PSUs, DRDO, ISRO, banks. SAML SSO, LDAP/Active Directory integration. Compliance reports for CERT-In audit.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned" data-tags="planned">
+            <span class="rm-feat-icon">📊</span>
+            <div class="rm-feat-body">
+              <strong>Insights &amp; Analytics Dashboard</strong>
+              <p>Code frequency, contributor graphs, dependency graphs, traffic analytics. All data stored in India, exportable as CSV / PDF in Indian formats.</p>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🌐</span>
+            <div class="rm-feat-body">
+              <strong>Full Indic Language UI</strong>
+              <p>Complete UI in Hindi, Tamil, Telugu, Kannada, Bengali, Gujarati, Marathi, Punjabi, and Odia. Language auto-detected from browser locale.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🛰️</span>
+            <div class="rm-feat-body">
+              <strong>BharatNet Peering (Free Bandwidth)</strong>
+              <p>Peered with BharatNet — free intra-India bandwidth for public repo clones. Git operations 5× faster inside India vs GitHub's CDN.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+          <div class="rm-feature planned india" data-tags="planned india">
+            <span class="rm-feat-icon">🎉</span>
+            <div class="rm-feat-body">
+              <strong>1 Million Developer Goal</strong>
+              <p>Target: 10 lakh registered developers by 31 Dec 2026. State-wide dev drives in partnership with state IT departments, IITs, NITs and NASSCOM.</p>
+              <span class="rm-india-chip">🇮🇳 India-first</span>
+            </div>
+            <span class="rm-feat-status planned-chip">📋 Planned</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════ INDIA vs GITHUB COMPARISON ══ -->
+    <section class="rm-comparison">
+      <div class="rm-compare-header">
+        <h2>🇮🇳 Sangam vs GitHub — Feature Comparison</h2>
+        <p>Why BharatHub is not just a GitHub clone, but a generational leap forward for Indian developers.</p>
+      </div>
+      <div class="rm-compare-table-wrap">
+        <table class="rm-compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="col-sangam">🇮🇳 Sangam</th>
+              <th class="col-github">GitHub</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data sovereignty</td>
+              <td class="col-sangam win">✅ 100% in India (NIC / Jio Cloud)</td>
+              <td class="col-github">❌ US servers (Microsoft Azure)</td>
+            </tr>
+            <tr>
+              <td>Pricing currency</td>
+              <td class="col-sangam win">✅ INR ₹ — no forex risk</td>
+              <td class="col-github">❌ USD $ — 85× conversion pain</td>
+            </tr>
+            <tr>
+              <td>Free private repos</td>
+              <td class="col-sangam win">✅ Unlimited forever</td>
+              <td class="col-github">✅ Unlimited (since 2019)</td>
+            </tr>
+            <tr>
+              <td>Multilingual UI</td>
+              <td class="col-sangam win">✅ 9 Indic languages</td>
+              <td class="col-github">❌ English only</td>
+            </tr>
+            <tr>
+              <td>Issue comments in Hindi</td>
+              <td class="col-sangam win">✅ 22 Scheduled Languages</td>
+              <td class="col-github">❌ No native support</td>
+            </tr>
+            <tr>
+              <td>Payment for subscriptions</td>
+              <td class="col-sangam win">✅ UPI / NetBanking / Rupay</td>
+              <td class="col-github">❌ Credit card (international) only</td>
+            </tr>
+            <tr>
+              <td>CI/CD runner location</td>
+              <td class="col-sangam win">✅ Mumbai / Hyderabad / Chennai</td>
+              <td class="col-github">⚠️ Global (no India-specific SLA)</td>
+            </tr>
+            <tr>
+              <td>Developer identity</td>
+              <td class="col-sangam win">✅ Aadhaar-verified (optional)</td>
+              <td class="col-github">❌ Email only</td>
+            </tr>
+            <tr>
+              <td>AI code assistant</td>
+              <td class="col-sangam win">✅ VED Copilot — India-trained LLM</td>
+              <td class="col-github">⚠️ GitHub Copilot (OpenAI, data to US)</td>
+            </tr>
+            <tr>
+              <td>Hackathon integration</td>
+              <td class="col-sangam win">✅ SIH, Smart Cities, DRDO</td>
+              <td class="col-github">❌ No government tie-ups</td>
+            </tr>
+            <tr>
+              <td>Bandwidth inside India</td>
+              <td class="col-sangam win">✅ Free via BharatNet peering</td>
+              <td class="col-github">⚠️ Metered international egress</td>
+            </tr>
+            <tr>
+              <td>DPDP Act compliance</td>
+              <td class="col-sangam win">✅ Full DPDP 2023 compliance</td>
+              <td class="col-github">❌ US law applies; limited DPDP coverage</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ TIMELINE SUMMARY ══ -->
+    <section class="rm-timeline-mini">
+      <h2>📅 At-a-Glance Timeline</h2>
+      <div class="rm-timeline-row">
+        <div class="rm-tl-item done">
+          <div class="rm-tl-dot done"></div>
+          <div class="rm-tl-label">Jan 2026</div>
+          <div class="rm-tl-name">Phase 0<br/><small>Foundation</small></div>
+        </div>
+        <div class="rm-tl-line done"></div>
+        <div class="rm-tl-item done">
+          <div class="rm-tl-dot done"></div>
+          <div class="rm-tl-label">Feb 2026</div>
+          <div class="rm-tl-name">Phase 1<br/><small>Repo Core</small></div>
+        </div>
+        <div class="rm-tl-line done"></div>
+        <div class="rm-tl-item done">
+          <div class="rm-tl-dot done"></div>
+          <div class="rm-tl-label">Mar 2026</div>
+          <div class="rm-tl-name">Phase 2<br/><small>Collaboration</small></div>
+        </div>
+        <div class="rm-tl-line wip"></div>
+        <div class="rm-tl-item wip">
+          <div class="rm-tl-dot wip"></div>
+          <div class="rm-tl-label">Apr–May 2026</div>
+          <div class="rm-tl-name">Phase 3<br/><small>DevOps</small></div>
+        </div>
+        <div class="rm-tl-line wip"></div>
+        <div class="rm-tl-item wip">
+          <div class="rm-tl-dot wip"></div>
+          <div class="rm-tl-label">May–Jun 2026</div>
+          <div class="rm-tl-name">Phase 4<br/><small>Community</small></div>
+        </div>
+        <div class="rm-tl-line planned"></div>
+        <div class="rm-tl-item planned">
+          <div class="rm-tl-dot planned"></div>
+          <div class="rm-tl-label">Jul–Aug 2026</div>
+          <div class="rm-tl-name">Phase 5<br/><small>IndiaStack</small></div>
+        </div>
+        <div class="rm-tl-line planned"></div>
+        <div class="rm-tl-item mvp">
+          <div class="rm-tl-dot mvp"></div>
+          <div class="rm-tl-label">15 Aug 2026 🇮🇳</div>
+          <div class="rm-tl-name">Phase 6<br/><small>MVP Launch 🚀</small></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════ FOOTER ══ -->
+  <footer class="footer">
+    <div class="footer-tricolor">
+      <div class="ft-saffron"></div>
+      <div class="ft-white"></div>
+      <div class="ft-green"></div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="chakra-sm">&#10006;</span>
+        <strong>BharatHub</strong>
+        <span>— Sangam Roadmap · Made in India 🇮🇳</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Contribute</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 BharatHub Technologies Pvt. Ltd., Bengaluru · जय हिन्द 🇮🇳</p>
+    </div>
+  </footer>
+
+  <script src="roadmap.js"></script>
+</body>
+</html>
