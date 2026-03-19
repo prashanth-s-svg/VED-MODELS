@@ -98,6 +98,11 @@
       <div class="tab-bar">
         <button class="tab active" id="tab-explore" onclick="showTab('explore', this)">🏠 Feed</button>
         <button class="tab" id="tab-trending" onclick="showTab('trending', this)">🔥 Trending</button>
+        <button class="tab" id="tab-popular" onclick="showTab('popular', this)">⭐ Popular</button>
+        <button class="tab" id="tab-startups" onclick="showTab('startups', this)">🚀 Startups</button>
+        <button class="tab" id="tab-bharatai" onclick="showTab('bharatai', this)">🤖 BharatAI</button>
+        <button class="tab" id="tab-research" onclick="showTab('research', this)">🔬 Research</button>
+        <button class="tab" id="tab-nemoclaw" onclick="showTab('nemoclaw', this)">🕷️ NemoClaw</button>
         <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
       </div>
 
@@ -131,6 +136,264 @@
           </div>
         </div>
         <div id="trendingCards"></div>
+      </div>
+
+      <!-- ── POPULAR OPEN SOURCE ── -->
+      <div id="pane-popular" class="tab-pane hidden">
+        <div class="section-header">
+          <h2>⭐ Most Popular Open-Source Projects</h2>
+        </div>
+        <div class="filter-row popular-filter-row">
+          <label class="filter-label">Sort by:</label>
+          <button class="sort-btn active" id="sortByStars" onclick="setPopularSort('stars')">⭐ Stars</button>
+          <button class="sort-btn" id="sortByForks" onclick="setPopularSort('forks')">🍴 Forks</button>
+          <select id="popularLangFilter" onchange="renderPopular()">
+            <option value="">All Languages</option>
+            <option value="Python">Python</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="TypeScript">TypeScript</option>
+            <option value="Go">Go</option>
+            <option value="Rust">Rust</option>
+            <option value="C">C</option>
+            <option value="C++">C++</option>
+            <option value="Java">Java</option>
+            <option value="Shell">Shell</option>
+          </select>
+        </div>
+        <div id="popularCards"></div>
+      </div>
+
+      <!-- ── STARTUP BUILDER ── -->
+      <div id="pane-startups" class="tab-pane hidden">
+        <div class="section-header">
+          <h2>🚀 Build Your Tech Startup</h2>
+          <span class="badge badge-green">OSS Stack</span>
+        </div>
+        <p class="startup-intro">
+          A curated collection of battle-tested open-source tools used by the world's fastest-growing startups.
+          Filter by the layer of your stack you're building.
+        </p>
+        <div class="startup-cat-bar" id="startupCatBar"></div>
+        <div id="startupCards"></div>
+      </div>
+
+      <!-- ── BHARATAI AGENT BUILDER ── -->
+      <div id="pane-bharatai" class="tab-pane hidden">
+
+        <!-- Hero -->
+        <div class="ai-hero">
+          <div class="ai-hero-text">
+            <h2>🤖 Build India's AI Agent</h2>
+            <p>Like Perplexity · Claude · NeMo — but built in Bharat 🇮🇳</p>
+          </div>
+          <div class="ai-hero-badges">
+            <span class="badge badge-saffron">RAG</span>
+            <span class="badge badge-blue">Multi-lingual</span>
+            <span class="badge badge-green">Open Source</span>
+          </div>
+        </div>
+
+        <!-- Live Chat Demo -->
+        <div class="ai-chat-section">
+          <div class="ai-chat-label">
+            <span class="ai-chat-dot"></span>
+            Try BharatAI — Ask anything about Indian tech, startups or code
+          </div>
+          <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-msg ai-msg-bot">
+              <div class="ai-avatar">🇮🇳</div>
+              <div class="ai-bubble">
+                Namaste! 🙏 I'm <strong>BharatAI</strong> — India's open-source AI agent.<br>
+                Ask me about building AI agents, Indian tech stacks, startups, or anything you want to ship. <em>Every tool acts as one developer for you.</em>
+              </div>
+            </div>
+          </div>
+          <div class="ai-chat-input-row">
+            <input class="ai-chat-input" id="aiChatInput" type="text"
+              placeholder="Ask BharatAI… e.g. 'How do I build a Perplexity clone in India?'"
+              onkeydown="if(event.key==='Enter') sendBharatAI()" />
+            <button class="ai-send-btn" onclick="sendBharatAI()">Send ⚡</button>
+          </div>
+          <div class="ai-suggestions" id="aiSuggestions">
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">How to build a Perplexity clone?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">Best Indian LLM models?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">What is RAG and how does it work?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">IndiaGPT — where to start?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">How to add Hindi language support?</button>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="section-header" style="margin-top:28px">
+          <h3>🏗️ Indian AI Agent Architecture</h3>
+          <span class="badge badge-blue">Blueprint</span>
+        </div>
+        <div class="ai-arch-flow" id="aiArchFlow"></div>
+
+        <!-- OSS Stack -->
+        <div class="section-header" style="margin-top:28px">
+          <h3>🧰 Open-Source Stack to Build Your Agent</h3>
+          <span class="badge badge-green">Curated</span>
+        </div>
+        <div class="startup-cat-bar" id="agentCatBar"></div>
+        <div id="agentCards"></div>
+
+      </div>
+
+      <!-- ── MARKET RESEARCH AGENT ── -->
+      <div id="pane-research" class="tab-pane hidden">
+
+        <!-- Hero -->
+        <div class="res-hero">
+          <div class="res-hero-left">
+            <h2>🔬 Market Research Agent</h2>
+            <p>6 specialised AI agents auto-research the market so you can build your tech startup with conviction</p>
+          </div>
+          <div class="res-hero-badges">
+            <span class="badge badge-saffron">6 Agents</span>
+            <span class="badge badge-blue">Auto-Research</span>
+            <span class="badge badge-green">India-First</span>
+          </div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="res-input-card" id="resInputCard">
+          <div class="res-input-label">💡 What tech startup do you want to build?</div>
+          <textarea id="resIdeaInput" class="res-idea-input" rows="2"
+            placeholder="e.g. 'AI-powered tutoring app for Tier-2 India students' or 'BNPL for MSMEs' or 'B2B SaaS for jewellers'"></textarea>
+          <div class="res-form-row">
+            <div class="res-form-group">
+              <label class="res-label">Sector</label>
+              <select id="resSector" class="res-select">
+                <option value="auto">🤖 Auto-detect from idea</option>
+                <option value="edtech">📚 EdTech</option>
+                <option value="fintech">💳 FinTech</option>
+                <option value="agritech">🌾 AgriTech</option>
+                <option value="healthtech">🏥 HealthTech</option>
+                <option value="aiml">🤖 AI / ML SaaS</option>
+                <option value="ecommerce">🛒 E-Commerce / D2C</option>
+                <option value="logitech">🚛 LogiTech</option>
+                <option value="saas">💼 B2B SaaS</option>
+              </select>
+            </div>
+            <div class="res-form-group">
+              <label class="res-label">Market Focus</label>
+              <select id="resMarket" class="res-select">
+                <option value="india">🇮🇳 India-First</option>
+                <option value="global">🌍 Global</option>
+                <option value="both">🌐 India + Global</option>
+              </select>
+            </div>
+          </div>
+          <button class="res-run-btn" id="resRunBtn" onclick="runMarketResearch()">
+            🚀 Run Market Research
+          </button>
+          <div class="res-quick-ideas">
+            <span class="res-quick-label">Quick ideas:</span>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">AI tutoring app for India</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">MSME lending FinTech</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">AgriTech for small farmers</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">Mental health app</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">LLM SaaS for BFSI</button>
+          </div>
+        </div>
+
+        <!-- Agent Progress Panel -->
+        <div class="res-progress" id="resProgress" style="display:none">
+          <div class="res-progress-title">🤖 Agents researching your market…</div>
+          <div id="resAgentList" class="res-agent-list"></div>
+        </div>
+
+        <!-- Report Output -->
+        <div id="resReport"></div>
+
+      </div>
+
+      <!-- ── NEMOCLAW ── -->
+      <div id="pane-nemoclaw" class="tab-pane hidden">
+
+        <!-- Hero -->
+        <div class="nc-hero">
+          <div class="nc-hero-left">
+            <div class="nc-logo-row">
+              <span class="nc-logo-icon">🕷️</span>
+              <span class="nc-logo-text">NemoClaw</span>
+              <span class="nc-logo-version">v1.0</span>
+            </div>
+            <p class="nc-hero-sub">Deep-web crawling intelligence agent — scans 30+ sources across news, funding, GitHub, policy &amp; academic databases to build your startup brief in real-time.</p>
+          </div>
+          <div class="nc-hero-badges">
+            <span class="badge badge-saffron">30+ Sources</span>
+            <span class="badge badge-blue">Live Crawl</span>
+            <span class="badge badge-green">AI Synthesis</span>
+          </div>
+        </div>
+
+        <!-- Input Card -->
+        <div class="nc-input-card" id="ncInputCard">
+          <div class="nc-input-label">🔎 What startup do you want deep intelligence on?</div>
+          <div class="nc-input-row">
+            <input id="ncIdeaInput" class="nc-idea-input" type="text"
+              placeholder="e.g. 'EdTech for rural India' · 'AI credit scoring FinTech' · 'B2B SaaS for hospitals'" />
+            <button class="nc-run-btn" id="ncRunBtn" onclick="startCrawl()">🕷️ Crawl</button>
+          </div>
+          <div class="nc-options-row">
+            <div class="nc-opt-group">
+              <label class="nc-opt-label">Crawl Depth</label>
+              <select id="ncDepth" class="nc-select">
+                <option value="quick">⚡ Quick (10 sources, ~5s)</option>
+                <option value="standard" selected>🔍 Standard (20 sources, ~12s)</option>
+                <option value="deep">🌊 Deep (30+ sources, ~22s)</option>
+              </select>
+            </div>
+            <div class="nc-opt-group">
+              <label class="nc-opt-label">Focus</label>
+              <select id="ncFocus" class="nc-select">
+                <option value="all">🌐 All signals</option>
+                <option value="funding">💰 Funding &amp; Investors</option>
+                <option value="tech">🛠️ Tech &amp; GitHub</option>
+                <option value="news">📰 News &amp; Trends</option>
+                <option value="policy">🏛️ Policy &amp; Regulation</option>
+              </select>
+            </div>
+          </div>
+          <div class="nc-quick-chips">
+            <span class="nc-chip-label">Try:</span>
+            <button class="nc-chip" onclick="prefillCrawl(this)">EdTech India</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">FinTech MSME lending</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">AI SaaS for healthcare</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">AgriTech crop advisory</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">D2C fashion brand</button>
+          </div>
+        </div>
+
+        <!-- Live Crawl Terminal -->
+        <div class="nc-terminal" id="ncTerminal" style="display:none">
+          <div class="nc-terminal-bar">
+            <span class="nc-tb-dot red"></span>
+            <span class="nc-tb-dot yellow"></span>
+            <span class="nc-tb-dot green"></span>
+            <span class="nc-tb-title">nemoclaw_agent — live crawl log</span>
+            <span class="nc-tb-stats" id="ncStats">0 URLs · 0 signals</span>
+          </div>
+          <div class="nc-terminal-body" id="ncLog"></div>
+        </div>
+
+        <!-- Source Grid -->
+        <div class="nc-source-section" id="ncSourceSection" style="display:none">
+          <div class="nc-section-hdr">📡 Sources Being Crawled</div>
+          <div class="nc-source-grid" id="ncSourceGrid"></div>
+        </div>
+
+        <!-- Extracted Signals -->
+        <div class="nc-signals-section" id="ncSignalsSection" style="display:none">
+          <div class="nc-section-hdr">⚡ Extracted Signals <span class="nc-signal-count" id="ncSignalCount">0</span></div>
+          <div class="nc-signals-feed" id="ncSignalsFeed"></div>
+        </div>
+
+        <!-- Intelligence Brief -->
+        <div id="ncBrief"></div>
+
       </div>
 
       <!-- ── PROFILE ── -->
