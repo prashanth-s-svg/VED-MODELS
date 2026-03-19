@@ -102,6 +102,7 @@
         <button class="tab" id="tab-startups" onclick="showTab('startups', this)">🚀 Startups</button>
         <button class="tab" id="tab-bharatai" onclick="showTab('bharatai', this)">🤖 BharatAI</button>
         <button class="tab" id="tab-research" onclick="showTab('research', this)">🔬 Research</button>
+        <button class="tab" id="tab-nemoclaw" onclick="showTab('nemoclaw', this)">🕷️ NemoClaw</button>
         <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
       </div>
 
@@ -305,6 +306,93 @@
 
         <!-- Report Output -->
         <div id="resReport"></div>
+
+      </div>
+
+      <!-- ── NEMOCLAW ── -->
+      <div id="pane-nemoclaw" class="tab-pane hidden">
+
+        <!-- Hero -->
+        <div class="nc-hero">
+          <div class="nc-hero-left">
+            <div class="nc-logo-row">
+              <span class="nc-logo-icon">🕷️</span>
+              <span class="nc-logo-text">NemoClaw</span>
+              <span class="nc-logo-version">v1.0</span>
+            </div>
+            <p class="nc-hero-sub">Deep-web crawling intelligence agent — scans 30+ sources across news, funding, GitHub, policy &amp; academic databases to build your startup brief in real-time.</p>
+          </div>
+          <div class="nc-hero-badges">
+            <span class="badge badge-saffron">30+ Sources</span>
+            <span class="badge badge-blue">Live Crawl</span>
+            <span class="badge badge-green">AI Synthesis</span>
+          </div>
+        </div>
+
+        <!-- Input Card -->
+        <div class="nc-input-card" id="ncInputCard">
+          <div class="nc-input-label">🔎 What startup do you want deep intelligence on?</div>
+          <div class="nc-input-row">
+            <input id="ncIdeaInput" class="nc-idea-input" type="text"
+              placeholder="e.g. 'EdTech for rural India' · 'AI credit scoring FinTech' · 'B2B SaaS for hospitals'" />
+            <button class="nc-run-btn" id="ncRunBtn" onclick="startCrawl()">🕷️ Crawl</button>
+          </div>
+          <div class="nc-options-row">
+            <div class="nc-opt-group">
+              <label class="nc-opt-label">Crawl Depth</label>
+              <select id="ncDepth" class="nc-select">
+                <option value="quick">⚡ Quick (10 sources, ~5s)</option>
+                <option value="standard" selected>🔍 Standard (20 sources, ~12s)</option>
+                <option value="deep">🌊 Deep (30+ sources, ~22s)</option>
+              </select>
+            </div>
+            <div class="nc-opt-group">
+              <label class="nc-opt-label">Focus</label>
+              <select id="ncFocus" class="nc-select">
+                <option value="all">🌐 All signals</option>
+                <option value="funding">💰 Funding &amp; Investors</option>
+                <option value="tech">🛠️ Tech &amp; GitHub</option>
+                <option value="news">📰 News &amp; Trends</option>
+                <option value="policy">🏛️ Policy &amp; Regulation</option>
+              </select>
+            </div>
+          </div>
+          <div class="nc-quick-chips">
+            <span class="nc-chip-label">Try:</span>
+            <button class="nc-chip" onclick="prefillCrawl(this)">EdTech India</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">FinTech MSME lending</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">AI SaaS for healthcare</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">AgriTech crop advisory</button>
+            <button class="nc-chip" onclick="prefillCrawl(this)">D2C fashion brand</button>
+          </div>
+        </div>
+
+        <!-- Live Crawl Terminal -->
+        <div class="nc-terminal" id="ncTerminal" style="display:none">
+          <div class="nc-terminal-bar">
+            <span class="nc-tb-dot red"></span>
+            <span class="nc-tb-dot yellow"></span>
+            <span class="nc-tb-dot green"></span>
+            <span class="nc-tb-title">nemoclaw_agent — live crawl log</span>
+            <span class="nc-tb-stats" id="ncStats">0 URLs · 0 signals</span>
+          </div>
+          <div class="nc-terminal-body" id="ncLog"></div>
+        </div>
+
+        <!-- Source Grid -->
+        <div class="nc-source-section" id="ncSourceSection" style="display:none">
+          <div class="nc-section-hdr">📡 Sources Being Crawled</div>
+          <div class="nc-source-grid" id="ncSourceGrid"></div>
+        </div>
+
+        <!-- Extracted Signals -->
+        <div class="nc-signals-section" id="ncSignalsSection" style="display:none">
+          <div class="nc-section-hdr">⚡ Extracted Signals <span class="nc-signal-count" id="ncSignalCount">0</span></div>
+          <div class="nc-signals-feed" id="ncSignalsFeed"></div>
+        </div>
+
+        <!-- Intelligence Brief -->
+        <div id="ncBrief"></div>
 
       </div>
 

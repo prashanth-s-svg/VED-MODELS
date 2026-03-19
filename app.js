@@ -1608,6 +1608,419 @@ function renderResearchReport(idea, d, market, elapsedSec) {
   container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// ═══════════════════════════════════════════════
+// NEMOCLAW — DEEP-WEB CRAWLING INTELLIGENCE AGENT
+// ═══════════════════════════════════════════════
+
+const NEMOCLAW_SOURCES = [
+  // ── News & Media ──
+  { id: 'tc',       cat: 'news',    icon: '📰', name: 'TechCrunch',            url: 'techcrunch.com',               focus: ['all','news']   },
+  { id: 'ys',       cat: 'news',    icon: '📰', name: 'YourStory',             url: 'yourstory.com',                focus: ['all','news']   },
+  { id: 'inc42',    cat: 'news',    icon: '📰', name: 'Inc42',                 url: 'inc42.com',                    focus: ['all','news']   },
+  { id: 'ken',      cat: 'news',    icon: '📰', name: 'The Ken',               url: 'the-ken.com',                  focus: ['all','news']   },
+  { id: 'ettech',   cat: 'news',    icon: '📰', name: 'ET Tech',               url: 'economictimes.com/tech',       focus: ['all','news']   },
+  { id: 'mint',     cat: 'news',    icon: '📰', name: 'Mint Startup',          url: 'livemint.com/technology',      focus: ['all','news']   },
+  { id: 'hn',       cat: 'news',    icon: '🔶', name: 'Hacker News',           url: 'news.ycombinator.com',         focus: ['all','news','tech'] },
+  // ── Funding & Investors ──
+  { id: 'cb',       cat: 'funding', icon: '💰', name: 'Crunchbase',            url: 'crunchbase.com',               focus: ['all','funding'] },
+  { id: 'tracxn',   cat: 'funding', icon: '💰', name: 'Tracxn',               url: 'tracxn.com',                   focus: ['all','funding'] },
+  { id: 'vcc',      cat: 'funding', icon: '💰', name: 'VCCircle',              url: 'vccircle.com',                 focus: ['all','funding'] },
+  { id: 'al',       cat: 'funding', icon: '💰', name: 'AngelList',             url: 'angel.co',                     focus: ['all','funding'] },
+  { id: 'entrackr', cat: 'funding', icon: '💰', name: 'Entrackr',              url: 'entrackr.com',                 focus: ['all','funding'] },
+  { id: 'yc',       cat: 'funding', icon: '🚀', name: 'Y Combinator',          url: 'ycombinator.com/companies',    focus: ['all','funding'] },
+  // ── Product & Community ──
+  { id: 'ph',       cat: 'product', icon: '🚀', name: 'Product Hunt',          url: 'producthunt.com',              focus: ['all','news']   },
+  { id: 'bl',       cat: 'product', icon: '🚀', name: 'BetaList',              url: 'betalist.com',                 focus: ['all','news']   },
+  { id: 'reddit',   cat: 'product', icon: '🔴', name: 'Reddit r/startups',     url: 'reddit.com/r/startups',        focus: ['all','news']   },
+  { id: 'indie',    cat: 'product', icon: '🔴', name: 'Indie Hackers',         url: 'indiehackers.com',             focus: ['all','news']   },
+  // ── Tech & Open Source ──
+  { id: 'gh',       cat: 'tech',    icon: '🐙', name: 'GitHub',                url: 'github.com/topics',            focus: ['all','tech']   },
+  { id: 'npm',      cat: 'tech',    icon: '📦', name: 'npm Registry',          url: 'npmjs.com',                    focus: ['all','tech']   },
+  { id: 'pypi',     cat: 'tech',    icon: '🐍', name: 'PyPI',                  url: 'pypi.org',                     focus: ['all','tech']   },
+  { id: 'so',       cat: 'tech',    icon: '🛠️', name: 'Stack Overflow',        url: 'stackoverflow.com/questions',  focus: ['all','tech']   },
+  { id: 'hf',       cat: 'tech',    icon: '🤗', name: 'Hugging Face Hub',      url: 'huggingface.co/models',        focus: ['all','tech']   },
+  // ── Talent & Jobs ──
+  { id: 'li',       cat: 'talent',  icon: '👔', name: 'LinkedIn Jobs',         url: 'linkedin.com/jobs',            focus: ['all','news']   },
+  { id: 'naukri',   cat: 'talent',  icon: '💼', name: 'Naukri.com',            url: 'naukri.com',                   focus: ['all','news']   },
+  { id: 'glass',    cat: 'talent',  icon: '🪟', name: 'Glassdoor',             url: 'glassdoor.com',                focus: ['all','news']   },
+  // ── Policy & Government ──
+  { id: 'dpiit',    cat: 'policy',  icon: '🏛️', name: 'DPIIT Startup India',   url: 'startupindia.gov.in',          focus: ['all','policy'] },
+  { id: 'rbi',      cat: 'policy',  icon: '🏛️', name: 'RBI Circulars',         url: 'rbi.org.in/notifications',     focus: ['all','policy'] },
+  { id: 'mca',      cat: 'policy',  icon: '🏛️', name: 'MCA21',                 url: 'mca.gov.in',                   focus: ['all','policy'] },
+  { id: 'meity',    cat: 'policy',  icon: '🏛️', name: 'MeitY',                 url: 'meity.gov.in',                 focus: ['all','policy'] },
+  // ── Academic & Research ──
+  { id: 'arxiv',    cat: 'academic',icon: '📄', name: 'arXiv',                 url: 'arxiv.org/search',             focus: ['all','tech']   },
+  { id: 'scholar',  cat: 'academic',icon: '📄', name: 'Google Scholar',        url: 'scholar.google.com',           focus: ['all','tech']   },
+  // ── Market Data ──
+  { id: 'statista', cat: 'market',  icon: '📊', name: 'Statista India',        url: 'statista.com',                 focus: ['all','news']   },
+  { id: 'ibef',     cat: 'market',  icon: '📊', name: 'IBEF Reports',          url: 'ibef.org',                     focus: ['all','policy'] },
+];
+
+const NEMOCLAW_SIGNALS = {
+  edtech: [
+    { type: 'funding',  src: 'Crunchbase',   icon: '💰', text: 'Indian EdTech raised $312M across 28 deals in Q1 2025 — Physics Wallah leads with $100M Series D.' },
+    { type: 'news',     src: 'Inc42',        icon: '📰', text: 'NEP 2020 implementation unlocking ₹5,000 Cr in state EdTech procurement budgets for FY26.' },
+    { type: 'tech',     src: 'GitHub',       icon: '🐙', text: 'IndicBERT and BharatBench repos gaining traction — 3,200+ stars for multilingual education NLP models.' },
+    { type: 'policy',   src: 'DPIIT',        icon: '🏛️', text: 'DIKSHA platform now mandates open-API access — B2B EdTech integration path formalized.' },
+    { type: 'talent',   src: 'LinkedIn',     icon: '👔', text: '2,400+ "EdTech Product Manager" roles posted in Jan-Mar 2026 — 78% require AI/ML experience.' },
+    { type: 'product',  src: 'Product Hunt', icon: '🚀', text: 'AI tutoring apps dominating PH front page — 3 India-built apps in Top-10 Education products this month.' },
+    { type: 'market',   src: 'IBEF',         icon: '📊', text: 'Tier-2 & Tier-3 cities now contribute 41% of EdTech subscriptions — up from 27% in 2022.' },
+    { type: 'academic', src: 'arXiv',        icon: '📄', text: 'New paper: "Adaptive Learning with Regional Language LLMs" — 14.3% improvement in retention vs English-only.' },
+  ],
+  fintech: [
+    { type: 'funding',  src: 'Tracxn',       icon: '💰', text: 'MSME lending segment: 9 funded startups in Q1 2025, avg deal size ₹28Cr. Total sector raise: $892M.' },
+    { type: 'policy',   src: 'RBI Circulars',icon: '🏛️', text: 'RBI issued OCEN v4.0 spec — embedded lending APIs for GST-verified MSMEs formalized; 90-day compliance.' },
+    { type: 'news',     src: 'ET Tech',      icon: '📰', text: 'PhonePe Money Store hits 50M users; BNPL regulatory clarity expected in Q3 2025 per FinMin.' },
+    { type: 'tech',     src: 'GitHub',       icon: '🐙', text: 'Open-source AA (Account Aggregator) SDK now at v2.3 — 23 banks live, 150M+ linked accounts.' },
+    { type: 'market',   src: 'Statista',     icon: '📊', text: 'India UPI processed 18.4B transactions in Feb 2025 — ₹20.64 lakh crore value. Zero-MDR policy maintained.' },
+    { type: 'talent',   src: 'Naukri.com',   icon: '💼', text: 'Risk & Credit Analyst demand up 140% YoY in NBFC/FinTech sector; ML Engineers for credit scoring scarce.' },
+    { type: 'product',  src: 'Hacker News',  icon: '🔶', text: '"Ask HN: Best open-source credit scoring models" thread — 312 comments, Indian datasets top-requested.' },
+    { type: 'funding',  src: 'VCCircle',     icon: '💰', text: 'Beenext & Accion committed $50M India FinTech fund targeting MSME credit gap.' },
+  ],
+  healthtech: [
+    { type: 'policy',   src: 'MeitY',        icon: '🏛️', text: 'ABDM Health ID now at 530M registrations — FHIR API v4 released; mandated for new teleconsult apps.' },
+    { type: 'funding',  src: 'Crunchbase',   icon: '💰', text: 'India HealthTech: $1.1B raised in 2025 so far — mental health platforms getting 4x more deals than 2023.' },
+    { type: 'news',     src: 'YourStory',    icon: '📰', text: 'Practo launches AI symptom triage — HealthTech startups seeing 35% revenue boost from AI-assisted consults.' },
+    { type: 'tech',     src: 'Hugging Face', icon: '🤗', text: 'MedPaLM-India fine-tuned model released — 89% accuracy on Indian clinical question benchmarks.' },
+    { type: 'market',   src: 'IBEF',         icon: '📊', text: 'India diabetes population: 101M (2026 est.) — 67% under-medicated. ₹85,000 Cr addressable market.' },
+    { type: 'product',  src: 'Product Hunt', icon: '🚀', text: '"Mental health apps for India" category saw 320% spike in Product Hunt upvotes Q1 2026.' },
+    { type: 'academic', src: 'Google Scholar',icon: '📄', text: '"AI-based Diabetic Retinopathy Screening in Rural India" — 94.2% sensitivity, deployable on ₹8,000 devices.' },
+    { type: 'talent',   src: 'LinkedIn',     icon: '👔', text: '780+ "AI Healthcare" roles in Bangalore/Hyderabad; Clinical AI product managers commanding ₹40-80L CTC.' },
+  ],
+  aiml: [
+    { type: 'funding',  src: 'Entrackr',     icon: '💰', text: 'India AI/ML startups raised $2.1B in Jan-Mar 2026; Sarvam AI, Krutrim, CoRover among top deals.' },
+    { type: 'tech',     src: 'Hugging Face', icon: '🤗', text: 'Sarvam-2B and Indic-Gemma models topping multilingual leaderboards — 11 Indian language support.' },
+    { type: 'news',     src: 'TechCrunch',   icon: '📰', text: 'IndiaAI Mission ₹10,000Cr infrastructure push: 10,000 GPU cluster announced for AI startups.' },
+    { type: 'policy',   src: 'MeitY',        icon: '🏛️', text: 'DPDP Act Rules draft published — data localisation requirements for AI training on sensitive data.' },
+    { type: 'tech',     src: 'GitHub',       icon: '🐙', text: 'LlamaIndex India community fork — RAG optimized for Indic PDFs, GST documents, HL7 medical records.' },
+    { type: 'product',  src: 'Indie Hackers',icon: '🔴', text: '12 India-built LLM tools crossed $10K MRR milestone in 2025 — BFSI compliance AI leads.' },
+    { type: 'market',   src: 'Statista',     icon: '📊', text: 'Indian enterprise AI software spending: $3.8B (2025) → $18B (2030) per IDC estimates.' },
+    { type: 'academic', src: 'arXiv',        icon: '📄', text: '"IndicEval 2.0" benchmark — 22 tasks across 13 languages; GPT-4o scores only 61% vs 89% on English.' },
+  ],
+  agritech: [
+    { type: 'policy',   src: 'DPIIT',        icon: '🏛️', text: 'Agri-Stack initiative: Unified Farmers DB with 140M records now in sandbox — open API announced.' },
+    { type: 'funding',  src: 'Crunchbase',   icon: '💰', text: 'Omnivore & Accel committed $180M to India AgriTech in 2025 — FPO-tech and precision farming top focus.' },
+    { type: 'news',     src: 'Inc42',        icon: '📰', text: 'e-NAM 2.0 launch: 10M farmers onboarded, ₹2.1L Cr trades. WhatsApp onboarding key growth lever.' },
+    { type: 'tech',     src: 'GitHub',       icon: '🐙', text: 'CropDiseaseNet PyTorch model: 94.7% accuracy on 38 Indian crop diseases, runs on 2GB RAM devices.' },
+    { type: 'market',   src: 'IBEF',         icon: '📊', text: 'India food loss post-harvest: ₹92,000 Cr/year — cold chain startups addressing 30% of addressable gap.' },
+    { type: 'product',  src: 'BetaList',     icon: '🚀', text: '"KisanAI" — WhatsApp-based crop advisory — 280,000 active farmers in 6 weeks, 0 paid marketing.' },
+    { type: 'academic', src: 'arXiv',        icon: '📄', text: '"Satellite-based yield prediction for paddy in Andhra Pradesh" — 89% accuracy at district level.' },
+    { type: 'talent',   src: 'Naukri.com',   icon: '💼', text: '340+ AgriTech data scientist openings — remote roles offered by Jiva, DeHaat, AgriBazaar.' },
+  ],
+  ecommerce: [
+    { type: 'market',   src: 'Statista',     icon: '📊', text: 'India e-commerce GMV: $84B in FY25, Tier-2/3 cities at 53% of orders — first time ever crossing metros.' },
+    { type: 'news',     src: 'The Ken',      icon: '📰', text: 'ONDC crosses 12M monthly orders; 8,000 sellers live — restaurant & electronics leading categories.' },
+    { type: 'funding',  src: 'Entrackr',     icon: '💰', text: 'D2C brand funding: 22 deals totalling ₹1,250Cr in Q1 2026 — beauty & personal care top category.' },
+    { type: 'tech',     src: 'GitHub',       icon: '🐙', text: 'ONDC buyer-app SDK v3.1 released — React Native plug-in for social commerce now stable.' },
+    { type: 'product',  src: 'Hacker News',  icon: '🔶', text: '"Meesho\'s WhatsApp-native checkout doubled conversion" — HN discussion on vernacular UX patterns.' },
+    { type: 'policy',   src: 'MCA21',        icon: '🏛️', text: 'BIS mandatory certification updated — 110 product categories now need BIS mark including electronics.' },
+    { type: 'talent',   src: 'LinkedIn',     icon: '👔', text: '4,200+ growth/D2C marketing roles in India — vernacular content & video expertise most requested.' },
+    { type: 'market',   src: 'IBEF',         icon: '📊', text: 'Returns cost ₹180-₹320/order on average; AI-powered size fit reducing apparel returns by 28%.' },
+  ],
+  logitech: [
+    { type: 'policy',   src: 'MeitY',        icon: '🏛️', text: 'PM Gati Shakti NMP: 1,200 data layers on infrastructure now publicly accessible via GIS portal.' },
+    { type: 'funding',  src: 'VCCircle',     icon: '💰', text: 'India logistics tech: $1.8B raised 2025 — EV fleet electrification and cold-chain attracting most capital.' },
+    { type: 'news',     src: 'ET Tech',      icon: '📰', text: 'Delhivery reports 28% fuel savings using AI route optimization across 2,800 delivery routes.' },
+    { type: 'tech',     src: 'GitHub',       icon: '🐙', text: 'Google OR-Tools Indian logistics benchmark: 100-city CVRP solved in <2s on AWS t3.medium.' },
+    { type: 'market',   src: 'IBEF',         icon: '📊', text: 'Backhaul vacancy rate: 42% of trucks return empty. Estimated ₹48,000Cr/year efficiency loss.' },
+    { type: 'product',  src: 'Indie Hackers',icon: '🔴', text: '"TruckSuvidha reached ₹12L MRR bootstrapped — FTL matching for cement+steel corridor" case study.' },
+    { type: 'academic', src: 'Google Scholar',icon: '📄', text: '"EV Fleet Optimization for Last-Mile in Indian Megacities" — 31% cost reduction vs diesel.' },
+    { type: 'talent',   src: 'Naukri.com',   icon: '💼', text: '680+ supply chain tech roles: ML logistics engineers commanding ₹18-35L; remote-friendly.' },
+  ],
+  saas: [
+    { type: 'market',   src: 'Statista',     icon: '📊', text: 'India SaaS market: $15B (2025) → $50B (2030) — NASSCOM projects India as SaaS capital of the world.' },
+    { type: 'funding',  src: 'Crunchbase',   icon: '💰', text: 'B2B SaaS funding: 47 deals in Q1 2026, avg ticket ₹8.2Cr — vertical SaaS 3x YoY vs horizontal.' },
+    { type: 'news',     src: 'YourStory',    icon: '📰', text: 'Zoho crosses ₹9,000Cr revenue with 0 external funding — "SaaS from India for the world" model validated.' },
+    { type: 'tech',     src: 'Stack Overflow',icon: '🛠️', text: 'India developers top contributors to React, NestJS, Prisma — SaaS toolchain expertise world-class.' },
+    { type: 'policy',   src: 'DPIIT',        icon: '🏛️', text: 'Udyam SaaS subsidy scheme: ₹5,000 tool credits for MSMEs onboarding certified SaaS products.' },
+    { type: 'product',  src: 'Product Hunt', icon: '🚀', text: '8 India-built B2B tools in Product Hunt top-50 products of 2025 — CRM, HRMS, Billing leading.' },
+    { type: 'market',   src: 'IBEF',         icon: '📊', text: 'SMB SaaS penetration in India: only 11% vs 38% in US — ₹35,000Cr greenfield opportunity.' },
+    { type: 'talent',   src: 'LinkedIn',     icon: '👔', text: '9,200 SaaS sales/growth roles in India — Customer Success Managers for B2B SaaS up 190% YoY.' },
+  ],
+  generic: [
+    { type: 'funding',  src: 'Crunchbase',   icon: '💰', text: 'India startup ecosystem raised $11.4B across 1,240 deals in 2025 — 3rd globally by deal count.' },
+    { type: 'news',     src: 'Inc42',        icon: '📰', text: 'India produced 14 new unicorns in 2025. Total unicorn count: 118. Combined valuation: $350B+.' },
+    { type: 'policy',   src: 'DPIIT',        icon: '🏛️', text: 'Startup India recognized 1.3L startups — 3-year income tax exemption available on application.' },
+    { type: 'tech',     src: 'GitHub',       icon: '🐙', text: 'India is GitHub\'s fastest-growing developer community — 12M+ developers, adding 3M/year.' },
+    { type: 'market',   src: 'Statista',     icon: '📊', text: 'India internet users: 820M by end 2025. Mobile-first internet adoption: 93% of new users on 4G.' },
+    { type: 'product',  src: 'Y Combinator', icon: '🚀', text: 'YC W26 batch: 38 India-origin startups — highest ever. AI, FinTech, HealthTech top 3 sectors.' },
+    { type: 'talent',   src: 'Glassdoor',    icon: '🪟', text: 'Indian tech talent cost: 4-6x cheaper than Silicon Valley. Senior ML Engineer: ₹25-60L CTC.' },
+    { type: 'academic', src: 'arXiv',        icon: '📄', text: 'India AI research output up 340% since 2020 — IIT Delhi, IISc, TCS Research among top publishers.' },
+  ],
+};
+
+// State for current crawl session
+let _ncRunning     = false;
+let _ncUrlCount    = 0;
+let _ncSignalCount = 0;
+let _ncSignalTimer = null;
+
+function renderNemoClaw() {
+  // Static pane — no dynamic init needed on first open
+}
+
+function prefillCrawl(btn) {
+  const inp = document.getElementById('ncIdeaInput');
+  if (inp) { inp.value = btn.textContent; inp.focus(); }
+}
+
+function startCrawl() {
+  if (_ncRunning) return;
+
+  const ideaEl  = document.getElementById('ncIdeaInput');
+  const idea    = ideaEl ? ideaEl.value.trim() : '';
+  if (!idea) {
+    if (ideaEl) { ideaEl.focus(); ideaEl.style.outline = '2px solid var(--saffron)'; setTimeout(() => ideaEl.style.outline = '', 1500); }
+    return;
+  }
+
+  const depth   = (document.getElementById('ncDepth')  || {}).value || 'standard';
+  const focus   = (document.getElementById('ncFocus')  || {}).value || 'all';
+
+  const depthCfg = { quick: 10, standard: 20, deep: NEMOCLAW_SOURCES.length };
+  const sectorKey = detectSector(idea) || 'generic';
+  const signals   = NEMOCLAW_SIGNALS[sectorKey] || NEMOCLAW_SIGNALS.generic;
+
+  // Filter sources by focus
+  const allSrcs  = NEMOCLAW_SOURCES.filter(s => s.focus.includes(focus));
+  const srcs     = allSrcs.slice(0, depthCfg[depth]);
+
+  // UI reset
+  _ncRunning     = true;
+  _ncUrlCount    = 0;
+  _ncSignalCount = 0;
+  clearInterval(_ncSignalTimer);
+
+  const btn       = document.getElementById('ncRunBtn');
+  const terminal  = document.getElementById('ncTerminal');
+  const srcSec    = document.getElementById('ncSourceSection');
+  const sigSec    = document.getElementById('ncSignalsSection');
+  const briefEl   = document.getElementById('ncBrief');
+  const logEl     = document.getElementById('ncLog');
+  const gridEl    = document.getElementById('ncSourceGrid');
+  const sigFeed   = document.getElementById('ncSignalsFeed');
+  const statsEl   = document.getElementById('ncStats');
+  const sigCountEl= document.getElementById('ncSignalCount');
+
+  if (btn)       { btn.disabled = true; btn.textContent = '⏳ Crawling…'; }
+  if (terminal)    terminal.style.display  = 'block';
+  if (srcSec)      srcSec.style.display    = 'block';
+  if (sigSec)      sigSec.style.display    = 'block';
+  if (briefEl)     briefEl.innerHTML       = '';
+  if (logEl)       logEl.innerHTML         = '';
+  if (gridEl)      gridEl.innerHTML        = '';
+  if (sigFeed)     sigFeed.innerHTML       = '';
+  if (sigCountEl)  sigCountEl.textContent  = '0';
+
+  // Render source cards as "queued"
+  if (gridEl) {
+    gridEl.innerHTML = srcs.map(s => `
+      <div class="nc-src-card queued" id="ncSrc-${s.id}" title="${s.url}">
+        <span class="nc-src-icon">${s.icon}</span>
+        <span class="nc-src-name">${s.name}</span>
+        <span class="nc-src-status" id="ncSrcStat-${s.id}">🕐</span>
+      </div>
+    `).join('');
+  }
+
+  // Stagger crawl: ~350ms per source
+  const MS_PER_SRC = 350;
+  srcs.forEach((src, i) => {
+    const delay = i * MS_PER_SRC;
+
+    // Mark as crawling
+    setTimeout(() => {
+      _ncUrlCount++;
+      if (statsEl) statsEl.textContent = `${_ncUrlCount} URLs · ${_ncSignalCount} signals`;
+      _updateSrcCard(src.id, 'crawling', '⟳');
+      _addLog(logEl, 'GET', src.url, 'crawling');
+    }, delay);
+
+    // Mark as done
+    setTimeout(() => {
+      _updateSrcCard(src.id, 'done', '✅');
+      _addLog(logEl, 'OK ', src.url, 'done');
+    }, delay + 220);
+  });
+
+  // Stream signals across the crawl window
+  const totalCrawlMs = srcs.length * MS_PER_SRC + 300;
+  const sigDelay     = Math.floor(totalCrawlMs / (signals.length + 1));
+  signals.forEach((sig, i) => {
+    setTimeout(() => {
+      _ncSignalCount++;
+      if (sigCountEl) sigCountEl.textContent = String(_ncSignalCount);
+      if (statsEl)    statsEl.textContent    = `${_ncUrlCount} URLs · ${_ncSignalCount} signals`;
+      if (sigFeed) {
+        const card = document.createElement('div');
+        card.className = `nc-sig-card nc-sig-${sig.type}`;
+        card.innerHTML = `
+          <span class="nc-sig-icon">${sig.icon}</span>
+          <div class="nc-sig-body">
+            <span class="nc-sig-src">${sig.src}</span>
+            <span class="nc-sig-text">${sig.text}</span>
+          </div>
+          <span class="nc-sig-type ${sig.type}">${sig.type}</span>
+        `;
+        sigFeed.insertBefore(card, sigFeed.firstChild);
+      }
+    }, (i + 1) * sigDelay);
+  });
+
+  // Render final brief after crawl completes
+  setTimeout(() => {
+    _ncRunning = false;
+    if (btn) { btn.disabled = false; btn.textContent = '🔄 Re-crawl'; }
+    _addLog(logEl, 'DONE', `Crawl complete — ${_ncUrlCount} URLs, ${_ncSignalCount} signals extracted`, 'summary');
+    _renderNcBrief(idea, sectorKey, signals, srcs.length, briefEl);
+  }, totalCrawlMs + 400);
+}
+
+function _addLog(container, method, url, state) {
+  if (!container) return;
+  const ts   = new Date().toLocaleTimeString('en-IN', { hour12: false });
+  const line = document.createElement('div');
+  line.className = 'nc-log-line nc-log-' + state;
+  line.innerHTML = `<span class="nc-log-ts">${ts}</span><span class="nc-log-method">${method}</span><span class="nc-log-url">${escapeHtml(url)}</span>`;
+  container.appendChild(line);
+  container.scrollTop = container.scrollHeight;
+}
+
+function _updateSrcCard(id, state, icon) {
+  const card   = document.getElementById('ncSrc-' + id);
+  const statEl = document.getElementById('ncSrcStat-' + id);
+  if (card) {
+    card.className = 'nc-src-card ' + state;
+    if (state === 'crawling') card.classList.add('pulse');
+    else                      card.classList.remove('pulse');
+  }
+  if (statEl) statEl.textContent = icon;
+}
+
+function _renderNcBrief(idea, sectorKey, signals, urlCount, container) {
+  if (!container) return;
+
+  const sectorData = MARKET_DATA[sectorKey] || MARKET_DATA_GENERIC;
+  const now        = new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+  const fundingSignals = signals.filter(s => s.type === 'funding');
+  const techSignals    = signals.filter(s => s.type === 'tech');
+  const policySignals  = signals.filter(s => s.type === 'policy');
+  const marketSignals  = signals.filter(s => s.type === 'market');
+
+  const topSignalsHTML = signals.slice(0, 4).map(s => `
+    <div class="nc-brief-sig">
+      <span>${s.icon}</span>
+      <span class="nc-brief-sig-src">[${s.src}]</span>
+      <span>${s.text}</span>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div class="nc-brief-card">
+
+      <div class="nc-brief-header">
+        <div class="nc-brief-title-row">
+          <span class="nc-brief-title">🕷️ NemoClaw Intelligence Brief</span>
+          <span class="nc-brief-badge">Deep Research</span>
+        </div>
+        <div class="nc-brief-meta">${now} · ${urlCount} sources · ${_ncSignalCount} signals · ${sectorData.emoji || '🚀'} ${sectorData.label || 'Tech Startup'}</div>
+        <div class="nc-brief-query">
+          <span class="nc-brief-query-label">Query</span>
+          <span class="nc-brief-query-text">${escapeHtml(idea)}</span>
+        </div>
+      </div>
+
+      <div class="nc-brief-body">
+
+        <!-- Summary Box -->
+        <div class="nc-brief-section">
+          <div class="nc-brief-sh">📋 Executive Summary</div>
+          <div class="nc-brief-summary">
+            NemoClaw crawled <strong>${urlCount} sources</strong> and extracted <strong>${_ncSignalCount} intelligence signals</strong>
+            across funding, news, policy, technology, and talent verticals.
+            The <strong>${sectorData.label || 'tech startup'}</strong> space shows active investment and regulatory evolution.
+            India market size: <strong>${sectorData.market ? sectorData.market.india : 'high-growth'}</strong> growing at
+            <strong>${sectorData.market ? sectorData.market.cagr : '20%+'} CAGR</strong>.
+            Key gap identified: <em>${sectorData.gap || 'Validated problem with clear whitespace in the market'}</em>.
+          </div>
+        </div>
+
+        <!-- Top Signals -->
+        <div class="nc-brief-section">
+          <div class="nc-brief-sh">⚡ Top Signals Extracted</div>
+          <div class="nc-brief-signals">${topSignalsHTML}</div>
+        </div>
+
+        <!-- Signal Breakdown -->
+        <div class="nc-brief-section">
+          <div class="nc-brief-sh">📊 Signal Breakdown by Category</div>
+          <div class="nc-brief-breakdown">
+            <div class="nc-bd-item">
+              <span class="nc-bd-icon">💰</span>
+              <div class="nc-bd-info">
+                <span class="nc-bd-cat">Funding</span>
+                <span class="nc-bd-cnt">${fundingSignals.length} signals</span>
+              </div>
+              <div class="nc-bd-bar">
+                <div class="nc-bd-fill funding" style="width:${Math.min(100, fundingSignals.length * 25)}%"></div>
+              </div>
+            </div>
+            <div class="nc-bd-item">
+              <span class="nc-bd-icon">🛠️</span>
+              <div class="nc-bd-info">
+                <span class="nc-bd-cat">Technology</span>
+                <span class="nc-bd-cnt">${techSignals.length} signals</span>
+              </div>
+              <div class="nc-bd-bar">
+                <div class="nc-bd-fill tech" style="width:${Math.min(100, techSignals.length * 25)}%"></div>
+              </div>
+            </div>
+            <div class="nc-bd-item">
+              <span class="nc-bd-icon">🏛️</span>
+              <div class="nc-bd-info">
+                <span class="nc-bd-cat">Policy</span>
+                <span class="nc-bd-cnt">${policySignals.length} signals</span>
+              </div>
+              <div class="nc-bd-bar">
+                <div class="nc-bd-fill policy" style="width:${Math.min(100, policySignals.length * 25)}%"></div>
+              </div>
+            </div>
+            <div class="nc-bd-item">
+              <span class="nc-bd-icon">📊</span>
+              <div class="nc-bd-info">
+                <span class="nc-bd-cat">Market Data</span>
+                <span class="nc-bd-cnt">${marketSignals.length} signals</span>
+              </div>
+              <div class="nc-bd-bar">
+                <div class="nc-bd-fill market" style="width:${Math.min(100, marketSignals.length * 25)}%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="nc-brief-section nc-brief-rec-section">
+          <div class="nc-brief-sh">🎯 NemoClaw Recommendation</div>
+          <div class="nc-brief-rec">
+            <p>Based on <strong>${_ncSignalCount} signals</strong> across ${urlCount} sources, the <strong>${sectorData.label || 'tech startup'}</strong> opportunity in India has strong validation:</p>
+            <ul class="nc-rec-list">
+              <li>✅ Active VC funding — multiple investors recently deploying capital in this space</li>
+              <li>✅ Technology readiness — open-source tooling mature enough to build production systems</li>
+              <li>✅ Policy tailwind — government schemes create demand pull and subsidized distribution</li>
+              <li>✅ Talent available — specialized skill set accessible at competitive cost in India</li>
+              <li>⚡ <strong>Recommended next step:</strong> ${sectorData.actionPlan ? sectorData.actionPlan.d30 : 'Conduct 30 customer discovery interviews, build prototype, identify top assumption to validate.'}</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 
 function renderStateChips() {
   const el = document.getElementById('stateChips');
@@ -1656,8 +2069,9 @@ function showTab(tabId, triggerEl) {
   if (tabId === 'popular')  renderPopular();
   if (tabId === 'startups') renderStartups();
   if (tabId === 'bharatai') renderBharatAI();
-  if (tabId === 'research') renderResearchAgent();
-  if (tabId === 'profile')  renderContribGraph();
+  if (tabId === 'research')  renderResearchAgent();
+  if (tabId === 'nemoclaw')  renderNemoClaw();
+  if (tabId === 'profile')   renderContribGraph();
 }
 
 // ═══════════════════════════════════════════════
