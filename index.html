@@ -99,6 +99,7 @@
         <button class="tab active" id="tab-explore" onclick="showTab('explore', this)">🏠 Feed</button>
         <button class="tab" id="tab-trending" onclick="showTab('trending', this)">🔥 Trending</button>
         <button class="tab" id="tab-popular" onclick="showTab('popular', this)">⭐ Popular</button>
+        <button class="tab" id="tab-startups" onclick="showTab('startups', this)">🚀 Startups</button>
         <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
       </div>
 
@@ -157,6 +158,20 @@
           </select>
         </div>
         <div id="popularCards"></div>
+      </div>
+
+      <!-- ── STARTUP BUILDER ── -->
+      <div id="pane-startups" class="tab-pane hidden">
+        <div class="section-header">
+          <h2>🚀 Build Your Tech Startup</h2>
+          <span class="badge badge-green">OSS Stack</span>
+        </div>
+        <p class="startup-intro">
+          A curated collection of battle-tested open-source tools used by the world's fastest-growing startups.
+          Filter by the layer of your stack you're building.
+        </p>
+        <div class="startup-cat-bar" id="startupCatBar"></div>
+        <div id="startupCards"></div>
       </div>
 
       <!-- ── PROFILE ── -->

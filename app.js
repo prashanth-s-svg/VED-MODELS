@@ -158,6 +158,302 @@ const TRENDING = [
   },
 ];
 
+const STARTUP_TOOLS = [
+  // ── Frontend ──
+  {
+    name: 'next.js',
+    owner: 'vercel',
+    category: 'Frontend',
+    catIcon: '🎨',
+    desc: 'The React framework for production — SSR, SSG, API routes, and full-stack in one.',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 128000,
+    forks: 27400,
+    license: 'MIT',
+    url: 'https://github.com/vercel/next.js',
+    why: 'Zero-config full-stack React — ship fast with great SEO out of the box.',
+  },
+  {
+    name: 'shadcn-ui',
+    owner: 'shadcn-ui',
+    category: 'Frontend',
+    catIcon: '🎨',
+    desc: 'Beautifully designed components built with Radix UI and Tailwind CSS.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 74000,
+    forks: 4600,
+    license: 'MIT',
+    url: 'https://github.com/shadcn-ui/ui',
+    why: 'Copy-paste component library — no install lock-in, fully customisable.',
+  },
+  {
+    name: 'tailwindcss',
+    owner: 'tailwindlabs',
+    category: 'Frontend',
+    catIcon: '🎨',
+    desc: 'A utility-first CSS framework for rapidly building custom user interfaces.',
+    lang: 'CSS',
+    langColor: '#563d7c',
+    stars: 83000,
+    forks: 4200,
+    license: 'MIT',
+    url: 'https://github.com/tailwindlabs/tailwindcss',
+    why: 'Design directly in markup — fastest path from wireframe to polished UI.',
+  },
+  // ── Backend ──
+  {
+    name: 'fastapi',
+    owner: 'tiangolo',
+    category: 'Backend',
+    catIcon: '⚙️',
+    desc: 'FastAPI framework — high performance, easy to learn, fast to code, ready for production.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 79000,
+    forks: 6700,
+    license: 'MIT',
+    url: 'https://github.com/tiangolo/fastapi',
+    why: 'Auto-generates OpenAPI docs; great for building MVP APIs in hours.',
+  },
+  {
+    name: 'express',
+    owner: 'expressjs',
+    category: 'Backend',
+    catIcon: '⚙️',
+    desc: 'Fast, unopinionated, minimalist web framework for Node.js.',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 65000,
+    forks: 15600,
+    license: 'MIT',
+    url: 'https://github.com/expressjs/express',
+    why: 'The most battle-tested Node.js framework — huge ecosystem, minimal boilerplate.',
+  },
+  {
+    name: 'supabase',
+    owner: 'supabase',
+    category: 'Backend',
+    catIcon: '⚙️',
+    desc: 'The open-source Firebase alternative: Postgres, Auth, Storage, Realtime, Edge Functions.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 73000,
+    forks: 7000,
+    license: 'Apache-2.0',
+    url: 'https://github.com/supabase/supabase',
+    why: 'Full backend-as-a-service in minutes — Postgres + Auth + Storage self-hostable.',
+  },
+  // ── Auth & Identity ──
+  {
+    name: 'next-auth',
+    owner: 'nextauthjs',
+    category: 'Auth',
+    catIcon: '🔐',
+    desc: 'Authentication for Next.js — supports OAuth, email, credentials, and JWT.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 24000,
+    forks: 3400,
+    license: 'ISC',
+    url: 'https://github.com/nextauthjs/next-auth',
+    why: 'Drop-in auth for Next.js — Google, GitHub, email login in under an hour.',
+  },
+  {
+    name: 'keycloak',
+    owner: 'keycloak',
+    category: 'Auth',
+    catIcon: '🔐',
+    desc: 'Open Source Identity and Access Management for modern applications and services.',
+    lang: 'Java',
+    langColor: '#b07219',
+    stars: 24000,
+    forks: 6600,
+    license: 'Apache-2.0',
+    url: 'https://github.com/keycloak/keycloak',
+    why: 'Enterprise-grade SSO, MFA, and RBAC — self-hostable on your own infra.',
+  },
+  // ── Payments ──
+  {
+    name: 'stripe-node',
+    owner: 'stripe',
+    category: 'Payments',
+    catIcon: '💳',
+    desc: 'Official Stripe Node.js library — accept payments, subscriptions, and marketplace splits.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 9200,
+    forks: 1200,
+    license: 'MIT',
+    url: 'https://github.com/stripe/stripe-node',
+    why: 'The gold standard for payments SDK — subscriptions, webhooks, 3DS all included.',
+  },
+  {
+    name: 'razorpay-node',
+    owner: 'razorpay',
+    category: 'Payments',
+    catIcon: '💳',
+    desc: 'Official Razorpay SDK for Node.js — UPI, cards, netbanking, wallets, and EMI.',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 570,
+    forks: 270,
+    license: 'MIT',
+    url: 'https://github.com/razorpay/razorpay-node',
+    why: 'India-first payment gateway with UPI support — lowest friction for Indian users.',
+  },
+  // ── DevOps / Infrastructure ──
+  {
+    name: 'docker',
+    owner: 'moby',
+    category: 'DevOps',
+    catIcon: '🐳',
+    desc: 'Moby — the open-source project behind Docker for packaging apps in containers.',
+    lang: 'Go',
+    langColor: '#00ADD8',
+    stars: 69000,
+    forks: 18700,
+    license: 'Apache-2.0',
+    url: 'https://github.com/moby/moby',
+    why: 'Containerise everything — consistent environments from laptop to production.',
+  },
+  {
+    name: 'traefik',
+    owner: 'traefik',
+    category: 'DevOps',
+    catIcon: '🐳',
+    desc: 'The Cloud Native Application Proxy — automatic TLS, load balancing, and service discovery.',
+    lang: 'Go',
+    langColor: '#00ADD8',
+    stars: 51000,
+    forks: 5100,
+    license: 'MIT',
+    url: 'https://github.com/traefik/traefik',
+    why: 'Spin up HTTPS + routing for all your microservices with near-zero config.',
+  },
+  {
+    name: 'terraform',
+    owner: 'hashicorp',
+    category: 'DevOps',
+    catIcon: '🐳',
+    desc: 'Infrastructure as code — provision and manage cloud resources declaratively.',
+    lang: 'Go',
+    langColor: '#00ADD8',
+    stars: 43000,
+    forks: 9600,
+    license: 'BUSL-1.1',
+    url: 'https://github.com/hashicorp/terraform',
+    why: 'Manage your entire cloud infra in version-controlled code — repeatable and safe.',
+  },
+  // ── AI / ML ──
+  {
+    name: 'langchain',
+    owner: 'langchain-ai',
+    category: 'AI / ML',
+    catIcon: '🤖',
+    desc: 'Build context-aware, reasoning applications using LLMs with LangChain.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 95000,
+    forks: 15600,
+    license: 'MIT',
+    url: 'https://github.com/langchain-ai/langchain',
+    why: 'Fastest way to build LLM-powered features — RAG, agents, chains, tools.',
+  },
+  {
+    name: 'ollama',
+    owner: 'ollama',
+    category: 'AI / ML',
+    catIcon: '🤖',
+    desc: 'Get up and running with large language models locally on your machine.',
+    lang: 'Go',
+    langColor: '#00ADD8',
+    stars: 95000,
+    forks: 7700,
+    license: 'MIT',
+    url: 'https://github.com/ollama/ollama',
+    why: 'Run LLMs on your own hardware — no API cost, full data privacy for your startup.',
+  },
+  // ── Analytics & Monitoring ──
+  {
+    name: 'posthog',
+    owner: 'PostHog',
+    category: 'Analytics',
+    catIcon: '📊',
+    desc: 'Open-source product analytics, session recording, feature flags, and A/B testing.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 23000,
+    forks: 1400,
+    license: 'MIT',
+    url: 'https://github.com/PostHog/posthog',
+    why: 'All-in-one product analytics self-hostable — funnels, retention, and feature flags.',
+  },
+  {
+    name: 'grafana',
+    owner: 'grafana',
+    category: 'Analytics',
+    catIcon: '📊',
+    desc: 'Open-source observability and data visualization platform.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 65000,
+    forks: 12100,
+    license: 'AGPL-3.0',
+    url: 'https://github.com/grafana/grafana',
+    why: 'Beautiful dashboards for metrics, logs, and traces — essential for production.',
+  },
+  // ── CMS & Content ──
+  {
+    name: 'payload',
+    owner: 'payloadcms',
+    category: 'CMS',
+    catIcon: '📝',
+    desc: 'The most powerful TypeScript-native headless CMS. Code-first, self-hostable.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 29000,
+    forks: 1900,
+    license: 'MIT',
+    url: 'https://github.com/payloadcms/payload',
+    why: 'Full CMS + API in your codebase — no vendor lock-in, type-safe from day one.',
+  },
+  // ── Communication ──
+  {
+    name: 'cal.com',
+    owner: 'calcom',
+    category: 'Communication',
+    catIcon: '📅',
+    desc: 'Scheduling infrastructure for everyone — the open-source Calendly alternative.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 33000,
+    forks: 8100,
+    license: 'AGPL-3.0',
+    url: 'https://github.com/calcom/cal.com',
+    why: 'Self-host your booking system — perfect for SaaS demos, sales calls, and support.',
+  },
+  {
+    name: 'mattermost',
+    owner: 'mattermost',
+    category: 'Communication',
+    catIcon: '📅',
+    desc: 'Mattermost is a secure, open source platform for developer collaboration.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 30000,
+    forks: 7200,
+    license: 'AGPL-3.0',
+    url: 'https://github.com/mattermost/mattermost',
+    why: 'Self-hosted team chat — keep company comms private and GDPR-compliant.',
+  },
+];
+
+const STARTUP_CATEGORIES = ['All', 'Frontend', 'Backend', 'Auth', 'Payments', 'DevOps', 'AI / ML', 'Analytics', 'CMS', 'Communication'];
+
+let activeStartupCat = 'All';
+
 const POPULAR_OSS = [
   {
     name: 'freeCodeCamp',
@@ -481,6 +777,74 @@ function setPopularSort(key) {
   renderPopular();
 }
 
+function renderStartupCategoryBar() {
+  const bar = document.getElementById('startupCatBar');
+  if (!bar) return;
+  bar.innerHTML = STARTUP_CATEGORIES.map(cat => `
+    <button class="cat-chip${cat === activeStartupCat ? ' active' : ''}"
+      onclick="setStartupCat('${cat}')">${cat}</button>
+  `).join('');
+}
+
+function renderStartupCards() {
+  const container = document.getElementById('startupCards');
+  if (!container) return;
+  const data = activeStartupCat === 'All'
+    ? STARTUP_TOOLS
+    : STARTUP_TOOLS.filter(t => t.category === activeStartupCat);
+
+  // group by category when showing All
+  if (activeStartupCat === 'All') {
+    const grouped = {};
+    data.forEach(t => {
+      if (!grouped[t.category]) grouped[t.category] = [];
+      grouped[t.category].push(t);
+    });
+    container.innerHTML = Object.entries(grouped).map(([cat, tools]) => `
+      <div class="startup-group">
+        <div class="startup-group-title">${tools[0].catIcon} ${cat}</div>
+        ${tools.map(t => startupCardHTML(t)).join('')}
+      </div>
+    `).join('');
+  } else {
+    container.innerHTML = data.map(t => startupCardHTML(t)).join('');
+  }
+}
+
+function startupCardHTML(t) {
+  return `
+    <div class="startup-card">
+      <div class="startup-card-top">
+        <div class="startup-card-name">
+          <a class="popular-link" href="${t.url}" target="_blank" rel="noopener noreferrer">
+            📦 ${t.owner} / <strong>${t.name}</strong>
+          </a>
+          <span class="startup-cat-badge">${t.catIcon} ${t.category}</span>
+          <span class="popular-license">${t.license}</span>
+        </div>
+        <div class="startup-card-meta">
+          <span>⭐ ${fmtNum(t.stars)}</span>
+          <span>🍴 ${fmtNum(t.forks)}</span>
+          <span>${langDot(t.langColor)} ${t.lang}</span>
+        </div>
+      </div>
+      <p class="startup-card-desc">${t.desc}</p>
+      <div class="startup-why">💡 <em>${t.why}</em></div>
+    </div>
+  `;
+}
+
+function setStartupCat(cat) {
+  activeStartupCat = cat;
+  renderStartupCategoryBar();
+  renderStartupCards();
+}
+
+function renderStartups() {
+  renderStartupCategoryBar();
+  renderStartupCards();
+}
+
 function renderStateChips() {
   const el = document.getElementById('stateChips');
   if (!el) return;
@@ -526,6 +890,7 @@ function showTab(tabId, triggerEl) {
   // lazy render
   if (tabId === 'trending') renderTrending();
   if (tabId === 'popular')  renderPopular();
+  if (tabId === 'startups') renderStartups();
   if (tabId === 'profile')  renderContribGraph();
 }
 
