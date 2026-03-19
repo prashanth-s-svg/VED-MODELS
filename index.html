@@ -100,6 +100,7 @@
         <button class="tab" id="tab-trending" onclick="showTab('trending', this)">🔥 Trending</button>
         <button class="tab" id="tab-popular" onclick="showTab('popular', this)">⭐ Popular</button>
         <button class="tab" id="tab-startups" onclick="showTab('startups', this)">🚀 Startups</button>
+        <button class="tab" id="tab-bharatai" onclick="showTab('bharatai', this)">🤖 BharatAI</button>
         <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
       </div>
 
@@ -172,6 +173,69 @@
         </p>
         <div class="startup-cat-bar" id="startupCatBar"></div>
         <div id="startupCards"></div>
+      </div>
+
+      <!-- ── BHARATAI AGENT BUILDER ── -->
+      <div id="pane-bharatai" class="tab-pane hidden">
+
+        <!-- Hero -->
+        <div class="ai-hero">
+          <div class="ai-hero-text">
+            <h2>🤖 Build India's AI Agent</h2>
+            <p>Like Perplexity · Claude · NeMo — but built in Bharat 🇮🇳</p>
+          </div>
+          <div class="ai-hero-badges">
+            <span class="badge badge-saffron">RAG</span>
+            <span class="badge badge-blue">Multi-lingual</span>
+            <span class="badge badge-green">Open Source</span>
+          </div>
+        </div>
+
+        <!-- Live Chat Demo -->
+        <div class="ai-chat-section">
+          <div class="ai-chat-label">
+            <span class="ai-chat-dot"></span>
+            Try BharatAI — Ask anything about Indian tech, startups or code
+          </div>
+          <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-msg ai-msg-bot">
+              <div class="ai-avatar">🇮🇳</div>
+              <div class="ai-bubble">
+                Namaste! 🙏 I'm <strong>BharatAI</strong> — India's open-source AI agent.<br>
+                Ask me about building AI agents, Indian tech stacks, startups, or anything you want to ship. <em>Every tool acts as one developer for you.</em>
+              </div>
+            </div>
+          </div>
+          <div class="ai-chat-input-row">
+            <input class="ai-chat-input" id="aiChatInput" type="text"
+              placeholder="Ask BharatAI… e.g. 'How do I build a Perplexity clone in India?'"
+              onkeydown="if(event.key==='Enter') sendBharatAI()" />
+            <button class="ai-send-btn" onclick="sendBharatAI()">Send ⚡</button>
+          </div>
+          <div class="ai-suggestions" id="aiSuggestions">
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">How to build a Perplexity clone?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">Best Indian LLM models?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">What is RAG and how does it work?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">IndiaGPT — where to start?</button>
+            <button class="ai-suggest-chip" onclick="askSuggestion(this)">How to add Hindi language support?</button>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="section-header" style="margin-top:28px">
+          <h3>🏗️ Indian AI Agent Architecture</h3>
+          <span class="badge badge-blue">Blueprint</span>
+        </div>
+        <div class="ai-arch-flow" id="aiArchFlow"></div>
+
+        <!-- OSS Stack -->
+        <div class="section-header" style="margin-top:28px">
+          <h3>🧰 Open-Source Stack to Build Your Agent</h3>
+          <span class="badge badge-green">Curated</span>
+        </div>
+        <div class="startup-cat-bar" id="agentCatBar"></div>
+        <div id="agentCards"></div>
+
       </div>
 
       <!-- ── PROFILE ── -->

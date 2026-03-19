@@ -158,6 +158,153 @@ const TRENDING = [
   },
 ];
 
+const BHARATAI_RESPONSES = {
+  perplexity: {
+    title: 'Building an Indian Perplexity Clone',
+    body: `Here's how to build <strong>BharatSearch</strong> — an Indian AI search agent:\n\n<ol>
+<li><strong>Query Understanding</strong> — Use a fast embedding model (e.g. <code>sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</code>) to encode the user's question in Hindi or English.</li>
+<li><strong>Web Retrieval</strong> — Use <code>SerpAPI</code> or <code>Brave Search API</code> to fetch top 5 results, then chunk the content.</li>
+<li><strong>RAG Pipeline</strong> — Store chunks in <code>ChromaDB</code>. Retrieve top-k similar chunks with cosine similarity.</li>
+<li><strong>Answer Synthesis</strong> — Pass retrieved context + question to an LLM (<code>Ollama + Mistral</code> or <code>AI4Bharat IndicBART</code>) to generate a cited answer.</li>
+<li><strong>UI</strong> — Next.js frontend with streaming responses via Server-Sent Events.</li>
+</ol>
+🛠️ Full stack: <code>FastAPI + LangChain + ChromaDB + Ollama + Next.js</code>`,
+  },
+  rag: {
+    title: 'What is RAG & How Does It Work?',
+    body: `<strong>RAG (Retrieval-Augmented Generation)</strong> combines a search engine with an LLM:\n\n<ul>
+<li>📥 <strong>Ingest</strong> — Load your documents (PDFs, web pages, databases) and split into chunks.</li>
+<li>🔢 <strong>Embed</strong> — Convert each chunk into a vector using an embedding model.</li>
+<li>🗄️ <strong>Store</strong> — Save vectors in a vector database (<code>ChromaDB</code>, <code>Qdrant</code>, <code>pgvector</code>).</li>
+<li>🔍 <strong>Retrieve</strong> — At query time, embed the question and find the most similar chunks.</li>
+<li>🤖 <strong>Generate</strong> — Send the retrieved chunks as context to an LLM to produce a grounded answer.</li>
+</ul>
+For Indian use-cases use <strong>MuRIL</strong> or <strong>IndicBERT</strong> embeddings to handle Hindi, Tamil, Telugu, and 20+ other Indic scripts natively.`,
+  },
+  hindi: {
+    title: 'Adding Hindi & Indic Language Support',
+    body: `To make your AI agent understand and respond in <strong>Hindi, Tamil, Telugu, Bengali</strong> and 20 other Indian languages:\n\n<ul>
+<li>🗣️ <strong>Embedding model</strong>: Use <code>ai4bharat/indic-bert</code> or <code>l3cube-pune/hindi-sentence-bert</code> — both multilingual and Indic-trained.</li>
+<li>✍️ <strong>LLM</strong>: <code>Sarvam AI's Sarvam-1</code> (India's first homegrown SLM), or <code>Llama-3 fine-tuned on Hindi</code> corpora.</li>
+<li>🔤 <strong>Transliteration</strong>: <code>indic-transliteration</code> library handles Roman ↔ Devanagari ↔ other scripts.</li>
+<li>📚 <strong>Corpora</strong>: AI4Bharat's <code>IndicCorp</code> (8.5B tokens across 12 languages) for fine-tuning.</li>
+<li>🌐 <strong>UI</strong>: Use <code>react-i18next</code> + <code>unicode-range</code> font loading for rendering Indic scripts properly.</li>
+</ul>`,
+  },
+  llm: {
+    title: 'Best Indian & Open-Source LLM Models',
+    body: `Top models to power your Indian AI agent:\n\n<ul>
+<li>🇮🇳 <strong>Sarvam-1</strong> — India's first 2B SLM, trained on 4T tokens including Indian languages. <em>Best for production.</em></li>
+<li>🇮🇳 <strong>AI4Bharat IndicBART</strong> — Multilingual seq2seq for 11 Indian languages. Great for summarisation & translation.</li>
+<li>🇮🇳 <strong>MuRIL (Google)</strong> — Multilingual Representations for Indian Languages — best for NLU tasks.</li>
+<li>🌍 <strong>Mistral 7B / 8x7B</strong> — Top open-weight LLM, runs locally via Ollama. Strong reasoning in English.</li>
+<li>🌍 <strong>LLaMA 3.1 (Meta)</strong> — Strong baseline; community fine-tunes available for Hindi.</li>
+<li>🌍 <strong>Gemma 2 (Google)</strong> — Compact, fast, open; good Indic language capability.</li>
+</ul>
+👉 Start with <code>Ollama + Mistral</code> locally, then swap to <code>Sarvam-1</code> for Indian language production.`,
+  },
+  indiaGPT: {
+    title: 'Building IndiaGPT — Where to Start',
+    body: `A concrete 5-step roadmap to launch your own <strong>IndiaGPT</strong>:\n\n<ol>
+<li>🧱 <strong>Week 1 — Foundation</strong>: Set up <code>Ollama</code> + <code>LangChain</code> + <code>FastAPI</code>. Get a basic Q&amp;A agent running in English.</li>
+<li>🌐 <strong>Week 2 — Indic Support</strong>: Swap embeddings to <code>IndicBERT</code>. Add <code>indic-transliteration</code>. Test with Hindi queries.</li>
+<li>🔍 <strong>Week 3 — RAG</strong>: Build a knowledge base with Indian datasets (news, govt docs, Wikipedia in Hindi). Ingest into <code>ChromaDB</code>.</li>
+<li>🖥️ <strong>Week 4 — UI</strong>: Next.js + streaming SSE. Streaming word-by-word response like Perplexity. Add citations.</li>
+<li>🚀 <strong>Week 5 — Deploy</strong>: <code>Docker + Kubernetes on Jio Cloud / AWS Mumbai</code>. Add Razorpay for monetisation. Open-source on BharatHub!</li>
+</ol>`,
+  },
+  startup: {
+    title: 'Building an AI Startup in India',
+    body: `India's AI startup ecosystem is exploding 🚀. Here's how to position yourself:\n\n<ul>
+<li>💡 <strong>Pick a vertical</strong>: EdTech AI (Hindi tutors), AgriTech AI (crop advice in local languages), HealthTech AI (ayurveda + modern medicine), LegalTech AI (Indian law Q&amp;A).</li>
+<li>💰 <strong>Funding</strong>: iSPIRT, Nasscom Deep Tech Club, Meity Startup Hub offer grants. Sequoia Surge and Peak XV fund Indian AI startups.</li>
+<li>🏛️ <strong>Use India Stack</strong>: Aadhaar eKYC, UPI payments, ONDC for distribution — massive moat vs global players.</li>
+<li>🤝 <strong>Talent</strong>: IIT/NIT graduates, IISc researchers, and the massive Indian open-source community.</li>
+<li>📊 <strong>Market</strong>: 1.4B users, 750M internet users, 22 official languages — an LLM that speaks all of them is a billion-dollar opportunity.</li>
+</ul>`,
+  },
+  default: {
+    title: 'BharatAI — Your Indian Dev Assistant',
+    body: `I can help you build an AI agent like Perplexity or Claude, but <em>Made in India</em>. Try asking me:\n\n<ul>
+<li>🔍 <em>"How do I build a Perplexity clone?"</em></li>
+<li>🧠 <em>"What is RAG and how does it work?"</em></li>
+<li>🗣️ <em>"How to add Hindi language support?"</em></li>
+<li>🤖 <em>"Best Indian LLM models?"</em></li>
+<li>🚀 <em>"IndiaGPT — where to start?"</em></li>
+<li>💼 <em>"Building an AI startup in India?"</em></li>
+</ul>`,
+  },
+};
+
+const AGENT_ARCH = [
+  { icon: '💬', step: '1', title: 'User Query', desc: 'Hindi / English input via chat UI or voice (Web Speech API).' },
+  { icon: '🧠', step: '2', title: 'Intent & Embed', desc: 'IndicBERT / MuRIL encodes query into a multilingual embedding vector.' },
+  { icon: '🔍', step: '3', title: 'Retrieval (RAG)', desc: 'ChromaDB / Qdrant fetches top-k relevant document chunks.' },
+  { icon: '📰', step: '4', title: 'Web Grounding', desc: 'Optional: live search (Brave API) for fresh news & facts.' },
+  { icon: '🤖', step: '5', title: 'LLM Generation', desc: 'Sarvam-1 / Mistral synthesises a grounded answer with citations.' },
+  { icon: '📱', step: '6', title: 'Streaming UI', desc: 'Next.js streams the response token-by-token — just like Perplexity.' },
+];
+
+const AGENT_TOOLS = [
+  // LLM
+  { name: 'ollama', owner: 'ollama', cat: 'LLM', catIcon: '🤖',
+    desc: 'Run Mistral, Llama 3, Gemma 2 locally — zero API cost.', lang: 'Go', langColor: '#00ADD8',
+    stars: 95000, forks: 7700, license: 'MIT', url: 'https://github.com/ollama/ollama',
+    why: 'The fastest way to run an open LLM on your laptop or server for free.' },
+  { name: 'llama.cpp', owner: 'ggerganov', cat: 'LLM', catIcon: '🤖',
+    desc: 'Run LLMs on CPU — quantised models fit in 4 GB RAM.', lang: 'C++', langColor: '#f34b7d',
+    stars: 71000, forks: 10300, license: 'MIT', url: 'https://github.com/ggerganov/llama.cpp',
+    why: 'Ship an AI agent on a Rs 8k cloud VM — no GPU required.' },
+  // Indian Language
+  { name: 'indic-bert', owner: 'ai4bharat', cat: 'Indic AI', catIcon: '🇮🇳',
+    desc: 'ALBERT-based model trained on 12 Indian languages — best Indic NLU.', lang: 'Python', langColor: '#3572A5',
+    stars: 1800, forks: 310, license: 'MIT', url: 'https://github.com/ai4bharat/indic-bert',
+    why: 'Understand Hindi, Tamil, Telugu, Bengali and 9 more — natively.' },
+  { name: 'indicnlp-library', owner: 'anoopkunchukuttan', cat: 'Indic AI', catIcon: '🇮🇳',
+    desc: 'NLP tools for Indian languages — tokenisation, transliteration, normalisation.', lang: 'Python', langColor: '#3572A5',
+    stars: 1500, forks: 380, license: 'MIT', url: 'https://github.com/anoopkunchukuttan/indic_nlp_library',
+    why: 'The foundational NLP toolkit for any Indian language AI application.' },
+  { name: 'indic-trans', owner: 'AI4Bharat', cat: 'Indic AI', catIcon: '🇮🇳',
+    desc: 'State-of-the-art translation between 22 Indian languages and English.', lang: 'Python', langColor: '#3572A5',
+    stars: 940, forks: 180, license: 'MIT', url: 'https://github.com/AI4Bharat/IndicTrans2',
+    why: 'Give your AI agent a superpower: fluent translation across all 22 Indian languages.' },
+  // RAG & Orchestration
+  { name: 'langchain', owner: 'langchain-ai', cat: 'RAG', catIcon: '🔗',
+    desc: 'LLM orchestration framework — chains, agents, RAG, tools.', lang: 'Python', langColor: '#3572A5',
+    stars: 95000, forks: 15600, license: 'MIT', url: 'https://github.com/langchain-ai/langchain',
+    why: 'Wire your LLM + retriever + tools into one coherent agent pipeline.' },
+  { name: 'llama_index', owner: 'run-llama', cat: 'RAG', catIcon: '🔗',
+    desc: 'Data framework for LLM applications — ingest, index, query any data.', lang: 'Python', langColor: '#3572A5',
+    stars: 38000, forks: 5400, license: 'MIT', url: 'https://github.com/run-llama/llama_index',
+    why: 'Best for building knowledge bases from PDFs, websites, and databases.' },
+  // Vector DB
+  { name: 'chroma', owner: 'chroma-core', cat: 'Vector DB', catIcon: '🗄️',
+    desc: 'The AI-native open-source embedding database — in-process or server mode.', lang: 'Python', langColor: '#3572A5',
+    stars: 16000, forks: 1400, license: 'Apache-2.0', url: 'https://github.com/chroma-core/chroma',
+    why: 'Zero-infra vector store — get RAG running locally in 5 minutes.' },
+  { name: 'qdrant', owner: 'qdrant', cat: 'Vector DB', catIcon: '🗄️',
+    desc: 'Production-grade vector search engine — Rust-powered, cloud-native.', lang: 'Rust', langColor: '#dea584',
+    stars: 21000, forks: 1500, license: 'Apache-2.0', url: 'https://github.com/qdrant/qdrant',
+    why: 'Battle-tested vector DB for production — handles billions of embeddings.' },
+  // Web / API
+  { name: 'fastapi', owner: 'tiangolo', cat: 'API', catIcon: '⚙️',
+    desc: 'High-performance Python API framework with auto OpenAPI docs.', lang: 'Python', langColor: '#3572A5',
+    stars: 79000, forks: 6700, license: 'MIT', url: 'https://github.com/tiangolo/fastapi',
+    why: 'Build your agent API endpoint in 30 lines — streaming support built-in.' },
+  { name: 'next.js', owner: 'vercel', cat: 'API', catIcon: '⚙️',
+    desc: 'React framework for the AI chat UI — SSE streaming, API routes.', lang: 'JavaScript', langColor: '#f1e05a',
+    stars: 128000, forks: 27400, license: 'MIT', url: 'https://github.com/vercel/next.js',
+    why: 'Vercel\'s Next.js is the standard for streaming AI UIs (used by Perplexity).' },
+  // Monitoring
+  { name: 'langfuse', owner: 'langfuse', cat: 'Observability', catIcon: '📊',
+    desc: 'Open-source LLM observability — trace, evals, prompt management.', lang: 'TypeScript', langColor: '#3178c6',
+    stars: 8000, forks: 680, license: 'MIT', url: 'https://github.com/langfuse/langfuse',
+    why: 'Debug and improve your agent — see every LLM call, latency and cost.' },
+];
+
+const AGENT_CATEGORIES = ['All', 'LLM', 'Indic AI', 'RAG', 'Vector DB', 'API', 'Observability'];
+let activeAgentCat = 'All';
+
 const STARTUP_TOOLS = [
   // ── Frontend ──
   {
@@ -845,6 +992,165 @@ function renderStartups() {
   renderStartupCards();
 }
 
+// ═══════════════════════════════════════════════
+// BHARATAI — Indian AI Agent Builder
+// ═══════════════════════════════════════════════
+
+function renderBharatAI() {
+  renderAgentArch();
+  renderAgentCategoryBar();
+  renderAgentCards();
+}
+
+function renderAgentArch() {
+  const el = document.getElementById('aiArchFlow');
+  if (!el || el.children.length) return; // render once
+  el.innerHTML = AGENT_ARCH.map((node, i) => `
+    <div class="arch-node">
+      <div class="arch-icon">${node.icon}</div>
+      <div class="arch-step">${node.step}</div>
+      <div class="arch-title">${node.title}</div>
+      <div class="arch-desc">${node.desc}</div>
+    </div>${i < AGENT_ARCH.length - 1 ? '<div class="arch-arrow">→</div>' : ''}
+  `).join('');
+}
+
+function renderAgentCategoryBar() {
+  const bar = document.getElementById('agentCatBar');
+  if (!bar) return;
+  bar.innerHTML = AGENT_CATEGORIES.map(cat => `
+    <button class="cat-chip${cat === activeAgentCat ? ' active' : ''}"
+      onclick="setAgentCat('${cat}')">${cat}</button>
+  `).join('');
+}
+
+function renderAgentCards() {
+  const container = document.getElementById('agentCards');
+  if (!container) return;
+  const data = activeAgentCat === 'All'
+    ? AGENT_TOOLS
+    : AGENT_TOOLS.filter(t => t.cat === activeAgentCat);
+
+  if (activeAgentCat === 'All') {
+    // group by category
+    const grouped = {};
+    data.forEach(t => { if (!grouped[t.cat]) grouped[t.cat] = []; grouped[t.cat].push(t); });
+    container.innerHTML = Object.entries(grouped).map(([cat, tools]) => `
+      <div class="startup-group">
+        <div class="startup-group-title">${tools[0].catIcon} ${cat}</div>
+        ${tools.map(agentCardHTML).join('')}
+      </div>
+    `).join('');
+  } else {
+    container.innerHTML = data.map(agentCardHTML).join('');
+  }
+}
+
+function agentCardHTML(t) {
+  return `
+    <div class="startup-card">
+      <div class="startup-card-top">
+        <div class="startup-card-name">
+          <a class="popular-link" href="${t.url}" target="_blank" rel="noopener noreferrer">
+            📦 ${t.owner} / <strong>${t.name}</strong>
+          </a>
+          <span class="startup-cat-badge">${t.catIcon} ${t.cat}</span>
+          <span class="popular-license">${t.license}</span>
+        </div>
+        <div class="startup-card-meta">
+          <span>⭐ ${fmtNum(t.stars)}</span>
+          <span>🍴 ${fmtNum(t.forks)}</span>
+          <span>${langDot(t.langColor)} ${t.lang}</span>
+        </div>
+      </div>
+      <p class="startup-card-desc">${t.desc}</p>
+      <div class="startup-why">💡 <em>${t.why}</em></div>
+    </div>
+  `;
+}
+
+function setAgentCat(cat) {
+  activeAgentCat = cat;
+  renderAgentCategoryBar();
+  renderAgentCards();
+}
+
+/* ── Chat logic ── */
+function getBharatAIResponse(q) {
+  const lower = q.toLowerCase();
+  if (/perplexi|search|clone|web search/.test(lower))   return BHARATAI_RESPONSES.perplexity;
+  if (/rag|retrieval|vector|embed|chunk/.test(lower))    return BHARATAI_RESPONSES.rag;
+  if (/hindi|tamil|telugu|bengali|indic|language|bhasha/.test(lower)) return BHARATAI_RESPONSES.hindi;
+  if (/llm|model|mistral|llama|gemma|sarvam|gpt/.test(lower))         return BHARATAI_RESPONSES.llm;
+  if (/indiagpt|india gpt|india.*gpt|start|roadmap|week/.test(lower)) return BHARATAI_RESPONSES.indiaGPT;
+  if (/startup|fund|investor|monetis|business/.test(lower))            return BHARATAI_RESPONSES.startup;
+  return BHARATAI_RESPONSES.default;
+}
+
+function appendMessage(role, html) {
+  const win = document.getElementById('aiChatWindow');
+  if (!win) return;
+  const div = document.createElement('div');
+  div.className = `ai-msg ai-msg-${role}`;
+  div.innerHTML = `
+    <div class="ai-avatar">${role === 'bot' ? '🇮🇳' : '👤'}</div>
+    <div class="ai-bubble">${html}</div>
+  `;
+  win.appendChild(div);
+  win.scrollTop = win.scrollHeight;
+}
+
+function appendTypingIndicator() {
+  const win = document.getElementById('aiChatWindow');
+  if (!win) return;
+  const div = document.createElement('div');
+  div.className = 'ai-msg ai-msg-bot ai-typing-row';
+  div.id = 'aiTyping';
+  div.innerHTML = `
+    <div class="ai-avatar">🇮🇳</div>
+    <div class="ai-bubble ai-typing"><span></span><span></span><span></span></div>
+  `;
+  win.appendChild(div);
+  win.scrollTop = win.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const el = document.getElementById('aiTyping');
+  if (el) el.remove();
+}
+
+function sendBharatAI() {
+  const input = document.getElementById('aiChatInput');
+  if (!input) return;
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+
+  appendMessage('user', escapeHtml(q));
+  appendTypingIndicator();
+
+  // simulate network latency
+  setTimeout(() => {
+    removeTypingIndicator();
+    const resp = getBharatAIResponse(q);
+    appendMessage('bot', `<strong>${resp.title}</strong><br><br>${resp.body}`);
+    // hide suggestion chips after first use
+    const sug = document.getElementById('aiSuggestions');
+    if (sug) sug.style.display = 'none';
+  }, 900 + Math.random() * 400);
+}
+
+function askSuggestion(btn) {
+  const input = document.getElementById('aiChatInput');
+  if (!input) return;
+  input.value = btn.textContent;
+  sendBharatAI();
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 function renderStateChips() {
   const el = document.getElementById('stateChips');
   if (!el) return;
@@ -891,6 +1197,7 @@ function showTab(tabId, triggerEl) {
   if (tabId === 'trending') renderTrending();
   if (tabId === 'popular')  renderPopular();
   if (tabId === 'startups') renderStartups();
+  if (tabId === 'bharatai') renderBharatAI();
   if (tabId === 'profile')  renderContribGraph();
 }
 
