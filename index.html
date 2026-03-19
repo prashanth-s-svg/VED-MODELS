@@ -101,6 +101,7 @@
         <button class="tab" id="tab-popular" onclick="showTab('popular', this)">⭐ Popular</button>
         <button class="tab" id="tab-startups" onclick="showTab('startups', this)">🚀 Startups</button>
         <button class="tab" id="tab-bharatai" onclick="showTab('bharatai', this)">🤖 BharatAI</button>
+        <button class="tab" id="tab-research" onclick="showTab('research', this)">🔬 Research</button>
         <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
       </div>
 
@@ -235,6 +236,75 @@
         </div>
         <div class="startup-cat-bar" id="agentCatBar"></div>
         <div id="agentCards"></div>
+
+      </div>
+
+      <!-- ── MARKET RESEARCH AGENT ── -->
+      <div id="pane-research" class="tab-pane hidden">
+
+        <!-- Hero -->
+        <div class="res-hero">
+          <div class="res-hero-left">
+            <h2>🔬 Market Research Agent</h2>
+            <p>6 specialised AI agents auto-research the market so you can build your tech startup with conviction</p>
+          </div>
+          <div class="res-hero-badges">
+            <span class="badge badge-saffron">6 Agents</span>
+            <span class="badge badge-blue">Auto-Research</span>
+            <span class="badge badge-green">India-First</span>
+          </div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="res-input-card" id="resInputCard">
+          <div class="res-input-label">💡 What tech startup do you want to build?</div>
+          <textarea id="resIdeaInput" class="res-idea-input" rows="2"
+            placeholder="e.g. 'AI-powered tutoring app for Tier-2 India students' or 'BNPL for MSMEs' or 'B2B SaaS for jewellers'"></textarea>
+          <div class="res-form-row">
+            <div class="res-form-group">
+              <label class="res-label">Sector</label>
+              <select id="resSector" class="res-select">
+                <option value="auto">🤖 Auto-detect from idea</option>
+                <option value="edtech">📚 EdTech</option>
+                <option value="fintech">💳 FinTech</option>
+                <option value="agritech">🌾 AgriTech</option>
+                <option value="healthtech">🏥 HealthTech</option>
+                <option value="aiml">🤖 AI / ML SaaS</option>
+                <option value="ecommerce">🛒 E-Commerce / D2C</option>
+                <option value="logitech">🚛 LogiTech</option>
+                <option value="saas">💼 B2B SaaS</option>
+              </select>
+            </div>
+            <div class="res-form-group">
+              <label class="res-label">Market Focus</label>
+              <select id="resMarket" class="res-select">
+                <option value="india">🇮🇳 India-First</option>
+                <option value="global">🌍 Global</option>
+                <option value="both">🌐 India + Global</option>
+              </select>
+            </div>
+          </div>
+          <button class="res-run-btn" id="resRunBtn" onclick="runMarketResearch()">
+            🚀 Run Market Research
+          </button>
+          <div class="res-quick-ideas">
+            <span class="res-quick-label">Quick ideas:</span>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">AI tutoring app for India</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">MSME lending FinTech</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">AgriTech for small farmers</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">Mental health app</button>
+            <button class="res-quick-chip" onclick="prefillResearch(this)">LLM SaaS for BFSI</button>
+          </div>
+        </div>
+
+        <!-- Agent Progress Panel -->
+        <div class="res-progress" id="resProgress" style="display:none">
+          <div class="res-progress-title">🤖 Agents researching your market…</div>
+          <div id="resAgentList" class="res-agent-list"></div>
+        </div>
+
+        <!-- Report Output -->
+        <div id="resReport"></div>
 
       </div>
 

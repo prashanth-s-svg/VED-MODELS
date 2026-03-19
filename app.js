@@ -1151,6 +1151,464 @@ function escapeHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+// ═══════════════════════════════════════════════
+// MARKET RESEARCH AGENT
+// ═══════════════════════════════════════════════
+
+const RESEARCH_AGENTS = [
+  { id: 'market',     icon: '🔍', name: 'MarketScout',   task: 'Scanning global & India market size data…'  },
+  { id: 'competitor', icon: '🏆', name: 'CompetitorMap',  task: 'Mapping competitor landscape & gaps…'       },
+  { id: 'audience',   icon: '🎯', name: 'AudienceAI',    task: 'Profiling target customers & ICP…'          },
+  { id: 'india',      icon: '🇮🇳', name: 'IndiaInsight',  task: 'Analysing India opportunity & schemes…'     },
+  { id: 'money',      icon: '💰', name: 'MoneyMind',     task: 'Modelling revenue paths & funding…'         },
+  { id: 'stack',      icon: '🛠️', name: 'StackAdvisor',  task: 'Selecting optimal open-source tech stack…'  },
+];
+
+const MARKET_DATA = {
+  edtech: {
+    label: 'EdTech', emoji: '📚',
+    market: { india: '₹7,000 Cr (2024) → ₹16,000 Cr (2028)', global: '$400B by 2028', cagr: '19.9%' },
+    problem: 'Quality education remains inaccessible to 250M+ students in Tier-2/3 India due to language, cost, and infrastructure barriers.',
+    competitors: [
+      { name: "BYJU'S",        pos: 'Market leader, K-12 focus',              weakness: 'Heavy sales, poor retention, debt-laden' },
+      { name: 'Unacademy',     pos: 'Live classes, IIT-JEE & UPSC',           weakness: 'Burning cash, instructor dependency'     },
+      { name: 'Physics Wallah',pos: 'Affordable, Tier-2 stronghold',          weakness: 'Limited personalisation'                 },
+      { name: 'Coursera/Udemy',pos: 'Global, professional skills',            weakness: 'Not localised for India'                 },
+    ],
+    gap: 'AI-personalised, vernacular (Hindi/Tamil/Telugu) micro-learning for skill-based jobs at sub-₹200/month.',
+    audience: { primary: 'Students 14-25 in Tier-2/3 cities', secondary: 'Working professionals 22-35 seeking upskilling', size: '350M addressable learners', arpu: '₹800–₹2,500/year' },
+    india: { scheme: 'NEP 2020, DIKSHA platform, PM eVIDYA, Skill India', stat: '600M internet users; 54% of population under 25', upi: 'UPI collect for ₹1/day micro-subscriptions', regulation: 'No specific EdTech licence; follow DPDP Act for student data' },
+    revenue: [
+      { model: 'Freemium Subscription', desc: 'Free tier + ₹199/month premium', margin: '70% gross margin' },
+      { model: 'B2B (Schools)',          desc: '₹50–₹150/student/month institutional', margin: 'Predictable ARR, low CAC' },
+      { model: 'Income Share Agreement', desc: '15% of first-year salary on job placement', margin: 'High ticket, aligns incentives' },
+      { model: 'Corporate Training',     desc: '₹5,000–₹50,000/employee/year', margin: 'High ACV, long contracts' },
+    ],
+    stack: { frontend: 'Next.js + React Native', backend: 'FastAPI (Python)', db: 'PostgreSQL + Redis', ai: 'IndicBERT for vernacular NLP, LlamaIndex RAG', infra: 'AWS Mumbai + CloudFront', video: 'Cloudflare Stream' },
+    risks: ['Regulatory changes post NEP 2020', 'Content piracy on Telegram', 'High B2C CAC ₹3,000–₹8,000', "BYJU'S distress creating sector stigma"],
+    actionPlan: { d30: 'Validate with 50 students in 1 city; build MVP with 5 micro-courses in Hindi', d60: 'Launch beta in 3 cities; integrate UPI; sign 1 school pilot', d90: '500 paying users; apply to Nasscom EdTech cohort; target ₹1L MRR' },
+    funding: 'Seed ₹50L–₹2Cr — Antler India, Surge, YC. Series A once ₹5Cr ARR. India EdTech attracted $2B+ in 2021-24.',
+  },
+  fintech: {
+    label: 'FinTech', emoji: '💳',
+    market: { india: '₹2.1T (2024) → ₹7.1T (2030)', global: '$698B by 2030', cagr: '23%' },
+    problem: '190M Indians are unbanked or under-banked. MSME credit gap is $530B. Insurance penetration is only 4%.',
+    competitors: [
+      { name: 'Razorpay',     pos: 'Payments infra, $7.5B valuation',  weakness: 'Enterprise-focused, not SMB-friendly' },
+      { name: 'PhonePe',      pos: '48% UPI share, super-app pivot',   weakness: 'Regulatory scrutiny, thin margins'    },
+      { name: 'Groww',        pos: 'Retail investing, 80M+ users',     weakness: 'Dependent on bull market sentiment'   },
+      { name: 'Slice/OneCard',pos: 'Credit cards for millennials',     weakness: 'RBI regulation on PPI cards'         },
+    ],
+    gap: 'MSME embedded finance (BNPL + working capital), insurance for gig workers, wealth management for Tier-2.',
+    audience: { primary: 'MSME owners 25-50, gig workers, new-to-credit youth 18-28', secondary: 'Rural farmers needing agri-credit', size: '63M MSMEs + 15M gig workers', arpu: '₹2,000–₹12,000/year' },
+    india: { scheme: 'Account Aggregator (AA) framework, OCEN for lending, IndiaStack', stat: '9.4B UPI transactions/month (Jan 2025)', upi: 'RuPay + UPI built-in across ecosystem', regulation: 'RBI NBFC/PA licence required for lending/payments — allow 6-18 months' },
+    revenue: [
+      { model: 'Transaction Fee',      desc: '0.5–2% MDR on payment processing',         margin: 'Scales with GMV'       },
+      { model: 'Interest Spread',      desc: '15-24% NBFC lending, cost-of-funds 10%',   margin: '6-14% Net Interest Margin' },
+      { model: 'Insurance Commission', desc: '15-30% commission as PoSP agent',          margin: 'Zero capital, pure commission' },
+      { model: 'SaaS (B2B Infra)',     desc: '₹999–₹9,999/month for banking API stack',  margin: '80%+ gross margin' },
+    ],
+    stack: { frontend: 'React Native (iOS + Android)', backend: 'Node.js (Fastify) + Go microservices', db: 'CockroachDB + MongoDB', ai: 'ML credit scoring (XGBoost + LightGBM)', infra: 'AWS Mumbai (data residency)', security: 'PCI-DSS L1, ISO 27001' },
+    risks: ['RBI regulatory changes', 'UPI zero-MDR policy', 'Fraud & KYC costs', 'High cost of capital'],
+    actionPlan: { d30: 'File NBFC/PA licence OR partner with existing NBFC. Build AA integration. Design credit model.', d60: 'Pilot 200 MSMEs in 1 city. Process ₹10L transactions. Sign 1 NBFC co-lending partner.', d90: '1,000 active users; ₹1Cr disbursed; NPA < 3%; Series A pitch deck ready.' },
+    funding: 'Pre-seed ₹1–5Cr — BharatPe investors, Beenext, Accion. India FinTech raised $8B in 2023.',
+  },
+  agritech: {
+    label: 'AgriTech', emoji: '🌾',
+    market: { india: '₹70,000 Cr (2025) → ₹2.8L Cr (2030)', global: '$22B by 2027', cagr: '25%' },
+    problem: '58% of India works in agriculture but contributes only 17% to GDP. Farmers earn ₹10,000/month average with no price visibility or modern inputs.',
+    competitors: [
+      { name: 'AgriBazaar', pos: 'B2B agri marketplace, 20 states',   weakness: 'Low farmer tech literacy'          },
+      { name: 'Ninjacart',  pos: 'F&V supply chain, $200M+ funding',  weakness: 'High perishable losses'            },
+      { name: 'DeHaat',     pos: 'End-to-end farm advisory + inputs',  weakness: 'High opex, human-heavy'           },
+      { name: 'Fasal',      pos: 'IoT + AI crop advisory',            weakness: 'Device affordability barrier'     },
+    ],
+    gap: 'AI-powered crop advisory in local languages via WhatsApp + direct FPO-to-consumer marketplace bypassing 7 middlemen.',
+    audience: { primary: 'Small & marginal farmers (< 2 hectares) aged 25-60', secondary: 'FPOs (10,000+ registered), agri input dealers', size: '140M farming households', arpu: '₹600–₹3,000/year' },
+    india: { scheme: 'PM-KISAN, e-NAM, PMFBY crop insurance, Agri Infrastructure Fund ₹1L Cr', stat: '140M farming households; 650M rural internet users by 2025', upi: 'DBT direct payment via Aadhaar-linked accounts', regulation: 'APMC reforms in 18 states; FPO promotion policy' },
+    revenue: [
+      { model: 'SaaS Advisory',          desc: '₹200/month WhatsApp AI advisory per farmer', margin: 'Near-zero marginal cost'     },
+      { model: 'Marketplace Commission', desc: '3-5% on FPO-to-buyer transactions',           margin: 'Scales with GMV'            },
+      { model: 'Input Distribution',     desc: '10-15% margin on seeds/fertilisers',          margin: 'Working capital intensive'  },
+      { model: 'Data Monetisation (B2B)',desc: 'Crop data sold to insurers, banks, traders',  margin: 'Pure margin, no COGS'       },
+    ],
+    stack: { frontend: 'React Native (low-bandwidth) + WhatsApp Business API', backend: 'FastAPI + Celery', db: 'PostgreSQL + TimescaleDB (IoT)', ai: 'Computer vision for crop disease (PyTorch), IndicBERT for Kisan advice', infra: 'AWS + edge nodes for rural connectivity', iot: 'ESP32 weather sensors + GPS trackers' },
+    risks: ['Monsoon dependency', 'Slow tech adoption by older farmers', 'APMC regulation variability state-by-state', 'High CAC in rural markets'],
+    actionPlan: { d30: 'Partner with 2 FPOs. Launch WhatsApp chatbot in Hindi for 1 crop. Collect 500 farmer profiles.', d60: '5,000 farmers onboarded; first marketplace transaction; IoT pilot on 10 farms.', d90: '₹50L GMV; 2 B2B data contracts signed; apply to iSPIRT AgriTech cohort.' },
+    funding: 'Seed ₹1–3Cr — Omnivore, Accel India, Sequoia Surge. India AgriTech raised $1.2B in 2023.',
+  },
+  healthtech: {
+    label: 'HealthTech', emoji: '🏥',
+    market: { india: '₹1.8T (2024) → ₹5.4T (2030)', global: '$659B by 2030', cagr: '18%' },
+    problem: "Doctor-to-patient ratio is 1:1,456 vs WHO's 1:1,000. 70% of doctors are in urban areas. Health insurance covers only 36% of population.",
+    competitors: [
+      { name: 'Practo',           pos: 'Appointment booking + e-consult, 20M users', weakness: 'Monetisation struggles, doctor churn' },
+      { name: 'PharmEasy / 1mg',  pos: 'Medicine delivery + labs',                   weakness: 'Margin pressure from offline pharma'  },
+      { name: 'Mfine / DocsApp',  pos: 'Telemedicine pioneer',                       weakness: 'Post-COVID usage drop'               },
+      { name: 'HealthifyMe',      pos: 'AI nutrition + fitness, 30M users',          weakness: 'Premium conversion low'              },
+    ],
+    gap: 'AI-first chronic disease management (diabetes, hypertension) for 150M patients + mental health platform for Gen-Z.',
+    audience: { primary: 'Chronic disease patients 35-65, their caregivers', secondary: 'Gen-Z (18-25) with mental health needs', size: '150M chronic + 200M Gen-Z', arpu: '₹3,000–₹18,000/year' },
+    india: { scheme: 'Ayushman Bharat PM-JAY (500M covered), ABDM digital health IDs, NHP', stat: '77M diabetics (world 2nd largest); ₹1.03T mental health burden', upi: 'Cashless claims via UPI + ABDM Health Locker', regulation: 'Telemedicine Guidelines 2020; DPDP Act for health data; ABDM sandbox for integration' },
+    revenue: [
+      { model: 'Subscription (B2C)',  desc: '₹499–₹1,999/month chronic care plan', margin: '75% gross margin'                 },
+      { model: 'Insurance TPA',       desc: '₹200-500 per consult from insurers',  margin: 'High volume, predictable'         },
+      { model: 'Pharma Partnerships', desc: 'Patient adherence with pharma brands', margin: '₹50-200 per enrolled patient'    },
+      { model: 'B2B (Corporates)',    desc: '₹2,000-₹8,000/employee/year wellness', margin: 'Long contract cycles, low churn' },
+    ],
+    stack: { frontend: 'React Native + WebRTC telemedicine', backend: 'FastAPI + Go', db: 'PostgreSQL + HL7 FHIR-compliant data', ai: 'LLM for symptom triage assist; computer vision for dermatology', infra: 'AWS Mumbai (health data residency)', security: 'HIPAA-equivalent, DPDP Act, end-to-end encryption' },
+    risks: ['Health data privacy (DPDP Act)', 'Doctor quality control at scale', 'Insurance TPA payment delays', 'Low willingness to pay for digital health'],
+    actionPlan: { d30: 'ABDM sandbox integration. Recruit 10 doctors for pilot. Build async consult MVP.', d60: '500 patients onboarded; first chronic care subscription; 1 corporate wellness pilot.', d90: '₹5L MRR; NABH tele-health certification; Series A deck with 3-month cohort data.' },
+    funding: 'Pre-seed/Seed ₹2–10Cr — Chiratae Ventures, Stellaris, Prime VP. HealthTech raised $2.3B in India 2022-24.',
+  },
+  aiml: {
+    label: 'AI / ML SaaS', emoji: '🤖',
+    market: { india: '$6B (2024) → $28B (2030)', global: '$1.8T by 2030', cagr: '36%' },
+    problem: 'Indian enterprises spend $15B on IT annually but 87% lack in-house AI/ML capability. Building and maintaining LLM apps costs $500K–$2M/year for mid-sized companies.',
+    competitors: [
+      { name: 'OpenAI API',        pos: 'GPT-4/o series, dominant mindshare',    weakness: 'Expensive, US data residency, no Indic'  },
+      { name: 'Sarvam AI',         pos: "India's first Indic LLM (Sarvam-1 SLM)", weakness: 'Early stage, limited enterprise sales'    },
+      { name: 'Krutrim (Ola)',      pos: 'India-trained LLM, cloud infra',        weakness: 'Consumer focus, limited B2B APIs'         },
+      { name: 'AWS Bedrock / Azure',pos: 'Enterprise ML infra, global scale',     weakness: 'Generic, no India-specific models'        },
+    ],
+    gap: 'Vertical AI SaaS — domain-specific LLM agents for BFSI, healthcare, legal, HR with India data residency and Indic language support.',
+    audience: { primary: 'CTO/CDO at ₹500M–₹5B revenue Indian companies (BFSI, healthcare, manufacturing)', secondary: 'Mid-market 50-500 employee companies wanting AI', size: '5,000+ enterprise targets + 100,000 SMBs', arpu: '$15,000–$200,000 ACV (enterprise)' },
+    india: { scheme: 'IndiaAI Mission ₹10,000 Cr, MeitY AI Centre of Excellence, Digital India', stat: 'India has 420K AI/ML professionals — 3rd largest pool globally', upi: 'Invoice + UPI AutoPay for SMB API billing', regulation: 'DPDP Act 2023 — data localisation for sensitive categories; India data residency advantage' },
+    revenue: [
+      { model: 'API Pricing',         desc: '₹0.5–₹5 per 1K tokens',               margin: '60-80% gross margin at scale'     },
+      { model: 'Per-Seat SaaS',       desc: '$50–$500/user/month AI assistant',     margin: 'NRR > 120% if sticky'             },
+      { model: 'Outcome-Based',       desc: '% of cost savings or revenue from AI', margin: 'High value, requires measurement' },
+      { model: 'Professional Services',desc: 'Custom fine-tuning + deployment',     margin: 'One-time, cash-flow positive'     },
+    ],
+    stack: { frontend: 'Next.js + shadcn/ui', backend: 'FastAPI + Ray Serve', db: 'PostgreSQL + Qdrant vector DB', ai: 'LangChain + Llama 3 / Sarvam-1 fine-tuned, LoRA fine-tuning', infra: 'Jio Cloud / AWS Mumbai, NVIDIA A100 spot instances', mlops: 'MLflow + Prometheus + Grafana + LangFuse' },
+    risks: ['OpenAI price drops commoditising the market', 'Fast model obsolescence (6-month cycles)', 'Enterprise sales cycles 6-18 months', 'EU AI Act spillover regulation'],
+    actionPlan: { d30: 'Pick 1 vertical (e.g. BFSI compliance). Fine-tune Mistral on domain data. Build demo API. Sign 3 design partners.', d60: 'Production API with 99.9% SLA. 10 paying pilots at ₹50K–₹2L/month. Apply for IndiaAI Mission grant.', d90: '₹30L ARR; 3 enterprise pilots converting; product-market fit survey score > 40%.' },
+    funding: 'Pre-seed $500K–$2M — Lightspeed India, Peak XV Surge, Blume, 3one4. India AI SaaS saw 8x investment growth 2023-24.',
+  },
+  ecommerce: {
+    label: 'E-Commerce / D2C', emoji: '🛒',
+    market: { india: '$70B (2024) → $325B (2030)', global: '$8.1T by 2026', cagr: '27%' },
+    problem: 'Indian D2C brands spend 30-40% revenue on customer acquisition. 70% of orders come from 6 metro cities. Returns cost ₹180/order on average.',
+    competitors: [
+      { name: 'Meesho',           pos: 'Social commerce, 140M+ users, Tier-3', weakness: 'Ultra-low AOV, high return rate'           },
+      { name: 'Nykaa / Mamaearth',pos: 'D2C beauty brand, IPO-listed',         weakness: 'High CAC, brand saturation'               },
+      { name: 'Amazon / Flipkart',pos: 'Marketplace dominance',                weakness: 'High fees 20-35%, no brand control'       },
+      { name: 'ONDC',             pos: 'Gov-backed open protocol for D2C',     weakness: 'Fragmented buyer-seller experience'       },
+    ],
+    gap: 'AI-powered hyper-personalisation for Bharat shoppers in vernacular with WhatsApp-first commerce and ONDC integration.',
+    audience: { primary: 'Vernacular shoppers 20-40 in Tier-2/3 cities', secondary: 'D2C brands wanting to reduce Amazon dependency', size: '350M online shoppers; 40M D2C brand buyers', arpu: '₹4,000–₹24,000/year GMV' },
+    india: { scheme: 'ONDC open protocol, PM Gati Shakti for logistics, e-RUPI for digital vouchers', stat: '70M first-time online shoppers added per year; 4G penetration 95% by 2025', upi: 'UPI AutoPay for subscriptions; Bharat QR for offline commerce', regulation: 'FDI rules for e-commerce; BIS certification for electronics/toys/apparel' },
+    revenue: [
+      { model: 'Product Margin (D2C)',   desc: '50-70% gross margin on own-label',    margin: 'High if brand-led'             },
+      { model: 'Commission (Marketplace)',desc: '5-15% GMV from seller ecosystem',    margin: 'Zero inventory risk'           },
+      { model: 'SaaS for D2C Brands',    desc: '₹2,999–₹29,999/month AI tools',     margin: '85% gross margin'              },
+      { model: 'Logistics Revenue',      desc: '₹40-80/shipment on 3PL aggregation', margin: 'Low margin but high volume'    },
+    ],
+    stack: { frontend: 'Next.js + Shopify headless', backend: 'Node.js (NestJS)', db: 'PostgreSQL + Elasticsearch', ai: 'Recommendation engine — collaborative filtering + LLM', infra: 'AWS Mumbai + CloudFront CDN', logistics: 'Shiprocket / Delhivery API integration' },
+    risks: ['Amazon retaliation strategies', 'High return rates (15-30%)', 'Cash-on-delivery abuse', 'Global recession affecting discretionary spending'],
+    actionPlan: { d30: 'Launch MVP D2C store with 1 product category. Integrate UPI + COD. Reach first 100 orders.', d60: 'ONDC seller onboarding. WhatsApp catalog integration. Reach ₹10L GMV.', d90: '₹50L GMV; 2,000 repeat customers; NPS > 50; ₹20L MRR from SaaS tools for sellers.' },
+    funding: 'Pre-seed ₹50L–₹3Cr — 100X.VC, ah! Ventures, IAN. D2C brands attracting $1B+ from Fireside, WaterBridge, Sequoia.',
+  },
+  logitech: {
+    label: 'LogiTech / Supply Chain', emoji: '🚛',
+    market: { india: '₹14L Cr (2024) → ₹22L Cr (2030)', global: '$19.3T by 2028', cagr: '13%' },
+    problem: "India's logistics cost is 14% of GDP vs 8% global average. 30% of perishables are wasted. Truckers drive empty 40% of time (backhaul problem costs ₹50,000 Cr/year).",
+    competitors: [
+      { name: 'Shiprocket', pos: 'D2C courier aggregation, $100M+',  weakness: 'B2C focus, thin margins'               },
+      { name: 'Porter',     pos: 'Intra-city logistics, EV push',    weakness: 'Limited intercity capability'          },
+      { name: 'Delhivery',  pos: 'Listed, national network',         weakness: 'Enterprise-first, not SMB-friendly'    },
+      { name: 'Rivigo',     pos: 'Relay trucking innovation',        weakness: 'Burned through capital, strategy shift' },
+    ],
+    gap: 'AI-powered truck load matching (Uber for trucks) + predictive ETA for cold-chain with IoT sensors.',
+    audience: { primary: 'Fleet owners (5-50 trucks), MSME shippers', secondary: 'FMCG/pharma companies needing cold chain', size: '9.5M truckers; 6.3M SMB shippers', arpu: '₹24,000–₹1,20,000/year per fleet' },
+    india: { scheme: 'PM Gati Shakti, Sagarmala Port scheme, ONDC logistics layer, FASTag mandate', stat: 'India will be world\'s 3rd largest logistics market by 2030', upi: 'FASTag + UPI Lite for toll and fuel payments integration', regulation: 'E-way bill GST compliance required for all interstate freight' },
+    revenue: [
+      { model: 'Take Rate (Marketplace)', desc: '8-12% commission on freight value matched', margin: 'Asset-light, scales with volume' },
+      { model: 'SaaS (TMS/WMS)',          desc: '₹5,000–₹50,000/month transport mgmt',      margin: '80%+ gross margin'              },
+      { model: 'Cargo Insurance',         desc: '10-15% commission as PoSP partner',         margin: 'Zero capital deployed'          },
+      { model: 'Fleet Financing',         desc: 'Vehicle loan + fuel cards via NBFC',         margin: 'Interest spread 4-8%'          },
+    ],
+    stack: { frontend: 'React Native (trucker app) + React (shipper dashboard)', backend: 'Go (high-concurrency) + Node.js', db: 'PostgreSQL + Redis (real-time tracking)', ai: 'Route optimisation (Google OR-Tools + ML), demand forecasting (Prophet)', infra: 'AWS Mumbai + IoT Core for GPS', iot: 'GPS trackers + temperature sensors (cold chain)' },
+    risks: ['Asset-heavy if owning fleet', 'Diesel price volatility', 'Trucker mobile literacy barrier', 'E-way bill compliance complexity'],
+    actionPlan: { d30: 'Sign 20 fleet owners in 1 route corridor. Build load-posting app. Complete first 10 matches.', d60: '200 trips matched; ₹50L freight value; IoT pilot on 5 trucks; sign 1 FMCG shipper.', d90: '₹5Cr GMV; 3 enterprise shippers; break-even on 1 route corridor.' },
+    funding: 'Seed ₹2–8Cr — Blume Ventures, WaterBridge, Stellaris. India logistics raised $3.1B in 2022-24.',
+  },
+  saas: {
+    label: 'B2B SaaS', emoji: '💼',
+    market: { india: '$26B (2026) → $50B (2030)', global: '$908B by 2030', cagr: '18.7%' },
+    problem: '63M Indian SMBs run operations on WhatsApp + Excel. Only 12% use any dedicated SaaS. Salesforce costs $165/user/month — unaffordable for Indian SMBs.',
+    competitors: [
+      { name: 'Zoho',          pos: '$1B ARR, full-suite, India-first',      weakness: 'Complex UI, weak AI features'           },
+      { name: 'Freshworks',    pos: 'NASDAQ-listed, CRM + ITSM',             weakness: 'Mid-market focus, SMB churn'            },
+      { name: 'Chargebee',     pos: 'Billing & subscription SaaS',           weakness: 'Narrow use-case'                       },
+      { name: 'Salesforce/HubSpot', pos: 'Global brand, feature-rich',       weakness: '10-50x India price vs willingness-to-pay' },
+    ],
+    gap: 'Vertical SaaS for underserved Indian SMB segments (jewellers, clinics, kiranas, manufacturers) at ₹999/month with WhatsApp-native workflow.',
+    audience: { primary: 'SMB owners ₹50L–₹50Cr revenue, 1-50 employees', secondary: 'Mid-market companies needing India-specific compliance', size: '63M SMBs; 5M in target verticals', arpu: '₹12,000–₹1,20,000/year' },
+    india: { scheme: 'MSME digital tools subsidy under Udyam, GeM procurement, Startup India tax exemption', stat: 'India SaaS to cross $50B ARR by 2030 — 2nd only to US globally', upi: 'UPI AutoPay for SaaS billing — near-zero churn vs credit card', regulation: 'GST API integration required; DPDP Act data handling compliance' },
+    revenue: [
+      { model: 'Monthly Subscription', desc: '₹999–₹4,999/month tiered',        margin: '75-85% gross margin'           },
+      { model: 'Usage-Based',          desc: 'Per invoice/transaction pricing',  margin: 'Aligns cost with growth'       },
+      { model: 'Marketplace Add-ons',  desc: '30% cut on third-party integrations', margin: 'Flywheel, low COGS'         },
+      { model: 'Data & Analytics',     desc: 'Benchmark reports from SMB data',  margin: 'Pure margin, no incremental COGS' },
+    ],
+    stack: { frontend: 'React + Tailwind CSS', backend: 'Node.js (NestJS) + Go', db: 'PostgreSQL + Redis', ai: 'GPT-4 / Llama fine-tuned for SMB workflows, LangChain agents', infra: 'AWS Mumbai', billing: 'Razorpay subscriptions + UPI AutoPay' },
+    risks: ['SMB high churn (monthly CAC vs LTV)', 'WhatsApp Business API rate limits', 'GST/tax API complexity', 'Zoho price competition at bottom'],
+    actionPlan: { d30: 'Pick 1 vertical (jewellers/clinics). Talk to 50 SMBs. Build MVP in 6 weeks.', d60: 'Launch paid pilot at ₹999/month. Onboard 50 paying customers. NPS > 40.', d90: '300 paying customers; ₹3L MRR; 3 expansion features from user feedback; raise ₹1Cr seed.' },
+    funding: 'Pre-seed ₹25L–₹1Cr — 100X.VC, Powerhouse Ventures. B2B SaaS India raised $5B+ in 2023.',
+  },
+};
+
+const MARKET_DATA_GENERIC = {
+  label: 'Tech Startup', emoji: '🚀',
+  market: { india: "India's startup ecosystem (3rd largest globally) valued at $450B+", global: 'Global VC investment: $285B (2023)', cagr: '15-35% depending on vertical' },
+  problem: 'Identify the specific pain point your startup solves. The best startups address a problem experienced by millions that has no good solution, or where existing solutions are too expensive or inaccessible.',
+  competitors: [
+    { name: 'Legacy incumbents',   pos: 'Existing market share, brand trust',    weakness: 'Slow to innovate, expensive, poor UX'      },
+    { name: 'US SaaS players',     pos: 'Feature-rich, global brand',            weakness: 'Not localised for India, 10x price mismatch' },
+    { name: 'Indian startups',     pos: 'India-native, VC-backed, cost-aware',   weakness: 'Often under-funded or too niche'            },
+  ],
+  gap: 'Conduct 50 customer discovery interviews to identify your gap. Look for moments prospects say "I just use Excel/WhatsApp for this."',
+  audience: { primary: 'Define your ICP by industry, company size, role, and pain', secondary: 'Secondary expansion segment after product-market fit', size: 'India: 1.4B population, 750M internet users, 63M SMBs', arpu: 'Depends on B2B vs B2C and willingness-to-pay research' },
+  india: { scheme: 'Startup India, Atal Innovation Mission, MeitY grants, Nasscom cohorts, iSPIRT', stat: '1.4B people, 3rd largest startup ecosystem, 100+ unicorns, 12M+ developers', upi: 'Leverage UPI + Aadhaar + GSTN — India DPI is world-class and free to use', regulation: 'Register on Startup India portal for tax exemptions and easier compliance' },
+  revenue: [
+    { model: 'SaaS Subscription',  desc: 'Recurring monthly/annual fees — most fundable model', margin: '70-85% gross margin' },
+    { model: 'Transaction/Commission', desc: 'Take rate on GMV — scales with usage',            margin: 'Varies 2-30%'        },
+    { model: 'Freemium',           desc: 'Free tier to acquire → paid premium',                 margin: 'Requires 2-5% conversion' },
+    { model: 'Services + Software',desc: 'Implementation services to land enterprise',          margin: 'Lower margin, faster revenue' },
+  ],
+  stack: { frontend: 'Next.js (web) + React Native (mobile)', backend: 'FastAPI (Python) or Node.js', db: 'PostgreSQL + Redis', ai: 'LangChain + Ollama/OpenAI for AI features', infra: 'AWS Mumbai (data residency)', payments: 'Razorpay (India) + Stripe (global)' },
+  risks: ['Product-market fit risk — build something nobody wants', 'Premature scaling before PMF', 'Regulatory compliance (sector-specific)', 'Talent acquisition cost in Indian tech market'],
+  actionPlan: { d30: 'Do 50 customer interviews. Define ICP. Build prototype. Identify #1 assumption to test.', d60: 'Build MVP (not polished). Get 10 users to pay. Measure NPS. Iterate daily.', d90: '100 paying customers or clear path to them. ₹1L MRR target. Raise ₹25L–₹1Cr seed.' },
+  funding: 'Pre-seed: 100X.VC, Antler India, Venture Catalysts. Seed: Blume, Stellaris, 3one4. Series A: Accel, Sequoia Surge, Peak XV.',
+};
+
+function detectSector(text) {
+  const t = text.toLowerCase();
+  if (/edtech|education|learning|school|college|tutor|course|upskill|coaching|teach/.test(t)) return 'edtech';
+  if (/fintech|finance|payment|bank|lending|loan|insurance|neobank|credit|wallet|bnpl|nbfc/.test(t)) return 'fintech';
+  if (/agritech|agri|farm|kisan|crop|harvest|vegetable|cattle|dairy/.test(t)) return 'agritech';
+  if (/health|medic|doctor|hospital|telemedicine|pharma|mental|wellness|clinic|care/.test(t)) return 'healthtech';
+  if (/logi|transport|trucking|supply chain|delivery|shipping|warehouse|cold chain|freight/.test(t)) return 'logitech';
+  if (/ecommerce|e-commerce|d2c|shop|retail|marketplace|fashion|beauty|product|skincare/.test(t)) return 'ecommerce';
+  if (/saas|b2b|software|crm|erp|hrm|billing|subscription|smb|enterprise|workflow/.test(t)) return 'saas';
+  if (/\bai\b|llm|machine learning|nlp|generative|chatbot|artificial|language model|rag|vector/.test(t)) return 'aiml';
+  return null;
+}
+
+function renderResearchAgent() {
+  // pane is rendered statically; nothing to do on first open
+}
+
+function prefillResearch(btn) {
+  const input = document.getElementById('resIdeaInput');
+  if (input) input.value = btn.textContent;
+  input.focus();
+}
+
+function runMarketResearch() {
+  const idea    = (document.getElementById('resIdeaInput')  || {}).value || '';
+  const selSec  = (document.getElementById('resSector')     || {}).value || 'auto';
+  const selMkt  = (document.getElementById('resMarket')     || {}).value || 'india';
+
+  if (!idea.trim()) {
+    const inp = document.getElementById('resIdeaInput');
+    if (inp) { inp.focus(); inp.style.borderColor = 'var(--saffron)'; setTimeout(() => inp.style.borderColor = '', 1500); }
+    return;
+  }
+
+  const sectorKey = selSec === 'auto' ? (detectSector(idea) || 'generic') : selSec;
+  const data      = MARKET_DATA[sectorKey] || MARKET_DATA_GENERIC;
+
+  // Disable button
+  const btn = document.getElementById('resRunBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Researching…'; }
+
+  // Show progress panel, clear previous report
+  const progress = document.getElementById('resProgress');
+  const report   = document.getElementById('resReport');
+  if (progress) progress.style.display = 'block';
+  if (report) report.innerHTML = '';
+
+  // Render all agents as pending
+  const agentList = document.getElementById('resAgentList');
+  if (agentList) {
+    agentList.innerHTML = RESEARCH_AGENTS.map(a => `
+      <div class="res-agent-item" id="resAgent-${a.id}">
+        <span class="res-agent-icon">${a.icon}</span>
+        <div class="res-agent-info">
+          <span class="res-agent-name">${a.name}</span>
+          <span class="res-agent-task" id="resTask-${a.id}">${a.task}</span>
+        </div>
+        <span class="res-agent-status pending" id="resStat-${a.id}">⏳</span>
+      </div>
+    `).join('');
+  }
+
+  // Stagger agent completions — one agent every 400ms starting at 500ms
+  const AGENT_COMPLETION_DELAYS = RESEARCH_AGENTS.map((_, i) => 500 + i * 400);
+  RESEARCH_AGENTS.forEach((agent, i) => {
+    setTimeout(() => {
+      const statEl = document.getElementById('resStat-' + agent.id);
+      const taskEl = document.getElementById('resTask-' + agent.id);
+      const rowEl  = document.getElementById('resAgent-' + agent.id);
+      if (statEl) { statEl.textContent = '⟳'; statEl.className = 'res-agent-status running'; }
+      setTimeout(() => {
+        if (statEl) { statEl.textContent = '✅'; statEl.className = 'res-agent-status done'; }
+        if (taskEl) taskEl.textContent = 'Complete';
+        if (rowEl)  rowEl.classList.add('done');
+      }, 280);
+    }, AGENT_COMPLETION_DELAYS[i]);
+  });
+
+  // Show full report after all agents finish — derive final delay from last agent + buffer
+  const reportDelay = AGENT_COMPLETION_DELAYS[AGENT_COMPLETION_DELAYS.length - 1] + 400;
+  const researchStartTime = Date.now();
+  setTimeout(() => {
+    if (progress) progress.style.display = 'none';
+    const elapsedSec = ((Date.now() - researchStartTime) / 1000).toFixed(1);
+    renderResearchReport(idea, data, selMkt, elapsedSec);
+    if (btn) { btn.disabled = false; btn.textContent = '🔄 Run Again'; }
+  }, reportDelay);
+}
+
+function renderResearchReport(idea, d, market, elapsedSec) {
+  const container = document.getElementById('resReport');
+  if (!container) return;
+
+  const mktLabel = { india: '🇮🇳 India-First', global: '🌍 Global', both: '🌐 India + Global' }[market] || '🇮🇳 India-First';
+  const now      = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+  const compHTML = d.competitors.map(c => `
+    <div class="res-comp-card">
+      <div class="res-comp-name">${c.name}</div>
+      <div class="res-comp-pos">✅ ${c.pos}</div>
+      <div class="res-comp-weak">⚠️ ${c.weakness}</div>
+    </div>
+  `).join('');
+
+  const revHTML = d.revenue.map(r => `
+    <div class="res-rev-item">
+      <div class="res-rev-model">${r.model}</div>
+      <div class="res-rev-desc">${r.desc}</div>
+      <span class="res-rev-margin">${r.margin}</span>
+    </div>
+  `).join('');
+
+  const stackItems = Object.entries(d.stack).map(([k, v]) =>
+    `<div class="res-stack-item"><span class="res-stack-key">${k}</span><span class="res-stack-val">${v}</span></div>`
+  ).join('');
+
+  const risksHTML = d.risks.map(r => `<li>⚠️ ${r}</li>`).join('');
+
+  container.innerHTML = `
+    <div class="res-report-card">
+
+      <!-- Report Header -->
+      <div class="res-report-header">
+        <div class="res-report-title">
+          <span class="res-report-sector">${d.emoji} ${d.label}</span>
+          <span class="res-report-mkt-badge">${mktLabel}</span>
+        </div>
+        <div class="res-report-meta">Market Research Report · ${now} · ${RESEARCH_AGENTS.length} agents · ${elapsedSec}s</div>
+        <div class="res-idea-display">
+          <span class="res-idea-label">Your Idea</span>
+          <span class="res-idea-text">${escapeHtml(idea)}</span>
+        </div>
+      </div>
+
+      <!-- 1. Market Overview -->
+      <div class="res-section">
+        <div class="res-section-header"><span class="res-section-icon">🔍</span><span>Market Overview</span><span class="res-section-agent">MarketScout</span></div>
+        <div class="res-market-stats">
+          <div class="res-market-stat"><div class="res-stat-val">${d.market.india}</div><div class="res-stat-lbl">India Market</div></div>
+          <div class="res-market-stat"><div class="res-stat-val">${d.market.global}</div><div class="res-stat-lbl">Global Market</div></div>
+          <div class="res-market-stat accent"><div class="res-stat-val">${d.market.cagr} CAGR</div><div class="res-stat-lbl">Growth Rate</div></div>
+        </div>
+        <div class="res-problem-box">
+          <span class="res-pb-label">Core Problem</span>
+          <p>${d.problem}</p>
+        </div>
+        <div class="res-gap-box">
+          <span class="res-pb-label">Market Gap / Opportunity</span>
+          <p>🎯 ${d.gap}</p>
+        </div>
+      </div>
+
+      <!-- 2. Competitors -->
+      <div class="res-section">
+        <div class="res-section-header"><span class="res-section-icon">🏆</span><span>Competitor Landscape</span><span class="res-section-agent">CompetitorMap</span></div>
+        <div class="res-comp-grid">${compHTML}</div>
+      </div>
+
+      <!-- 3. Target Audience -->
+      <div class="res-section">
+        <div class="res-section-header"><span class="res-section-icon">🎯</span><span>Target Audience</span><span class="res-section-agent">AudienceAI</span></div>
+        <div class="res-audience-grid">
+          <div class="res-aud-item"><span class="res-aud-label">Primary ICP</span><span>${d.audience.primary}</span></div>
+          <div class="res-aud-item"><span class="res-aud-label">Secondary</span><span>${d.audience.secondary}</span></div>
+          <div class="res-aud-item"><span class="res-aud-label">Market Size</span><span>${d.audience.size}</span></div>
+          <div class="res-aud-item"><span class="res-aud-label">ARPU</span><span>${d.audience.arpu}</span></div>
+        </div>
+      </div>
+
+      <!-- 4. India Opportunity -->
+      <div class="res-section">
+        <div class="res-section-header"><span class="res-section-icon">🇮🇳</span><span>India Opportunity</span><span class="res-section-agent">IndiaInsight</span></div>
+        <div class="res-india-grid">
+          <div class="res-india-item"><span class="res-india-key">Govt Schemes</span><span>${d.india.scheme}</span></div>
+          <div class="res-india-item"><span class="res-india-key">Key Stat</span><span>${d.india.stat}</span></div>
+          <div class="res-india-item"><span class="res-india-key">IndiaStack / UPI</span><span>${d.india.upi}</span></div>
+          <div class="res-india-item"><span class="res-india-key">Regulation</span><span>${d.india.regulation}</span></div>
+        </div>
+      </div>
+
+      <!-- 5. Revenue Models -->
+      <div class="res-section">
+        <div class="res-section-header"><span class="res-section-icon">💰</span><span>Revenue Models</span><span class="res-section-agent">MoneyMind</span></div>
+        <div class="res-rev-list">${revHTML}</div>
+        <div class="res-funding-box">
+          <span class="res-pb-label">Funding Landscape</span>
+          <p>💼 ${d.funding}</p>
+        </div>
+      </div>
+
+      <!-- 6. Tech Stack -->
+      <div class="res-section">
+        <div class="res-section-header"><span class="res-section-icon">🛠️</span><span>Recommended Tech Stack</span><span class="res-section-agent">StackAdvisor</span></div>
+        <div class="res-stack-grid">${stackItems}</div>
+        <div class="res-risks-box">
+          <span class="res-pb-label">Key Risks to Watch</span>
+          <ul class="res-risks-list">${risksHTML}</ul>
+        </div>
+      </div>
+
+      <!-- 7. 90-Day Action Plan -->
+      <div class="res-section res-action-section">
+        <div class="res-section-header"><span class="res-section-icon">🚀</span><span>90-Day Action Plan</span></div>
+        <div class="res-action-grid">
+          <div class="res-action-col">
+            <div class="res-action-title">🗓️ Day 1–30</div>
+            <p>${d.actionPlan.d30}</p>
+          </div>
+          <div class="res-action-col">
+            <div class="res-action-title">🗓️ Day 31–60</div>
+            <p>${d.actionPlan.d60}</p>
+          </div>
+          <div class="res-action-col">
+            <div class="res-action-title">🗓️ Day 61–90</div>
+            <p>${d.actionPlan.d90}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+
 function renderStateChips() {
   const el = document.getElementById('stateChips');
   if (!el) return;
@@ -1198,6 +1656,7 @@ function showTab(tabId, triggerEl) {
   if (tabId === 'popular')  renderPopular();
   if (tabId === 'startups') renderStartups();
   if (tabId === 'bharatai') renderBharatAI();
+  if (tabId === 'research') renderResearchAgent();
   if (tabId === 'profile')  renderContribGraph();
 }
 
