@@ -98,6 +98,7 @@
       <div class="tab-bar">
         <button class="tab active" id="tab-explore" onclick="showTab('explore', this)">🏠 Feed</button>
         <button class="tab" id="tab-trending" onclick="showTab('trending', this)">🔥 Trending</button>
+        <button class="tab" id="tab-popular" onclick="showTab('popular', this)">⭐ Popular</button>
         <button class="tab" id="tab-profile" onclick="showTab('profile', this)">👤 Profile</button>
       </div>
 
@@ -131,6 +132,31 @@
           </div>
         </div>
         <div id="trendingCards"></div>
+      </div>
+
+      <!-- ── POPULAR OPEN SOURCE ── -->
+      <div id="pane-popular" class="tab-pane hidden">
+        <div class="section-header">
+          <h2>⭐ Most Popular Open-Source Projects</h2>
+        </div>
+        <div class="filter-row popular-filter-row">
+          <label class="filter-label">Sort by:</label>
+          <button class="sort-btn active" id="sortByStars" onclick="setPopularSort('stars')">⭐ Stars</button>
+          <button class="sort-btn" id="sortByForks" onclick="setPopularSort('forks')">🍴 Forks</button>
+          <select id="popularLangFilter" onchange="renderPopular()">
+            <option value="">All Languages</option>
+            <option value="Python">Python</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="TypeScript">TypeScript</option>
+            <option value="Go">Go</option>
+            <option value="Rust">Rust</option>
+            <option value="C">C</option>
+            <option value="C++">C++</option>
+            <option value="Java">Java</option>
+            <option value="Shell">Shell</option>
+          </select>
+        </div>
+        <div id="popularCards"></div>
       </div>
 
       <!-- ── PROFILE ── -->

@@ -725,7 +725,82 @@ a:hover { text-decoration: underline; }
 }
 .modal-files li:last-child { border-bottom: none; }
 
-/* ─── SEARCH HIGHLIGHT ─── */
+/* ─── POPULAR OSS ─── */
+.popular-filter-row {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+.sort-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  padding: 5px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.sort-btn:hover  { border-color: var(--saffron); color: var(--saffron); }
+.sort-btn.active { background: rgba(255,153,51,0.15); border-color: var(--saffron); color: var(--saffron); font-weight: 600; }
+
+.popular-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.popular-card:hover { border-color: var(--saffron); transform: translateY(-1px); }
+.popular-rank {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--border);
+  width: 32px;
+  flex-shrink: 0;
+  text-align: center;
+  padding-top: 2px;
+}
+.popular-body { flex: 1; }
+.popular-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.popular-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--saffron);
+  text-decoration: none;
+}
+.popular-link:hover { text-decoration: underline; }
+.popular-license {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: rgba(19,136,8,0.12);
+  color: var(--green-l);
+  border: 1px solid rgba(19,136,8,0.25);
+}
+.popular-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.5; }
+.popular-meta { display: flex; gap: 16px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+.popular-stars.sort-active,
+.popular-forks.sort-active { color: var(--saffron); font-weight: 700; }
+
+
 .search-active .repo-card.no-match { display: none; }
 
 /* ─── RESPONSIVE ─── */

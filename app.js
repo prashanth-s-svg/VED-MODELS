@@ -158,6 +158,209 @@ const TRENDING = [
   },
 ];
 
+const POPULAR_OSS = [
+  {
+    name: 'freeCodeCamp',
+    owner: 'freeCodeCamp',
+    desc: 'freeCodeCamp.org\'s open-source codebase and curriculum. Learn to code for free.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 408000,
+    forks: 38600,
+    license: 'BSD-3-Clause',
+    url: 'https://github.com/freeCodeCamp/freeCodeCamp',
+  },
+  {
+    name: 'linux',
+    owner: 'torvalds',
+    desc: 'Linux kernel source tree.',
+    lang: 'C',
+    langColor: '#555555',
+    stars: 184000,
+    forks: 55800,
+    license: 'GPL-2.0',
+    url: 'https://github.com/torvalds/linux',
+  },
+  {
+    name: 'react',
+    owner: 'facebook',
+    desc: 'The library for web and native user interfaces.',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 229000,
+    forks: 47000,
+    license: 'MIT',
+    url: 'https://github.com/facebook/react',
+  },
+  {
+    name: 'tensorflow',
+    owner: 'tensorflow',
+    desc: 'An open-source machine learning framework for everyone.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 187000,
+    forks: 74600,
+    license: 'Apache-2.0',
+    url: 'https://github.com/tensorflow/tensorflow',
+  },
+  {
+    name: 'vue',
+    owner: 'vuejs',
+    desc: 'This is the repo for Vue 2. For Vue 3, go to https://github.com/vuejs/core',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 208000,
+    forks: 33700,
+    license: 'MIT',
+    url: 'https://github.com/vuejs/vue',
+  },
+  {
+    name: 'bootstrap',
+    owner: 'twbs',
+    desc: 'The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 171000,
+    forks: 79200,
+    license: 'MIT',
+    url: 'https://github.com/twbs/bootstrap',
+  },
+  {
+    name: 'vscode',
+    owner: 'microsoft',
+    desc: 'Visual Studio Code — open-source code editor by Microsoft.',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 165000,
+    forks: 29700,
+    license: 'MIT',
+    url: 'https://github.com/microsoft/vscode',
+  },
+  {
+    name: 'flutter',
+    owner: 'flutter',
+    desc: 'Flutter makes it easy and fast to build beautiful apps for mobile and beyond.',
+    lang: 'Dart',
+    langColor: '#00B4AB',
+    stars: 166000,
+    forks: 27600,
+    license: 'BSD-3-Clause',
+    url: 'https://github.com/flutter/flutter',
+  },
+  {
+    name: 'kubernetes',
+    owner: 'kubernetes',
+    desc: 'Production-Grade Container Scheduling and Management.',
+    lang: 'Go',
+    langColor: '#00ADD8',
+    stars: 112000,
+    forks: 40300,
+    license: 'Apache-2.0',
+    url: 'https://github.com/kubernetes/kubernetes',
+  },
+  {
+    name: 'pytorch',
+    owner: 'pytorch',
+    desc: 'Tensors and Dynamic neural networks in Python with strong GPU acceleration.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 84000,
+    forks: 22700,
+    license: 'BSD-3-Clause',
+    url: 'https://github.com/pytorch/pytorch',
+  },
+  {
+    name: 'electron',
+    owner: 'electron',
+    desc: 'Build cross-platform desktop apps with JavaScript, HTML, and CSS.',
+    lang: 'C++',
+    langColor: '#f34b7d',
+    stars: 115000,
+    forks: 15400,
+    license: 'MIT',
+    url: 'https://github.com/electron/electron',
+  },
+  {
+    name: 'rust',
+    owner: 'rust-lang',
+    desc: 'Empowering everyone to build reliable and efficient software.',
+    lang: 'Rust',
+    langColor: '#dea584',
+    stars: 99000,
+    forks: 12700,
+    license: 'MIT/Apache-2.0',
+    url: 'https://github.com/rust-lang/rust',
+  },
+  {
+    name: 'django',
+    owner: 'django',
+    desc: 'The Web framework for perfectionists with deadlines.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 81000,
+    forks: 31900,
+    license: 'BSD-3-Clause',
+    url: 'https://github.com/django/django',
+  },
+  {
+    name: 'next.js',
+    owner: 'vercel',
+    desc: 'The React Framework — build fullstack apps with the best developer experience.',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 128000,
+    forks: 27400,
+    license: 'MIT',
+    url: 'https://github.com/vercel/next.js',
+  },
+  {
+    name: 'git',
+    owner: 'git',
+    desc: 'Git Source Code Mirror — the fast, scalable, distributed revision control system.',
+    lang: 'C',
+    langColor: '#555555',
+    stars: 53000,
+    forks: 26200,
+    license: 'GPL-2.0',
+    url: 'https://github.com/git/git',
+  },
+  {
+    name: 'llama.cpp',
+    owner: 'ggerganov',
+    desc: 'LLM inference in C/C++ — run large language models locally on your machine.',
+    lang: 'C++',
+    langColor: '#f34b7d',
+    stars: 71000,
+    forks: 10300,
+    license: 'MIT',
+    url: 'https://github.com/ggerganov/llama.cpp',
+  },
+  {
+    name: 'go',
+    owner: 'golang',
+    desc: 'The Go programming language.',
+    lang: 'Go',
+    langColor: '#00ADD8',
+    stars: 125000,
+    forks: 17800,
+    license: 'BSD-3-Clause',
+    url: 'https://github.com/golang/go',
+  },
+  {
+    name: 'ansible',
+    owner: 'ansible',
+    desc: 'Ansible is a radically simple IT automation platform.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 63000,
+    forks: 24100,
+    license: 'GPL-3.0',
+    url: 'https://github.com/ansible/ansible',
+  },
+];
+
+let popularSortKey = 'stars';
+
 const STATES = [
   'Maharashtra', 'Karnataka', 'Tamil Nadu', 'Telangana', 'Delhi',
   'Gujarat', 'Rajasthan', 'Uttar Pradesh', 'West Bengal', 'Punjab',
@@ -242,6 +445,42 @@ function renderTrending() {
   `).join('');
 }
 
+function renderPopular() {
+  const container = document.getElementById('popularCards');
+  if (!container) return;
+  const langF = (document.getElementById('popularLangFilter') || {}).value || '';
+  let data = langF ? POPULAR_OSS.filter(r => r.lang === langF) : POPULAR_OSS.slice();
+  data.sort((a, b) => b[popularSortKey] - a[popularSortKey]);
+
+  container.innerHTML = data.map((r, i) => `
+    <div class="popular-card">
+      <div class="popular-rank">${i + 1}</div>
+      <div class="popular-body">
+        <div class="popular-title">
+          <a class="popular-link" href="${r.url}" target="_blank" rel="noopener noreferrer">
+            📦 ${r.owner} / <strong>${r.name}</strong>
+          </a>
+          <span class="popular-license">${r.license}</span>
+        </div>
+        <div class="popular-desc">${r.desc}</div>
+        <div class="popular-meta">
+          <span>${langDot(r.langColor)} ${r.lang}</span>
+          <span class="popular-stars${popularSortKey === 'stars' ? ' sort-active' : ''}">⭐ ${fmtNum(r.stars)}</span>
+          <span class="popular-forks${popularSortKey === 'forks' ? ' sort-active' : ''}">🍴 ${fmtNum(r.forks)}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setPopularSort(key) {
+  popularSortKey = key;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(key === 'stars' ? 'sortByStars' : 'sortByForks');
+  if (btn) btn.classList.add('active');
+  renderPopular();
+}
+
 function renderStateChips() {
   const el = document.getElementById('stateChips');
   if (!el) return;
@@ -286,6 +525,7 @@ function showTab(tabId, triggerEl) {
 
   // lazy render
   if (tabId === 'trending') renderTrending();
+  if (tabId === 'popular')  renderPopular();
   if (tabId === 'profile')  renderContribGraph();
 }
 
