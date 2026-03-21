@@ -113,6 +113,19 @@ const REPOS = [
     tags: ['llm', 'offline-ai', 'benchmarks', 'open-source'],
     files: ['OFFLINE-MODELS-GUIDE.md', 'benchmarks/', 'scripts/', 'results/', 'README.md']
   },
+  {
+    id: 'airllm-big-models',
+    owner: 'prashanth_dev',
+    name: 'airllm-big-models',
+    desc: 'Complete guide to running 70B+ LLMs on a 4 GB GPU using AirLLM — layer-by-layer inference, 4-bit compression, streaming, RAG, and VED-MODELS integration.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 54,
+    forks: 16,
+    updated: 'just now',
+    tags: ['airllm', 'llm', 'low-vram', 'offline-ai', 'llama'],
+    files: ['AIRLLM-GUIDE.md', 'examples/', 'ved_airllm_explain.py', 'requirements.txt', 'README.md']
+  },
 ];
 
 const TRENDING = [
@@ -203,6 +216,17 @@ const TRENDING = [
     stars: 38,
     starsToday: 38,
     forks: 11,
+  },
+  {
+    rank: 9,
+    name: 'airllm-big-models',
+    owner: 'prashanth_dev',
+    desc: 'Run 70B+ LLMs on a 4 GB GPU with AirLLM — layer-by-layer inference, 4-bit compression, streaming & RAG.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 54,
+    starsToday: 54,
+    forks: 16,
   },
 ];
 
