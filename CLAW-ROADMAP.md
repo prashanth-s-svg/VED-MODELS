@@ -4,6 +4,10 @@
 > **CLAW = Continuous Local Automated Workflows** — a hands-free automation
 > framework for running AI/ML model pipelines (training, inference, evaluation,
 > and deployment) without any manual intervention.
+>
+> 🛠️ **Ready to build?** Jump straight to the
+> [Build From Scratch Guide](./CLAW-BUILD-FROM-SCRATCH.md) for step-by-step
+> code and commands to get a working prototype in ~2 hours.
 
 ---
 

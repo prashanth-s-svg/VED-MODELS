@@ -91,14 +91,14 @@ const REPOS = [
     id: 'bharatclaw',
     owner: 'prashanth_dev',
     name: 'bharatclaw',
-    desc: 'CLAW — Continuous Local Automated Workflows. Hands-free automation framework for AI/ML pipelines: ingest → train → evaluate → LLM explain → report, zero manual steps.',
+    desc: 'CLAW — Continuous Local Automated Workflows. Hands-free automation framework for AI/ML pipelines: ingest → train → evaluate → LLM explain → report, zero manual steps. Includes a full build-from-scratch guide.',
     lang: 'Python',
     langColor: '#3572A5',
     stars: 12,
     forks: 3,
     updated: 'just now',
     tags: ['automation', 'hands-free', 'mlops', 'llm', 'made-in-india'],
-    files: ['CLAW-ROADMAP.md', 'claw/', 'workflows/', 'examples/', 'docs/']
+    files: ['CLAW-ROADMAP.md', 'CLAW-BUILD-FROM-SCRATCH.md', 'claw/', 'workflows/', 'examples/', 'docs/']
   },
   {
     id: 'offline-llm-bench',
