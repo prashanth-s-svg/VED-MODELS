@@ -1,10 +1,13 @@
 # Running Big Models with AirLLM 🚀
 
-> **Question:** *"How to run big models in AirLLM?"*
+> **Question:** *"How to run big models in AirLLM? And is it free?"*
 >
 > **Short answer:** AirLLM lets you run **70 B+ models on a single GPU with as
 > little as 4 GB of VRAM** by streaming one transformer layer at a time from
 > disk — no multi-GPU rig required, no aggressive quantisation, no cloud API.
+> **AirLLM itself is free and open-source (MIT).** Most supported models are
+> also free; the only real costs are your hardware and electricity.
+> → Jump to [Licensing & Cost](#15-licensing--cost--is-it-free) for the full breakdown.
 
 ---
 
@@ -29,6 +32,7 @@
 12. [Performance Tips & Benchmarks](#12-performance-tips--benchmarks)
 13. [Troubleshooting](#13-troubleshooting)
 14. [VED-MODELS Integration Example](#14-ved-models-integration-example)
+15. [Licensing & Cost — Is it Free?](#15-licensing--cost--is-it-free)
 
 ---
 
@@ -707,6 +711,102 @@ EOF
 | 30–40 B | 4 GB | 4-bit |
 | 65–72 B | 4 GB | 4-bit |
 | 100–180 B | 4–8 GB | 4-bit |
+
+---
+
+## 15. Licensing & Cost — Is it Free?
+
+### ✅ AirLLM library — 100% free
+
+| Item | License | Cost |
+|------|---------|------|
+| **AirLLM Python library** | MIT | Free forever |
+| **Source code** | MIT (GitHub) | Free |
+| **Commercial use** | Allowed under MIT | Free |
+
+AirLLM is published at https://github.com/lyogavin/airllm under the **MIT
+License** — the most permissive open-source license. You can use it in personal
+projects, research, or commercial products at no cost.
+
+---
+
+### 🔓 Model licenses — mostly free, a few need sign-up
+
+Each model you download has its own license. Here is a summary for every model
+family mentioned in this guide:
+
+| Model | License | Free? | Commercial use | Notes |
+|-------|---------|-------|----------------|-------|
+| **Llama 3 / 3.1 / 3.3** | Meta Llama 3 Community License | ✅ Free | ✅ Allowed (< 700M MAU) | Must accept license on HuggingFace; no re-training to compete with Meta products |
+| **Mistral 7B / Mistral Large** | Apache 2.0 | ✅ Free | ✅ Fully open | No restrictions |
+| **Mixtral 8×7B** | Apache 2.0 | ✅ Free | ✅ Fully open | No restrictions |
+| **Qwen 2.5 (all sizes)** | Apache 2.0 | ✅ Free | ✅ Fully open | No restrictions |
+| **DeepSeek 67B / V2** | MIT | ✅ Free | ✅ Fully open | No restrictions |
+| **Phi-4 (Microsoft)** | MIT | ✅ Free | ✅ Fully open | No restrictions |
+| **Gemma 2 (Google)** | Gemma Terms of Use | ✅ Free | ✅ Allowed | Must accept Google's terms on HuggingFace |
+| **Falcon 40B** | Falcon License | ✅ Free | ✅ Allowed | Attribution required |
+| **Command R+ (Cohere)** | CC-BY-NC 4.0 | ✅ Free | ❌ Non-commercial only | Not for commercial products |
+
+> **Quick rule of thumb:**
+> - Apache 2.0 or MIT → fully free, including commercial use, no sign-up needed
+> - Meta Llama / Google Gemma → free but you must click "Accept" on HuggingFace
+>   and set an `HF_TOKEN` (takes ~2 minutes, one-time)
+> - CC-BY-NC → free for personal/research only, not for products you sell
+
+---
+
+### 💳 HuggingFace — free tier is enough
+
+| HuggingFace feature | Free tier | Paid (Pro / Enterprise) |
+|--------------------|-----------|------------------------|
+| Download models | ✅ Free | Faster download |
+| Access gated models (Llama, Gemma) | ✅ Free (accept license) | Same |
+| Inference API | ✅ Limited free quota | Pay-per-token |
+| Storage / Spaces | ✅ Free | More storage / GPU |
+
+You **do not need a paid HuggingFace account** to use AirLLM. A free account
+(email sign-up) is required only to access gated models like Llama 3 — and that
+takes under 2 minutes.
+
+---
+
+### 🔌 The only real costs: hardware & electricity
+
+Because AirLLM runs **entirely on your own machine** with no cloud API calls,
+the only recurring costs are:
+
+| Cost | Typical amount | Notes |
+|------|---------------|-------|
+| **Electricity** | ₹2–8 per hour of inference | RTX 3060 ≈ 170W; at ₹8/kWh |
+| **One-time disk storage** | ₹1,500–4,000 for a 500 GB NVMe SSD | Stores the model shards |
+| **GPU (optional)** | Already owned, or ₹20,000–80,000 | Consumer card is sufficient |
+| **Cloud API** | ₹0 | None — everything is local |
+| **Per-token fee** | ₹0 | None — models run on your hardware |
+| **Subscription** | ₹0 | AirLLM has no subscription model |
+
+**Compared to commercial APIs:**
+
+| Service | Cost for ~1M tokens |
+|---------|-------------------|
+| OpenAI GPT-4o | ~$15–30 (~₹1,250–2,500) |
+| Anthropic Claude 3.5 Sonnet | ~$15–75 (~₹1,250–6,250) |
+| Google Gemini 1.5 Pro | ~$7–21 (~₹580–1,750) |
+| **AirLLM (your GPU)** | **₹0 per token + electricity** |
+
+For a developer running 10 sessions/day, AirLLM pays for itself within weeks
+compared to any commercial API.
+
+---
+
+### 📋 Summary
+
+> **Yes — AirLLM is free.**
+>
+> - **AirLLM library:** MIT, free for any use
+> - **Most models:** Apache 2.0 or MIT, free for any use
+> - **Llama 3 / Gemma 2:** Free — just accept the license on HuggingFace once
+> - **No API fees, no subscriptions, no per-token billing**
+> - **Only cost:** your electricity while the GPU is running
 
 ---
 
