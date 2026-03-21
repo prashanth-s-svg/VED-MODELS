@@ -1,251 +1,328 @@
-# BharatClaw — Robotic Gripper Roadmap 🦾
+# CLAW — Continuous Local Automated Workflows 🤖
 
-> **Goal:** Design and build a robotic claw that outperforms
-> [NemoClaw](https://github.com/nmsl-lab/nemoclaw) and
-> [OpenClaw](https://github.com/pinchasaurus/openclaw) in gripping force,
-> payload range, sensing accuracy, and open-source accessibility.
+> **Clarification:** CLAW is **not** a robotic arm or gripper.
+> **CLAW = Continuous Local Automated Workflows** — a hands-free automation
+> framework for running AI/ML model pipelines (training, inference, evaluation,
+> and deployment) without any manual intervention.
 
 ---
 
 ## Table of Contents
 
-1. [Project Overview](#1-project-overview)
+1. [What is CLAW?](#1-what-is-claw)
 2. [Competitive Analysis](#2-competitive-analysis)
 3. [Learning Roadmap (Course Syllabus)](#3-learning-roadmap-course-syllabus)
 4. [Build Plan (Phases)](#4-build-plan-phases)
-5. [Hardware Bill of Materials](#5-hardware-bill-of-materials)
+5. [Architecture & Components](#5-architecture--components)
 6. [Software Stack](#6-software-stack)
 7. [Milestones & Timeline](#7-milestones--timeline)
 8. [Contributing](#8-contributing)
 
 ---
 
-## 1. Project Overview
+## 1. What is CLAW?
 
-**BharatClaw** is a fully open-source, 3-finger adaptive robotic gripper
-built in India. Key design targets:
+**CLAW** is a fully open-source, hands-free automation framework that
+orchestrates the full AI/ML lifecycle — data ingestion, preprocessing, model
+training, evaluation, and deployment — with zero manual steps once triggered.
 
-| Metric               | NemoClaw  | OpenClaw  | **BharatClaw target** |
-|----------------------|-----------|-----------|-----------------------|
-| Max gripping force   | ~30 N     | ~25 N     | **≥ 60 N**            |
-| Payload (kg)         | 1.5       | 1.2       | **≥ 3.0**             |
-| Finger DOF           | 1         | 2         | **3 (fully adaptive)**|
-| Force sensing        | None      | Basic FSR | **6-axis F/T sensor** |
-| ROS 2 support        | Partial   | No        | **Full**              |
-| Cost (USD, BOM)      | ~$180     | ~$120     | **≤ $150**            |
-| License              | CC BY-SA  | MIT       | **Apache 2.0**        |
+It is built specifically to run **locally on consumer hardware** (CPU, single
+GPU, or Apple Silicon) without depending on any cloud API or paid service.
+
+### Design Goals
+
+| Metric | Make-do scripts | GitHub Actions only | **CLAW target** |
+|--------|----------------|---------------------|-----------------|
+| Zero-touch pipeline | ❌ manual steps | ✅ CI only | **✅ local + CI** |
+| Offline capable | ✅ | ❌ | **✅ fully offline** |
+| LLM-aware tasks | ❌ | ❌ | **✅ built-in** |
+| Parallel task runner | ❌ | Partial | **✅ native** |
+| Scheduling (cron) | ❌ | ✅ | **✅ native** |
+| Secrets / config mgmt | Manual | Via repo secrets | **✅ encrypted local vault** |
+| License | — | MIT | **Apache 2.0** |
 
 ---
 
 ## 2. Competitive Analysis
 
-### NemoClaw
-- **Strengths:** Good mechanical design, decent community, CAD files available.
-- **Weaknesses:** Single DOF per finger, no tactile sensing, limited ROS 2 integration,
-  closed firmware, higher BOM cost.
+### n8n / Zapier (cloud automation)
+- **Strengths:** Excellent UI, hundreds of integrations, no-code friendly.
+- **Weaknesses:** Cloud-dependent, per-task pricing, not ML-pipeline-aware,
+  cannot run local LLM inference tasks.
 
-### OpenClaw
-- **Strengths:** Lightweight, low cost, simple to assemble.
-- **Weaknesses:** Very low payload, no sensing, no ROS support, no active development.
+### GitHub Actions (CI/CD)
+- **Strengths:** Tightly integrated with source control, free for public repos.
+- **Weaknesses:** Requires internet/cloud, cannot directly schedule local model
+  training jobs, no local secret execution.
 
-### BharatClaw Advantages
-1. **Adaptive 3-DOF fingers** — underactuated linkage allows grasping irregular objects.
-2. **Integrated 6-axis F/T sensing** — real-time force feedback per finger.
-3. **ROS 2 (Humble/Iron) first-class support** — MoveIt 2 plugin included.
-4. **Fully parametric OpenSCAD / FreeCAD model** — scale to any robot arm.
-5. **Made-in-India BOM** — components sourced from Indian distributors to keep costs low.
-6. **Comprehensive documentation** — step-by-step assembly, calibration, and control guides.
+### Apache Airflow
+- **Strengths:** Production-grade DAG scheduler, large ecosystem.
+- **Weaknesses:** Heavy setup (Docker, Postgres), overkill for a single-machine
+  ML project, no built-in LLM task type.
+
+### CLAW Advantages
+1. **100% local** — runs on your laptop/workstation, no cloud required.
+2. **LLM task primitive** — built-in `LLMTask` that calls AirLLM / HuggingFace
+   models with no boilerplate.
+3. **Hands-free trigger** — file-watcher, cron, and webhook triggers; zero
+   manual re-runs.
+4. **Tiny footprint** — pure Python, single `pip install`, no Docker daemon.
+5. **VED-MODELS native** — ships with ready-made workflows for student
+   performance prediction, batch inference, and report generation.
+6. **Encrypted local vault** — secrets stored with `cryptography` Fernet,
+   never sent off-device.
 
 ---
 
 ## 3. Learning Roadmap (Course Syllabus)
 
-Work through the modules below in order. Each module lists free/low-cost resources.
+Work through the modules below in order. Each module lists free resources.
 
-### Module 0 — Foundations (2–3 weeks)
+### Module 0 — Python Automation Foundations (1–2 weeks)
 | Topic | Resource |
 |-------|----------|
-| Python basics | [Python.org tutorial](https://docs.python.org/3/tutorial/) |
-| Linear algebra essentials | 3Blue1Brown "Essence of Linear Algebra" (YouTube) |
-| Basic electronics (Ohm's law, PWM, I²C, SPI) | SparkFun Learn Electronics |
-| 3-D printing workflow | Prusa Knowledge Base |
+| Python scripting best-practices | Real Python "Automating Tasks" series |
+| `subprocess`, `pathlib`, `shutil` | Python 3 official docs |
+| `schedule` library (cron in Python) | [schedule docs](https://schedule.readthedocs.io) |
+| `watchdog` — filesystem event monitoring | [watchdog docs](https://python-watchdog.readthedocs.io) |
+| Environment variables & `.env` | python-dotenv README |
 
-### Module 1 — Mechanical Design (3–4 weeks)
+**Hands-on:** Write a script that watches a `data/` folder and auto-runs
+a pre-processing function whenever a new CSV is dropped in.
+
+### Module 1 — DAG-Based Workflow Design (2 weeks)
 | Topic | Resource |
 |-------|----------|
-| Mechanism theory (linkages, cams, gears) | Norton "Design of Machinery" Ch. 1–4 |
-| CAD with FreeCAD | FreeCAD 0.21 official docs |
-| Underactuated gripper principles | MIT OpenCourseWare 6.832 |
-| Finite-element analysis (FreeCAD FEM) | FreeCAD FEM workbench tutorial |
-| Tolerance & fit for 3-D printed parts | Maker's Muse YouTube series |
+| Directed Acyclic Graphs (DAG) concepts | Wikipedia + CS fundamentals |
+| Task dependency resolution | Topological sort (MIT 6.006 lecture) |
+| `networkx` for DAG modelling | networkx.org tutorials |
+| Airflow core concepts (DAG, Operator, XCom) | Airflow official docs |
+| Prefect 2 quickstart | docs.prefect.io |
 
-**Hands-on:** Sketch three finger-linkage concepts, simulate in FreeCAD,
-select the best and print a 1-finger prototype.
+**Hands-on:** Model the VED-MODELS training pipeline as a DAG: ingest → clean
+→ feature engineer → train → evaluate → export.
 
-### Module 2 — Actuators & Electronics (2–3 weeks)
+### Module 2 — Local LLM Task Integration (2–3 weeks)
 | Topic | Resource |
 |-------|----------|
-| Servo motor selection (torque, speed, feedback) | ServoCity sizing guide |
-| Brushless DC + encoder basics | GreatScott! BLDC videos |
-| Strain-gauge / FSR force sensing | Honeywell application note AN001 |
-| Arduino / Raspberry Pi GPIO | Official Arduino reference |
-| PCB design with KiCad | KiCad official tutorials |
+| AirLLM layer-by-layer inference | [`AIRLLM-GUIDE.md`](./AIRLLM-GUIDE.md) |
+| HuggingFace `pipeline()` API | HuggingFace docs |
+| Prompt templating (Jinja2) | Jinja2 docs |
+| Async inference with `asyncio` | Python asyncio HOWTO |
+| Result caching (`diskcache`) | diskcache docs |
 
-**Hands-on:** Wire a single servo + FSR to an Arduino, read force and position
-in real time, log to CSV.
+**Hands-on:** Add an `LLMTask` node to the VED-MODELS pipeline that generates
+a plain-English explanation of each student's predicted score automatically.
 
-### Module 3 — Firmware & Low-level Control (3–4 weeks)
+### Module 3 — Scheduling & Triggers (1–2 weeks)
 | Topic | Resource |
 |-------|----------|
-| PID control theory | Brian Douglas "Control Systems" (YouTube) |
-| Embedded C++ (Arduino/STM32) | STM32 HAL library examples |
-| CAN bus for multi-actuator comms | CSS Electronics CAN bus guide |
-| Safety: current limiting, watchdog timers | Texas Instruments app note SLAA315 |
+| Cron syntax | crontab.guru |
+| `schedule` vs `APScheduler` | APScheduler docs |
+| inotify / watchdog file triggers | watchdog API docs |
+| Webhook receiver (Flask micro-server) | Flask quickstart |
+| Systemd service unit (Linux) | systemd.unit man page |
 
-**Hands-on:** Implement a PID position controller for one finger;
-add torque/current limiting.
+**Hands-on:** Schedule the full VED-MODELS pipeline to run at midnight every
+Sunday; add a webhook endpoint so a teacher's portal can trigger inference
+on-demand.
 
-### Module 4 — ROS 2 Integration (3–4 weeks)
+### Module 4 — Secrets, Config & Security (1 week)
 | Topic | Resource |
 |-------|----------|
-| ROS 2 concepts (nodes, topics, services, actions) | ROS 2 official tutorials |
-| URDF / xacro gripper description | MoveIt 2 gripper tutorial |
-| ros2_control hardware interface | ros2_control docs |
-| MoveIt 2 grasp pipeline | PickNik MoveIt 2 tutorials |
-| Gazebo Harmonic simulation | Gazebo docs |
+| Fernet symmetric encryption | cryptography.io docs |
+| `.env` + `python-dotenv` | python-dotenv docs |
+| Local secrets vault design | OWASP Secrets Management Cheat Sheet |
+| Config schema validation (`pydantic`) | Pydantic v2 docs |
 
-**Hands-on:** Write a `GripperHardwareInterface`, spawn the gripper in Gazebo,
-execute open/close actions via MoveIt 2.
+**Hands-on:** Store HuggingFace token and DB credentials in a Fernet-encrypted
+local vault; load them at runtime with zero plaintext exposure.
 
-### Module 5 — Perception & Intelligence (4–5 weeks)
+### Module 5 — Monitoring, Logging & Alerts (1–2 weeks)
 | Topic | Resource |
 |-------|----------|
-| Computer vision basics | OpenCV Python tutorial |
-| Object detection with YOLO v8 | Ultralytics docs |
-| Point-cloud processing | Open3D tutorials |
-| Grasp pose estimation (GraspNet / AnyGrasp) | GraspNet-1Billion paper |
-| PyTorch model deployment on Raspberry Pi | NCNN / TFLite guides |
+| Python `logging` module | Python docs |
+| Structured logging (`structlog`) | structlog docs |
+| Pipeline health dashboard (Streamlit) | streamlit.io docs |
+| Alert via email / Telegram bot | smtplib / python-telegram-bot |
+| Prometheus metrics (optional) | prometheus.io |
 
-**Hands-on:** Detect household objects with a depth camera; compute and
-execute grasp poses autonomously.
+**Hands-on:** Build a one-page Streamlit dashboard showing last-run status,
+duration, errors, and model accuracy trend for every pipeline run.
 
-### Module 6 — Testing, Documentation & Release (2 weeks)
+### Module 6 — CI/CD Integration & Release (1–2 weeks)
 | Topic | Resource |
 |-------|----------|
-| Unit & integration testing (pytest, gtest) | pytest docs |
-| CI/CD with GitHub Actions | GitHub Actions docs |
-| Technical writing (README, CONTRIBUTING) | Write the Docs guide |
-| Open-source licensing | choosealicense.com |
+| GitHub Actions basics | GitHub Actions docs |
+| `act` — run Actions locally | [nektos/act](https://github.com/nektos/act) |
+| Docker packaging (optional) | Docker getting-started |
+| Semantic versioning + `bump2version` | semver.org |
+| `pytest` + `pytest-mock` for pipeline tests | pytest docs |
 
 ---
 
 ## 4. Build Plan (Phases)
 
-### Phase 1 — Research & Design (Weeks 1–6)
+### Phase 1 — Core Engine (Weeks 1–4)
 - [ ] Complete Modules 0–1
-- [ ] Benchmark NemoClaw and OpenClaw (print, assemble, measure)
-- [ ] Define BharatClaw requirements document (`docs/requirements.md`)
-- [ ] Produce 3 CAD concepts; peer-review with community; choose winner
-- [ ] Validate chosen design with FEM stress analysis (target FOS ≥ 2.5)
+- [ ] Implement `claw/core/dag.py` — DAG engine with topological sort
+- [ ] Implement `claw/core/task.py` — base `Task` class (run, retry, timeout)
+- [ ] Implement `claw/core/runner.py` — parallel task executor (`ThreadPoolExecutor`)
+- [ ] Write unit tests for DAG resolution and task execution
+- [ ] CLI: `claw run <workflow.yaml>`
 
-### Phase 2 — Prototype v0.1 (Weeks 7–12)
-- [ ] Complete Modules 2–3
-- [ ] 3-D print finger assembly + palm; assemble full gripper
-- [ ] Wire servo drivers + FSR array; flash PID firmware
-- [ ] Manual open/close tests; record gripping-force curves
-- [ ] Iterate CAD based on failure modes; produce v0.2 print
+### Phase 2 — Triggers & Scheduler (Weeks 5–8)
+- [ ] Complete Module 3
+- [ ] Implement `claw/triggers/cron.py` — APScheduler wrapper
+- [ ] Implement `claw/triggers/watch.py` — watchdog filesystem trigger
+- [ ] Implement `claw/triggers/webhook.py` — Flask webhook endpoint
+- [ ] Integration test: drop a CSV → pipeline auto-runs end-to-end
 
-### Phase 3 — ROS 2 Integration (Weeks 13–18)
-- [ ] Complete Module 4
-- [ ] Implement `bharatclaw_description` (URDF/xacro)
-- [ ] Implement `bharatclaw_hardware` (ros2_control interface)
-- [ ] Simulate in Gazebo Harmonic; validate kinematics
-- [ ] MoveIt 2 grasp demo with a predefined set of objects
+### Phase 3 — LLM Tasks & VED-MODELS Integration (Weeks 9–12)
+- [ ] Complete Module 2
+- [ ] Implement `claw/tasks/llm_task.py` — AirLLM + HuggingFace wrapper
+- [ ] Ship built-in workflow: `workflows/ved_models_pipeline.yaml`
+  - ingest → clean → train → evaluate → llm_explain → report
+- [ ] Implement result caching (diskcache) to avoid redundant inference
+- [ ] End-to-end demo: new CSV in `data/` → PDF report in `output/` hands-free
 
-### Phase 4 — Perception & AI (Weeks 19–26)
-- [ ] Complete Module 5
-- [ ] Integrate depth camera (Intel RealSense D435i or OAK-D)
-- [ ] Train custom grasp-pose model on household-object dataset
-- [ ] End-to-end pick-and-place demo (detect → plan → grasp → release)
-- [ ] Benchmark success rate vs. NemoClaw/OpenClaw baselines
+### Phase 4 — Secrets Vault & Dashboard (Weeks 13–16)
+- [ ] Complete Modules 4–5
+- [ ] Implement `claw/vault/` — Fernet-encrypted local secret store
+- [ ] CLI: `claw vault set KEY VALUE` / `claw vault get KEY`
+- [ ] Streamlit dashboard (`claw ui`) — run history, status, accuracy charts
+- [ ] Alert engine: email / Telegram on pipeline failure
 
-### Phase 5 — Polish & Open-Source Release (Weeks 27–30)
+### Phase 5 — Polish & Open-Source Release (Weeks 17–20)
 - [ ] Complete Module 6
-- [ ] Full assembly manual with photos/videos
-- [ ] API reference docs (auto-generated via rosdoc2)
-- [ ] CI pipeline: build, test, lint on every PR
-- [ ] Tag v1.0.0 release; publish to BharatHub & ROS Index
+- [ ] Package on PyPI: `pip install bharatclaw`
+- [ ] Full documentation site (MkDocs)
+- [ ] GitHub Actions CI: lint, test, type-check on every PR
+- [ ] Tag v1.0.0 release; publish to BharatHub
 
 ---
 
-## 5. Hardware Bill of Materials
+## 5. Architecture & Components
 
-| # | Component | Qty | Est. Cost (₹) | Source |
-|---|-----------|-----|--------------|--------|
-| 1 | Dynamixel XL430-W250-T servo | 3 | ₹ 8,400 | RoboSmart India |
-| 2 | Raspberry Pi 4 (4 GB) | 1 | ₹ 5,500 | RS Components India |
-| 3 | Arduino Nano (firmware MCU) | 1 | ₹ 350 | Robu.in |
-| 4 | U2D2 USB-to-Dynamixel converter | 1 | ₹ 3,200 | RoboSmart India |
-| 5 | FSR 402 force sensor | 3 | ₹ 450 | Electron Components |
-| 6 | MCP3208 12-bit ADC | 1 | ₹ 120 | Robu.in |
-| 7 | Intel RealSense D435i | 1 | ₹ 22,000 | Intel ARK / Amazon India |
-| 8 | PLA+ filament (1 kg) | 1 | ₹ 900 | eSUN India |
-| 9 | M3 hardware kit (bolts, nuts, inserts) | 1 | ₹ 250 | Local hardware store |
-| 10 | 12 V / 5 A power supply | 1 | ₹ 600 | Robu.in |
-| **Total** | | | **≈ ₹ 41,770 (~$500)** | |
+```
+claw/
+├── core/
+│   ├── dag.py          # DAG engine — topological sort + dependency graph
+│   ├── task.py         # Base Task (run, retry, timeout, on_failure hook)
+│   └── runner.py       # Parallel executor (ThreadPoolExecutor / asyncio)
+├── tasks/
+│   ├── shell_task.py   # Run arbitrary shell commands
+│   ├── python_task.py  # Call any Python callable
+│   ├── llm_task.py     # Hands-free LLM inference (AirLLM / HuggingFace)
+│   └── http_task.py    # HTTP request (webhook call, REST API)
+├── triggers/
+│   ├── cron.py         # APScheduler cron trigger
+│   ├── watch.py        # watchdog filesystem trigger
+│   └── webhook.py      # Flask one-liner webhook receiver
+├── vault/
+│   ├── store.py        # Fernet-encrypted key-value store
+│   └── cli.py          # `claw vault` sub-commands
+├── ui/
+│   └── dashboard.py    # Streamlit run-history & metrics dashboard
+├── workflows/
+│   ├── ved_models_pipeline.yaml   # Full VED-MODELS training pipeline
+│   └── batch_inference.yaml       # Batch inference on new student data
+└── cli.py              # `claw` entry-point
+```
 
-> **Note:** Dynamixel servos dominate the cost. A lower-cost variant using
-> MG996R servos + custom encoder boards can bring the total under ₹ 8,000
-> (~$100) with reduced performance.
+### Workflow YAML example
+
+```yaml
+# workflows/ved_models_pipeline.yaml
+name: ved-models-pipeline
+description: "Hands-free train → evaluate → explain pipeline for VED-MODELS"
+
+triggers:
+  - type: watch
+    path: data/
+    pattern: "*.csv"
+  - type: cron
+    schedule: "0 0 * * 0"   # every Sunday midnight
+
+tasks:
+  ingest:
+    type: python
+    call: "ved_pipeline.ingest"
+    args: ["{trigger.file}"]
+
+  clean:
+    type: python
+    call: "ved_pipeline.clean"
+    depends_on: [ingest]
+
+  train:
+    type: python
+    call: "ved_pipeline.train"
+    depends_on: [clean]
+    timeout: 3600
+
+  evaluate:
+    type: python
+    call: "ved_pipeline.evaluate"
+    depends_on: [train]
+
+  explain:
+    type: llm
+    model: "meta-llama/Llama-3.1-8B-Instruct"
+    compression: "4bit"
+    prompt_template: "templates/counsellor_report.j2"
+    depends_on: [evaluate]
+
+  report:
+    type: python
+    call: "ved_pipeline.export_pdf"
+    depends_on: [explain]
+    output: "output/report_{date}.pdf"
+```
 
 ---
 
 ## 6. Software Stack
 
-```
-bharatclaw/
-├── hardware/           # FreeCAD + STL files
-├── firmware/           # Arduino C++ PID controller
-├── bharatclaw_description/   # ROS 2 URDF/xacro
-├── bharatclaw_hardware/      # ros2_control HW interface (C++)
-├── bharatclaw_moveit/        # MoveIt 2 config + grasp pipeline
-├── bharatclaw_perception/    # Python: YOLO + GraspNet inference
-├── bharatclaw_bringup/       # Launch files, config YAML
-└── docs/               # Assembly guide, API reference
-```
-
 | Layer | Technology |
 |-------|-----------|
-| Mechanical CAD | FreeCAD 0.21 (parametric, open source) |
-| Slicer | PrusaSlicer / Cura |
-| Firmware | Arduino C++ (PID + CAN) |
-| Middleware | ROS 2 Humble / Iron |
-| Simulation | Gazebo Harmonic |
-| Motion planning | MoveIt 2 |
-| Perception | Python 3.11, OpenCV, PyTorch, Open3D |
+| Language | Python 3.11 |
+| DAG engine | Custom (`networkx` for graph) |
+| Task execution | `concurrent.futures.ThreadPoolExecutor` + `asyncio` |
+| Scheduling | APScheduler 3.x |
+| File watching | `watchdog` 3.x |
+| Webhook | Flask 3.x (micro-server, optional) |
+| LLM inference | AirLLM + HuggingFace Transformers |
+| Secret vault | `cryptography` (Fernet) |
+| Config / schema | Pydantic v2 + YAML |
+| Caching | `diskcache` |
+| Dashboard | Streamlit |
+| CLI | `click` / `argparse` |
+| Tests | `pytest` + `pytest-mock` |
 | CI/CD | GitHub Actions |
-| Docs | Sphinx + rosdoc2 |
+| Docs | MkDocs + Material theme |
 
 ---
 
 ## 7. Milestones & Timeline
 
 ```
-Week  1-6  : Phase 1 — Research & Design
-Week  7-12 : Phase 2 — Prototype v0.1
-Week 13-18 : Phase 3 — ROS 2 Integration
-Week 19-26 : Phase 4 — Perception & AI
-Week 27-30 : Phase 5 — Polish & Release v1.0.0
+Week  1-4  : Phase 1 — Core Engine (DAG, tasks, runner)
+Week  5-8  : Phase 2 — Triggers & Scheduler
+Week  9-12 : Phase 3 — LLM Tasks & VED-MODELS Integration
+Week 13-16 : Phase 4 — Secrets Vault & Dashboard
+Week 17-20 : Phase 5 — Polish & Release v1.0.0
 ```
 
 ### Key Review Gates
+
 | Gate | Criteria |
 |------|----------|
-| G1 (end Phase 1) | CAD approved, FEM FOS ≥ 2.5, requirements frozen |
-| G2 (end Phase 2) | Gripping force ≥ 60 N, no mechanical failure in 500-cycle test |
-| G3 (end Phase 3) | Open/close via MoveIt 2 in Gazebo, zero ROS errors |
-| G4 (end Phase 4) | ≥ 85 % grasp success on 20-object test set |
-| G5 (end Phase 5) | All CI checks pass, docs complete, v1.0.0 tagged |
+| G1 (end Phase 1) | `claw run workflow.yaml` executes a 3-task DAG correctly |
+| G2 (end Phase 2) | Drop a CSV → pipeline auto-starts within 2 seconds |
+| G3 (end Phase 3) | End-to-end: new data → PDF report with LLM explanations, zero manual steps |
+| G4 (end Phase 4) | Vault stores/retrieves secrets; dashboard shows live run history |
+| G5 (end Phase 5) | `pip install bharatclaw` works; all CI checks green; v1.0.0 tagged |
 
 ---
 
@@ -258,7 +335,7 @@ Week 27-30 : Phase 5 — Polish & Release v1.0.0
 5. Ensure all CI checks pass before requesting a merge.
 
 Community discussions happen in the **Issues** tab. Tag your issue with one of:
-`design`, `firmware`, `ros2`, `perception`, `docs`, or `question`.
+`core`, `triggers`, `llm`, `vault`, `dashboard`, `docs`, or `question`.
 
 ---
 

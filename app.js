@@ -91,14 +91,14 @@ const REPOS = [
     id: 'bharatclaw',
     owner: 'prashanth_dev',
     name: 'bharatclaw',
-    desc: 'Open-source adaptive robotic gripper — 3-DOF fingers, 6-axis F/T sensing, full ROS 2 support. Outperforms NemoClaw & OpenClaw.',
+    desc: 'CLAW — Continuous Local Automated Workflows. Hands-free automation framework for AI/ML pipelines: ingest → train → evaluate → LLM explain → report, zero manual steps.',
     lang: 'Python',
     langColor: '#3572A5',
     stars: 12,
     forks: 3,
     updated: 'just now',
-    tags: ['robotics', 'gripper', 'ros2', 'made-in-india'],
-    files: ['CLAW-ROADMAP.md', 'hardware/', 'firmware/', 'bharatclaw_description/', 'bharatclaw_moveit/', 'docs/']
+    tags: ['automation', 'hands-free', 'mlops', 'llm', 'made-in-india'],
+    files: ['CLAW-ROADMAP.md', 'claw/', 'workflows/', 'examples/', 'docs/']
   },
   {
     id: 'offline-llm-bench',
@@ -199,7 +199,7 @@ const TRENDING = [
     rank: 7,
     name: 'bharatclaw',
     owner: 'prashanth_dev',
-    desc: 'Adaptive robotic gripper with 60 N grip force & ROS 2 support — better than NemoClaw & OpenClaw.',
+    desc: 'CLAW: hands-free ML pipeline automation — drop a CSV, get a full trained model + LLM report with zero manual steps.',
     lang: 'Python',
     langColor: '#3572A5',
     stars: 12,
