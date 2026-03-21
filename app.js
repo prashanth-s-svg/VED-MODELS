@@ -100,6 +100,19 @@ const REPOS = [
     tags: ['robotics', 'gripper', 'ros2', 'made-in-india'],
     files: ['CLAW-ROADMAP.md', 'hardware/', 'firmware/', 'bharatclaw_description/', 'bharatclaw_moveit/', 'docs/']
   },
+  {
+    id: 'offline-llm-bench',
+    owner: 'prashanth_dev',
+    name: 'offline-llm-bench',
+    desc: 'Comprehensive comparison of offline/local LLMs (DeepSeek-R1, Llama 3.3, Phi-4, Qwen2.5) vs Claude — benchmarks, setup guides, and use-case matrix.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 38,
+    forks: 11,
+    updated: 'just now',
+    tags: ['llm', 'offline-ai', 'benchmarks', 'open-source'],
+    files: ['OFFLINE-MODELS-GUIDE.md', 'benchmarks/', 'scripts/', 'results/', 'README.md']
+  },
 ];
 
 const TRENDING = [
@@ -179,6 +192,17 @@ const TRENDING = [
     stars: 12,
     starsToday: 12,
     forks: 3,
+  },
+  {
+    rank: 8,
+    name: 'offline-llm-bench',
+    owner: 'prashanth_dev',
+    desc: 'Benchmark suite & guide: best offline LLMs (DeepSeek-R1, Llama 3.3, Phi-4, Qwen2.5) vs Claude.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 38,
+    starsToday: 38,
+    forks: 11,
   },
 ];
 
