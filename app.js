@@ -87,6 +87,45 @@ const REPOS = [
     tags: ['cloud', 'terraform', 'devops', 'digital-india'],
     files: ['README.md', 'modules/', 'examples/', 'CHANGELOG.md', 'main.tf']
   },
+  {
+    id: 'bharatclaw',
+    owner: 'prashanth_dev',
+    name: 'bharatclaw',
+    desc: 'CLAW — Continuous Local Automated Workflows. Hands-free automation framework for AI/ML pipelines: ingest → train → evaluate → LLM explain → report, zero manual steps. Includes a full build-from-scratch guide.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 12,
+    forks: 3,
+    updated: 'just now',
+    tags: ['automation', 'hands-free', 'mlops', 'llm', 'made-in-india'],
+    files: ['CLAW-ROADMAP.md', 'CLAW-BUILD-FROM-SCRATCH.md', 'VIBE-CODING-GUIDE.md', 'claw/', 'workflows/', 'examples/', 'docs/']
+  },
+  {
+    id: 'offline-llm-bench',
+    owner: 'prashanth_dev',
+    name: 'offline-llm-bench',
+    desc: 'Comprehensive comparison of offline/local LLMs (DeepSeek-R1, Llama 3.3, Phi-4, Qwen2.5) vs Claude — benchmarks, setup guides, and use-case matrix.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 38,
+    forks: 11,
+    updated: 'just now',
+    tags: ['llm', 'offline-ai', 'benchmarks', 'open-source'],
+    files: ['OFFLINE-MODELS-GUIDE.md', 'benchmarks/', 'scripts/', 'results/', 'README.md']
+  },
+  {
+    id: 'airllm-big-models',
+    owner: 'prashanth_dev',
+    name: 'airllm-big-models',
+    desc: 'Complete guide to running 70B+ LLMs on a 4 GB GPU using AirLLM — layer-by-layer inference, 4-bit compression, streaming, RAG, and VED-MODELS integration.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 54,
+    forks: 16,
+    updated: 'just now',
+    tags: ['airllm', 'llm', 'low-vram', 'offline-ai', 'llama'],
+    files: ['AIRLLM-GUIDE.md', 'examples/', 'ved_airllm_explain.py', 'requirements.txt', 'README.md']
+  },
 ];
 
 const TRENDING = [
@@ -155,6 +194,39 @@ const TRENDING = [
     stars: 482,
     starsToday: 41,
     forks: 97,
+  },
+  {
+    rank: 7,
+    name: 'bharatclaw',
+    owner: 'prashanth_dev',
+    desc: 'CLAW: hands-free ML pipeline automation — drop a CSV, get a full trained model + LLM report with zero manual steps.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 12,
+    starsToday: 12,
+    forks: 3,
+  },
+  {
+    rank: 8,
+    name: 'offline-llm-bench',
+    owner: 'prashanth_dev',
+    desc: 'Benchmark suite & guide: best offline LLMs (DeepSeek-R1, Llama 3.3, Phi-4, Qwen2.5) vs Claude.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 38,
+    starsToday: 38,
+    forks: 11,
+  },
+  {
+    rank: 9,
+    name: 'airllm-big-models',
+    owner: 'prashanth_dev',
+    desc: 'Run 70B+ LLMs on a 4 GB GPU with AirLLM — layer-by-layer inference, 4-bit compression, streaming & RAG.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 54,
+    starsToday: 54,
+    forks: 16,
   },
 ];
 
