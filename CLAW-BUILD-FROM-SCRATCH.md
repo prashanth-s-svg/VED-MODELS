@@ -7,6 +7,10 @@
 >
 > **Time to working prototype:** ~2 hours  
 > **Prerequisites:** Python 3.10+, pip, basic Python knowledge
+>
+> 🎵 **No coding experience?** See the
+> [Vibe Coding Guide](./VIBE-CODING-GUIDE.md) — use AI to write all the code
+> for you with simple copy-paste prompts. No experience needed!
 
 ---
 

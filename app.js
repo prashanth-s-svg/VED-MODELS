@@ -98,7 +98,7 @@ const REPOS = [
     forks: 3,
     updated: 'just now',
     tags: ['automation', 'hands-free', 'mlops', 'llm', 'made-in-india'],
-    files: ['CLAW-ROADMAP.md', 'CLAW-BUILD-FROM-SCRATCH.md', 'claw/', 'workflows/', 'examples/', 'docs/']
+    files: ['CLAW-ROADMAP.md', 'CLAW-BUILD-FROM-SCRATCH.md', 'VIBE-CODING-GUIDE.md', 'claw/', 'workflows/', 'examples/', 'docs/']
   },
   {
     id: 'offline-llm-bench',
