@@ -87,6 +87,19 @@ const REPOS = [
     tags: ['cloud', 'terraform', 'devops', 'digital-india'],
     files: ['README.md', 'modules/', 'examples/', 'CHANGELOG.md', 'main.tf']
   },
+  {
+    id: 'bharatclaw',
+    owner: 'prashanth_dev',
+    name: 'bharatclaw',
+    desc: 'Open-source adaptive robotic gripper — 3-DOF fingers, 6-axis F/T sensing, full ROS 2 support. Outperforms NemoClaw & OpenClaw.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 12,
+    forks: 3,
+    updated: 'just now',
+    tags: ['robotics', 'gripper', 'ros2', 'made-in-india'],
+    files: ['CLAW-ROADMAP.md', 'hardware/', 'firmware/', 'bharatclaw_description/', 'bharatclaw_moveit/', 'docs/']
+  },
 ];
 
 const TRENDING = [
@@ -155,6 +168,17 @@ const TRENDING = [
     stars: 482,
     starsToday: 41,
     forks: 97,
+  },
+  {
+    rank: 7,
+    name: 'bharatclaw',
+    owner: 'prashanth_dev',
+    desc: 'Adaptive robotic gripper with 60 N grip force & ROS 2 support — better than NemoClaw & OpenClaw.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 12,
+    starsToday: 12,
+    forks: 3,
   },
 ];
 
