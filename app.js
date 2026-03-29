@@ -20,6 +20,7 @@ const REPOS = [
     forks: 2104,
     updated: '30 minutes ago',
     license: 'Apache-2.0',
+    featured: true,
     tags: ['voice', 'asr', 'tts', 'autonomous-agent', 'llm', 'open-source'],
     files: ['README.md', 'LICENSE', 'vani/', 'agents/', 'pipelines/', 'examples/', 'docs/', 'tests/', 'setup.py']
   },
@@ -244,7 +245,43 @@ function renderRepoCards() {
   const container = document.getElementById('repoCards');
   if (!container) return;
 
-  container.innerHTML = REPOS.map(r => `
+  const featured = REPOS.filter(r => r.featured);
+  const regular  = REPOS.filter(r => !r.featured);
+
+  const featuredHTML = featured.map(r => `
+    <div class="repo-card featured-card" id="card-${r.id}" data-name="${r.name.toLowerCase()} ${r.desc.toLowerCase()} ${r.tags.join(' ')}" onclick="openRepo('${r.id}')">
+      <div class="featured-banner">
+        <span class="featured-label">⭐ Featured Repository</span>
+        <span class="featured-new-badge">🆕 New</span>
+      </div>
+      <div class="featured-hero">
+        <div class="featured-icon">🎙️</div>
+        <div class="featured-body">
+          <div class="repo-card-name featured-name">
+            ${r.owner} / <strong>${r.name}</strong>
+          </div>
+          <p class="repo-card-desc featured-desc">${r.desc}</p>
+          <div class="repo-card-footer">
+            <div class="lang-badge">${langDot(r.langColor)} ${r.lang}</div>
+            ${r.license ? `<span class="license-badge">⚖️ ${r.license}</span>` : ''}
+            ${r.tags.map(t => `<span class="repo-tag">${t}</span>`).join('')}
+          </div>
+          <div class="featured-stats">
+            <span>⭐ <strong id="stars-${r.id}">${fmtNum(starCounts[r.id])}</strong> stars</span>
+            <span>🍴 <strong>${fmtNum(forkCounts[r.id])}</strong> forks</span>
+            <span class="trend-up">▲ 943 stars today</span>
+            <span class="repo-updated">Updated ${r.updated}</span>
+            <button class="btn-star${starredByMe[r.id] ? ' starred' : ''}"
+              onclick="toggleStar(event, '${r.id}')">
+              ${starredByMe[r.id] ? '★ Starred' : '☆ Star'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  const regularHTML = regular.map(r => `
     <div class="repo-card" id="card-${r.id}" data-name="${r.name.toLowerCase()} ${r.desc.toLowerCase()} ${r.tags.join(' ')}" onclick="openRepo('${r.id}')">
       <div class="repo-card-header">
         <div class="repo-card-name">
@@ -268,6 +305,8 @@ function renderRepoCards() {
       </div>
     </div>
   `).join('');
+
+  container.innerHTML = featuredHTML + regularHTML;
 }
 
 function renderTrending() {
