@@ -10,6 +10,20 @@
 
 const REPOS = [
   {
+    id: 'vani-agent',
+    owner: 'bharatai_labs',
+    name: 'vani-agent',
+    desc: 'Open-source voice-to-autonomous-agent framework — real-time ASR, Indic TTS, LLM reasoning, and tool-calling in a single pipeline. Speak a goal; the agent handles the rest.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 14382,
+    forks: 2104,
+    updated: '30 minutes ago',
+    license: 'Apache-2.0',
+    tags: ['voice', 'asr', 'tts', 'autonomous-agent', 'llm', 'open-source'],
+    files: ['README.md', 'LICENSE', 'vani/', 'agents/', 'pipelines/', 'examples/', 'docs/', 'tests/', 'setup.py']
+  },
+  {
     id: 'bharat-ai-kit',
     owner: 'startupindia',
     name: 'bharat-ai-kit',
@@ -19,8 +33,9 @@ const REPOS = [
     stars: 9847,
     forks: 1523,
     updated: '1 hour ago',
-    tags: ['llm', 'rag', 'ai', 'startup', 'indic-nlp'],
-    files: ['README.md', 'bharat_ai/', 'examples/', 'docs/', 'tests/', 'setup.py']
+    license: 'MIT',
+    tags: ['llm', 'rag', 'ai', 'startup', 'indic-nlp', 'open-source'],
+    files: ['README.md', 'LICENSE', 'bharat_ai/', 'examples/', 'docs/', 'tests/', 'setup.py']
   },
   {
     id: 'VED-MODELS',
@@ -105,6 +120,17 @@ const REPOS = [
 const TRENDING = [
   {
     rank: 1,
+    name: 'vani-agent',
+    owner: 'bharatai_labs',
+    desc: 'Open-source voice-to-autonomous-agent framework — ASR, Indic TTS, LLM reasoning and tool-calling in one pipeline.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 14382,
+    starsToday: 943,
+    forks: 2104,
+  },
+  {
+    rank: 2,
     name: 'bharat-ai-kit',
     owner: 'startupindia',
     desc: 'All-in-one AI toolkit for Indian tech startups — LLM wrappers, RAG pipelines and Indic-language support.',
@@ -115,7 +141,7 @@ const TRENDING = [
     forks: 1523,
   },
   {
-    rank: 2,
+    rank: 3,
     name: 'namaste-react',
     owner: 'mumbai_coder',
     desc: 'React component library with Indian design language and full Indic script support.',
@@ -126,7 +152,7 @@ const TRENDING = [
     forks: 642,
   },
   {
-    rank: 3,
+    rank: 4,
     name: 'rupee-pay',
     owner: 'fintech_india',
     desc: 'Open-source UPI & NPCI payment integrations for Indian developers.',
@@ -137,7 +163,7 @@ const TRENDING = [
     forks: 430,
   },
   {
-    rank: 4,
+    rank: 5,
     name: 'kisan-ai',
     owner: 'agro_tech',
     desc: 'Crop disease detection AI trained on 50,000+ Indian farm images.',
@@ -148,7 +174,7 @@ const TRENDING = [
     forks: 287,
   },
   {
-    rank: 5,
+    rank: 6,
     name: 'indiastack-sdk',
     owner: 'digital_bharat',
     desc: 'One SDK to access Aadhaar, UPI, DigiLocker — the entire IndiaStack.',
@@ -159,7 +185,7 @@ const TRENDING = [
     forks: 318,
   },
   {
-    rank: 6,
+    rank: 7,
     name: 'bharat-cloud',
     owner: 'cloud_india',
     desc: 'Terraform modules for India-first cloud deployments.',
@@ -170,7 +196,7 @@ const TRENDING = [
     forks: 156,
   },
   {
-    rank: 7,
+    rank: 8,
     name: 'VED-MODELS',
     owner: 'prashanth_dev',
     desc: 'PyTorch models for predicting student outcomes — built on Indian education data.',
@@ -236,6 +262,7 @@ function renderRepoCards() {
       <p class="repo-card-desc">${r.desc}</p>
       <div class="repo-card-footer">
         <div class="lang-badge">${langDot(r.langColor)} ${r.lang}</div>
+        ${r.license ? `<span class="license-badge">⚖️ ${r.license}</span>` : ''}
         ${r.tags.map(t => `<span class="repo-tag">${t}</span>`).join('')}
         <span class="repo-updated">Updated ${r.updated}</span>
       </div>
@@ -341,13 +368,14 @@ function toggleStar(event, repoId) {
 function openRepo(repoId) {
   const repo = REPOS.find(r => r.id === repoId) || TRENDING.find(r => r.name === repoId);
   if (!repo) return;
-  const name  = repo.name  || repo.id;
-  const desc  = repo.desc  || '';
-  const stars = repo.stars || 0;
-  const forks = repo.forks || 0;
-  const lang  = repo.lang  || 'Unknown';
-  const files = repo.files || ['README.md', 'src/', 'tests/'];
-  const tags  = repo.tags  || [];
+  const name    = repo.name    || repo.id;
+  const desc    = repo.desc    || '';
+  const stars   = repo.stars   || 0;
+  const forks   = repo.forks   || 0;
+  const lang    = repo.lang    || 'Unknown';
+  const files   = repo.files   || ['README.md', 'src/', 'tests/'];
+  const tags    = repo.tags    || [];
+  const license = repo.license || null;
 
   document.getElementById('modalContent').innerHTML = `
     <div class="modal-repo-name">📦 ${repo.owner || ''} / ${name}</div>
@@ -356,6 +384,7 @@ function openRepo(repoId) {
       <div class="modal-stat">⭐ <strong>${fmtNum(stars)}</strong> stars</div>
       <div class="modal-stat">🍴 <strong>${fmtNum(forks)}</strong> forks</div>
       <div class="modal-stat">${langDot(repo.langColor || '#ccc')} ${lang}</div>
+      ${license ? `<div class="modal-stat">⚖️ ${license}</div>` : ''}
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
       ${tags.map(t => `<span class="repo-tag">${t}</span>`).join('')}
