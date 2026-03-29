@@ -10,6 +10,19 @@
 
 const REPOS = [
   {
+    id: 'bharat-ai-kit',
+    owner: 'startupindia',
+    name: 'bharat-ai-kit',
+    desc: 'All-in-one AI toolkit for Indian tech startups — LLM wrappers, vector search, RAG pipelines, and model-serving APIs. Supports Indic languages and runs on affordable cloud infra.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 9847,
+    forks: 1523,
+    updated: '1 hour ago',
+    tags: ['llm', 'rag', 'ai', 'startup', 'indic-nlp'],
+    files: ['README.md', 'bharat_ai/', 'examples/', 'docs/', 'tests/', 'setup.py']
+  },
+  {
     id: 'VED-MODELS',
     owner: 'prashanth_dev',
     name: 'VED-MODELS',
@@ -92,6 +105,17 @@ const REPOS = [
 const TRENDING = [
   {
     rank: 1,
+    name: 'bharat-ai-kit',
+    owner: 'startupindia',
+    desc: 'All-in-one AI toolkit for Indian tech startups — LLM wrappers, RAG pipelines and Indic-language support.',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 9847,
+    starsToday: 612,
+    forks: 1523,
+  },
+  {
+    rank: 2,
     name: 'namaste-react',
     owner: 'mumbai_coder',
     desc: 'React component library with Indian design language and full Indic script support.',
@@ -102,7 +126,7 @@ const TRENDING = [
     forks: 642,
   },
   {
-    rank: 2,
+    rank: 3,
     name: 'rupee-pay',
     owner: 'fintech_india',
     desc: 'Open-source UPI & NPCI payment integrations for Indian developers.',
@@ -113,7 +137,7 @@ const TRENDING = [
     forks: 430,
   },
   {
-    rank: 3,
+    rank: 4,
     name: 'kisan-ai',
     owner: 'agro_tech',
     desc: 'Crop disease detection AI trained on 50,000+ Indian farm images.',
@@ -124,7 +148,7 @@ const TRENDING = [
     forks: 287,
   },
   {
-    rank: 4,
+    rank: 5,
     name: 'indiastack-sdk',
     owner: 'digital_bharat',
     desc: 'One SDK to access Aadhaar, UPI, DigiLocker — the entire IndiaStack.',
@@ -135,7 +159,7 @@ const TRENDING = [
     forks: 318,
   },
   {
-    rank: 5,
+    rank: 6,
     name: 'bharat-cloud',
     owner: 'cloud_india',
     desc: 'Terraform modules for India-first cloud deployments.',
@@ -146,7 +170,7 @@ const TRENDING = [
     forks: 156,
   },
   {
-    rank: 6,
+    rank: 7,
     name: 'VED-MODELS',
     owner: 'prashanth_dev',
     desc: 'PyTorch models for predicting student outcomes — built on Indian education data.',
