@@ -80,6 +80,8 @@
       <div class="card">
         <h3 class="card-title">Your Repositories</h3>
         <ul class="repo-list-mini" id="myRepoList">
+          <li onclick="openRepo('vani-agent')"><span class="repo-icon">🎙️</span> vani-agent <span class="lang-dot python"></span></li>
+          <li onclick="openRepo('bharat-ai-kit')"><span class="repo-icon">🤖</span> bharat-ai-kit <span class="lang-dot python"></span></li>
           <li onclick="openRepo('VED-MODELS')"><span class="repo-icon">📦</span> VED-MODELS <span class="lang-dot python"></span></li>
           <li onclick="openRepo('bharat-api')"><span class="repo-icon">🔗</span> bharat-api <span class="lang-dot js"></span></li>
           <li onclick="openRepo('namaste-ui')"><span class="repo-icon">🎨</span> namaste-ui <span class="lang-dot ts"></span></li>
@@ -161,6 +163,25 @@
 
     <!-- ─── RIGHT RAIL ─── -->
     <aside class="right-rail">
+      <div class="card card-vani-spotlight" onclick="showTab('explore', document.querySelector('.nav-link')); setTimeout(()=>openRepo('vani-agent'),50);" style="cursor:pointer;">
+        <div class="vani-spotlight-header">
+          <span class="featured-label">⭐ Featured</span>
+          <span class="featured-new-badge">🆕 New</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin:10px 0 6px;">
+          <span style="font-size:36px;filter:drop-shadow(0 0 6px rgba(255,153,51,.5))">🎙️</span>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--saffron);">vani-agent</div>
+            <div style="font-size:11px;color:var(--text-muted);">bharatai_labs · Apache-2.0</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:10px;">
+          Voice → Autonomous Agent pipeline: ASR → LLM reasoning → tool-calling. Open-source, Indic language support.
+        </p>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--text-muted);">
+          <span>⭐ 14.4k</span><span>🍴 2.1k</span><span class="trend-up">▲ 943 today</span>
+        </div>
+      </div>
       <div class="card">
         <h3 class="card-title">🇮🇳 Digital India Spotlight</h3>
         <div class="spotlight-item">
